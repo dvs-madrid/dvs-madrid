@@ -4,7 +4,10 @@ subtitulo: hola
 
 prox: 2025-09-26
 
-[videos]
+
+# listado de charlas
+
+[charlas]
 titulo: Las tripas del chart builder de Graphext (Victoriano Izquierdo y Juan Morales)
 link: https://www.youtube.com/watch?v=q68486gfNP4&ab_channel=DVS-Madrid
 
@@ -35,32 +38,139 @@ titulo: Componentes reutilizables con d3.js (Santi Espinosa)
 
 titulo: Mesa redonda sobre Outlier 2023 (Sergio Galán)
 
+
+# Personas relacionadas con la visualización de datos en Madrid
+
 [personas]
-nombre: Adrián
-tw: @...
-web: ...
+nombre: Adrián Maqueda
+tw: adrimaqueda
+web: adrimaqueda.com
 
-nombre: Irene
-tw: @...
-web: ...
+nombre: Irene de la Torre
+tw: inari_ta
+
+nombre: Carmen Torrecillas
+tw: carmen_TM_
+
+nombre: Álvaro Merino
+tw: Alvaro_Merino_
+
+nombre: Ainhoa Díez
+tw: ainhoa10ruiz
+
+nombre: Pablo Almunia
+
+nombre: Sergio Galán
+tw: sergioeclectico
+
+nombre: Yolanda Clemente
+tw: yolsclemente
+
+nombre: Blanca Rogel
+tw: blanca_rogel
+
+nombre: Marta Ley
+tw: leymarta
+
+nombre: Emma Esser
+tw: emma_esserdiaz
+
+nombre Guillermo Villar
+tw: _gvillar
+
+nombre: Rafael Höhr
+tw: rafahohr
+
+nombre: Victoriano Izquierdo
+tw: victorianoi
+
+nombre: Ana Ruiz
+tw: anabelruizaire
+
+nombre: Santi Espinosa
+tw: Saigesp
+
+nombre: Paula Guisado
+tw: PauGuisado
+
+nombre: Darío Ojeda
+tw: DarioOjeda
+
+nombre: María Hernández
+
+nombre: Carlos Muñoz
+tw: CarlosMunozDiaz
+
+nombre: Javier García
+tw: JGF92
+
+nombre: Elena Sánchez
+
+nombre: José R. Pérez
+tw: josernalist
+
+nombre: Lina Smith
+tw: Linasmithg
+
+nombre: Beatriz Martínez
+tw: maritrinez
+
+nombre: Arantxa Herranz
+tw: aherranz
+
+nombre: Adelaida
+
+nombre: Javi Álvarez Liébana
+tw: DadosdeLaplace
+
+nombre: Ana Somavilla
+tw: nitasomo
+
+nombre: Alberto Hernández
+tw: albertohv_
+
+nombre: Sonia Mochón
 
 
-[cursos]
-titulo: curso 1
-link: ...
-herramienta: ...
+# Recursos para visualizar datos: cursos, herramientas...
 
+[recursos.Cursos]
+nombre: Better Data Visualizations with Svelte
+link: https://www.newline.co/courses/better-data-visualizations-with-svelte
 
-[herramientas]
+[recursos.Herramientas]
 nombre: Datawrapper
-link:
+link: https://www.datawrapper.de/
 
 nombre: Flourish
-link:
+link: https://flourish.studio/
 
 nombre: RawGraphs
-link:
+link: https://www.rawgraphs.io/
+
+nombre: Graphext
+link: https://www.graphext.com/
+
+nombre: Observable
+link: https://observablehq.com/
+
+nombre: D3
+link: https://d3js.org/
+
+nombre: Svelte
+link: https://svelte.dev/
+
+[recursos.Libros]
+nombre: Visualizing Complexity: Modular Information Design Handbook
+
+nombre: How Charts Lie: Getting Smarter about Visual Information
+
+nombre: Data Sketches: A journey of imagination, exploration, and beautiful data visualizations 
+
 []
+
+
+# Datos sobre las charlas
 
 data: Nombre,Titulo,Afiliacion,Tipo de Organización,Tema,Fecha,Sexo
 Victoriano Izquierdo,Las tripas del chart builder de Graphext,Graphext,Producto,Business Intelligence,2024-05-09,Hombre

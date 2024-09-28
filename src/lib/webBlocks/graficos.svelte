@@ -13,7 +13,7 @@
 </script>
 
 {#if parsedData.length > 0}
-<h4>Así somos</h4>
+<h3>Así somos</h3>
 
 
 <p>Datos recopilados por <a href="https://observablehq.com/d/450f4d2787da3030">Irene de la Torre</a></p>
