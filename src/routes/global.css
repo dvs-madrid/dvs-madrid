@@ -35,3 +35,19 @@ a:hover {
 svg {
     height: 1.2cap;
 }
+
+
+/* COLORES */
+
+:root {
+    --Hombre: #52BF9E;
+    --Mujer: #8652EB;
+    --DVS: #2db1a4;
+    --Diseño: orange;
+    --Producto: red;
+    --Business-Intelligence: blue;
+    --GIS: yellow;
+    --ONG: green;
+    --Programación: pink;
+    --Taller: grey;
+}

@@ -18,7 +18,6 @@
         const response = await fetch('data.txt');
         const archieFile = await response.text();
         text = archieml.load(archieFile);
-        console.log(text);
 
         ready = true
     });
@@ -28,7 +27,7 @@
     {#if ready}
         <div style="margin-top: 100px">
             <h1>📊 {text.titulo}</h1>
-            <p>{text.subtitulo}</p>
+            <div>{@html text.subtitulo}</div>
         </div>
 
         <ProxEvento date={text.prox}/>
@@ -39,8 +38,8 @@
         
 
         <!-- footer -->
-        <div>
-            GitHub
+        <div style="width: 100%; border-top: 1px solid black">
+            <p>Pull Request en Github. Únete a Slack. Usa el formulario</p>
         </div>
 
     {:else}

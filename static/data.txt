@@ -1,6 +1,7 @@
 titulo: DVS Madrid
 
-subtitulo: hola
+subtitulo: <p>Esta es la página del grupo de visualización de datos de Madrid. Aquí puedes enterarte de lo último de las últimas charlas y de la próxima. Además también podrás encontrar información sobre nosotros y recursos interesantes relacionados con la visualización de datos.</p><p>Para estar al día de las próximas charlas o proponer una puedes unirte a nuestro grupo de Slack de la Data Visualization Society. Si echas en falta a alguna persona en el listado o quieres añadir cualquier recurso a la página puedes rellenar este formulario, hacer una Pull Request en GitHub o contactarme por Twitter/X.</p>
+:end
 
 prox: 2025-09-26
 
@@ -8,6 +9,12 @@ prox: 2025-09-26
 # listado de charlas
 
 [charlas]
+titulo: Un año de DVS Madrid (Irene de la Torre)
+
+titulo: La visualización de datos en el periodismo deportivo (Sonia Mochón)
+
+titulo: DMS for newsrooms (Marta Ley, Juan Pablo Marín y Rafa Höhr)
+
 titulo: Las tripas del chart builder de Graphext (Victoriano Izquierdo y Juan Morales)
 link: https://www.youtube.com/watch?v=q68486gfNP4&ab_channel=DVS-Madrid
 
@@ -172,19 +179,24 @@ nombre: Data Sketches: A journey of imagination, exploration, and beautiful data
 
 # Datos sobre las charlas
 
-data: Nombre,Titulo,Afiliacion,Tipo de Organización,Tema,Fecha,Sexo
-Victoriano Izquierdo,Las tripas del chart builder de Graphext,Graphext,Producto,Business Intelligence,2024-05-09,Hombre
-Juan Morales,Las tripas del chart builder de Graphext,Graphext,Producto,Business Intelligence,2024-05-09,Hombre
-Beatriz Martínez,Los hacks de la visualización de la Edad de Plata,Visualizados,Estudio de diseño,Diseño,2024-05-09,Mujer
-Ksenia Orlova,La Mirada del Urbanista a Través de los Datos,Gdańsk University of Technology,Universidad,GIS,2024-05-09,Mujer
-Adrián Maqueda,España y Europa en llamas,CIVIO,Medio de comunicación,GIS,2024-02-22,Hombre
-Aida Horaniet,Viz for Social Good: Qué es y cómo participar,Universidad de Luxemburgo,Universidad,ONG,2024-02-22,Mujer
-Javi Álvarez,Comunicando y visualizando en R con Quarto,Universidad Complutense,Universidad,Programación,2024-02-22,Hombre
-Pablo Almunia,Visualización de datos con bloques de construcción (una dinámica participativa),Corus Consulting,Consultoría,Taller,2023-09-21,Hombre
-Eduardo España,"Love, sustainability & data",Couple in Data,Estudio de diseño,Diseño,2023-09-21,Hombre
-Johana Dueñas,"Love, sustainability & data",Couple in Data,Estudio de diseño,Diseño,2023-09-21,Mujer
-Elena Sánchez,Presentación DVS Madrid y Prodigioso Volcán,DVS,DVS,DVS,2023-06-20,Mujer
-Irene de la Torre,"Animando mapas con d3.js, Mapbox y Observable",Financial Times,Medio de comunicación,Programación,2023-06-20,Mujer
-Santi Espinosa,"Componentes reutilizables con d3.js",Galeo,Consultoría,Programación,2023-06-20,Hombre
-Sergio Galán,Mesa redonda sobre Outlier 2023,Graphic Method,Estudio de diseño,DVS,2023-06-20,Hombre
+data: Nombre,Titulo,Afiliacion,Tipo de Organización,Tema,Fecha,Sexo,Curso
+Irene de la Torre,Un año de DVS Madrid,DVS,DVS,DVS,2024-09-26,Mujer,24-25
+Sonia Mochón,La visualización de datos en el periodismo deportivo,Diario AS,Medio de comunicación,Diseño,2024-09-26,Mujer,24-25
+Rafa Höhr,DMS for newsrooms,Prodigioso Volcán,Consultoría,Producto,2024-09-26,Hombre,24-25
+Juan Pablo Marín,DMS for newsrooms,DataSketch,Producto,Producto,2024-09-26,Hombre,24-25
+Marta Ley,DMS for newsrooms,El Confidencial,Medio de comunicación,Producto,2024-09-26,Mujer,24-25
+Victoriano Izquierdo,Las tripas del chart builder de Graphext,Graphext,Producto,Business Intelligence,2024-05-09,Hombre,23-24
+Juan Morales,Las tripas del chart builder de Graphext,Graphext,Producto,Business Intelligence,2024-05-09,Hombre,23-24
+Beatriz Martínez,Los hacks de la visualización de la Edad de Plata,Visualizados,Estudio de diseño,Diseño,2024-05-09,Mujer,23-24
+Ksenia Orlova,La Mirada del Urbanista a Través de los Datos,Gdańsk University of Technology,Universidad,GIS,2024-05-09,Mujer,23-24
+Adrián Maqueda,España y Europa en llamas,CIVIO,Medio de comunicación,GIS,2024-02-22,Hombre,23-24
+Aida Horaniet,Viz for Social Good: Qué es y cómo participar,Universidad de Luxemburgo,Universidad,ONG,2024-02-22,Mujer,23-24
+Javi Álvarez,Comunicando y visualizando en R con Quarto,Universidad Complutense,Universidad,Programación,2024-02-22,Hombre,23-24
+Pablo Almunia,Visualización de datos con bloques de construcción (una dinámica participativa),Corus Consulting,Consultoría,Taller,2023-09-21,Hombre,23-24
+Eduardo España,"Love, sustainability & data",Couple in Data,Estudio de diseño,Diseño,2023-09-21,Hombre,23-24
+Johana Dueñas,"Love, sustainability & data",Couple in Data,Estudio de diseño,Diseño,2023-09-21,Mujer,23-24
+Elena Sánchez,Presentación DVS Madrid y Prodigioso Volcán,DVS,DVS,DVS,2023-06-20,Mujer,23-24
+Irene de la Torre,"Animando mapas con d3.js, Mapbox y Observable",Financial Times,Medio de comunicación,Programación,2023-06-20,Mujer,23-24
+Santi Espinosa,"Componentes reutilizables con d3.js",Galeo,Consultoría,Programación,2023-06-20,Hombre,23-24
+Sergio Galán,Mesa redonda sobre Outlier 2023,Graphic Method,Estudio de diseño,DVS,2023-06-20,Hombre,23-24
 :end
