@@ -54,6 +54,7 @@ tw: adrimaqueda
 web: adrimaqueda.com
 
 nombre: Irene de la Torre
+web: https://irenedelatorrearenas.wordpress.com/
 tw: inari_ta
 
 nombre: Carmen Torrecillas
