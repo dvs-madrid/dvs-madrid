@@ -5,6 +5,8 @@
     import AreaChart from "./areaChart.svelte";
 
     export let data;
+    export let charlas;
+    export let personas
 
     let ready = false
     let globalDistribution = undefined
@@ -35,25 +37,32 @@
 {#if ready}
 
 <!-- global distribution -->
-<div style="height: 300px; width: 50%; display: flex; flex-direction: row;align-items: flex-end; justify-content: space-evenly;">
-    {#each globalDistribution as sex}
-    <div class="column">
-        <div style="height: {sex.percent}%; width: 100px;background-color:var(--{sex.genero})">
-            <p class="percent">{Math.round(sex.percent)}%</p>
+<div class="container">
+    <p>Desde que empezamos hemos realizado {charlas} charlas y han presentado {personas} personas diferentes. El porcentaje de presentadores según su sexo se queda así:</p>
+    <div style="height: 300px;display:flex;align-items: flex-end; justify-content: space-evenly">
+        {#each globalDistribution as sex}
+        <div class="column">
+            <div style="height: {sex.percent}%; width: 100px;background-color:var(--{sex.genero})">
+                <p class="percent">{Math.round(sex.percent)}%</p>
+            </div>
+            <p style="margin-top:1rem">{sex.genero}</p>
         </div>
-        <p style="margin-top:1rem">{sex.genero}</p>
+        {/each}
     </div>
-    {/each}
 </div>
 
-<!-- distribution by meeting -->
-<AreaChart {data} chartValue="Sexo" />
+<div class="container">
+    <p>Pero la proporción no ha sido siempre igual, sino que ha ido evolucionando en cada meetup:</p>
+    <!-- distribution by meeting -->
+    <AreaChart {data} chartValue="Sexo" />    
+</div>
 
 {/if}
 </div>
 
 
 <style>
+
     .column {
         height: 100%;
         display: flex;

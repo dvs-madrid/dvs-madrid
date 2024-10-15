@@ -6,7 +6,7 @@
 
 
 <div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">
-    <h3>Recursos para visualizar datos</h3>
+    <h2>Recursos para visualizar datos</h2>
 
     <div style="display: grid;grid-template-columns: repeat(auto-fill, 300px);column-gap: 10px;row-gap: 20px; justify-content: space-between;">
         {#each Object.entries(recursos) as [key, recurso]}

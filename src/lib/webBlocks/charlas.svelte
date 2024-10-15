@@ -3,7 +3,7 @@
 </script>
 
 <div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">
-    <h3>De qué hemos hablado</h3>
+    <h2>De qué hemos hablado</h2>
     <ul>
         {#each charlas as charla}
             {#if charla.link}

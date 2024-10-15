@@ -120,37 +120,45 @@ $: stackedData = stack()
     $: meetings = chartData.map(d => d.Fecha)
 </script>
 
-<div style="display: flex; flex-direction:column" bind:clientWidth={divWidth}>
+
+<div>
+    <div>
+        <button on:click={() => percentaje = false}>Mostrar en absoluto</button>
+        <button on:click={() => percentaje = true}>Mostrar como porcentaje</button>
+    </div>
     
-    <button on:click={() => percentaje = !percentaje}>click</button>
-
-    <svg style="height:350px" width={divWidth}>
-        <g>
-            {#each stackedData as layer, i}
-                <path class="layer" d={areaGenerator(layer)} style="fill:var(--{layer.key})" />
-            {/each}
-        </g>
-
-        <g>
-            {#if percentaje && chartValue === "Sexo" }
-                <text y={y(50)} x=5 alignment-baseline="middle" >50%</text>
-                <line x1=40 x2={divWidth} y1={y(50)} y2={y(50)} stroke="black" stroke-width=1 />
-            {/if}
-
-            {#each meetings as meeting}
-                <line x1={x(meeting)} x2={x(meeting)} y1={0} y2={300} stroke="white" stroke-width=1  />
-                <text x={x(meeting)} y={320} alignment-baseline="baseline" text-anchor="middle" >{new Intl.DateTimeFormat('es-ES', {dateStyle: 'short'}).format(new Date(meeting))}</text>
-            {/each}
-
-        </g>
-    </svg>
-
+    <div class="chart" bind:clientWidth={divWidth}>
+    
+        <svg style="height:100%" width={divWidth}>
+            <g>
+                {#each stackedData as layer, i}
+                    <path class="layer" d={areaGenerator(layer)} style="fill:var(--{layer.key})" />
+                {/each}
+            </g>
+    
+            <g>
+                {#if percentaje && chartValue === "Sexo" }
+                    <text y={y(50)} x=5 alignment-baseline="middle" >50%</text>
+                    <line x1=40 x2={divWidth} y1={y(50)} y2={y(50)} stroke="black" stroke-width=1 />
+                {/if}
+    
+                {#each meetings as meeting}
+                    <line x1={x(meeting)} x2={x(meeting)} y1={0} y2={300} stroke="white" stroke-width=1  />
+                    <text x={x(meeting)} y={320} alignment-baseline="baseline" text-anchor={x(meeting) < 20 ? 'start' : x(meeting) > divWidth - 20 ? 'end' : 'middle'} >
+                        {new Intl.DateTimeFormat('es-ES', {dateStyle: 'short'}).format(new Date(meeting))}
+                    </text>
+                {/each}
+    
+            </g>
+        </svg>
+    
+    </div>
 </div>
 
 
 <style>
-    div {
-        width: 350px;
+    .chart {
+        width: 100%;
         height: 350px;
     }
 

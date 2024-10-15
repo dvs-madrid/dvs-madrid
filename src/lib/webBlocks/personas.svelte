@@ -6,7 +6,7 @@
 
 
 <div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">
-    <h3>Quienes somos</h3>
+    <h2>Quienes somos</h2>
 
     <div style="display: grid;grid-template-columns: repeat(auto-fill, 300px);column-gap: 10px;row-gap: 20px">
         {#each sortedPersonas as persona}
