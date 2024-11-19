@@ -1,5 +1,5 @@
 <script>
-    export let charlas;
+    let { charlas } = $props();
 </script>
 
 <div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">

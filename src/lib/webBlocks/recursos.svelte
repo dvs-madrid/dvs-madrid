@@ -1,7 +1,7 @@
 <script>
 	import { ascending } from "d3";
 
-    export let recursos;
+    let { recursos } = $props();
 </script>
 
 

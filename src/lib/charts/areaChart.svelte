@@ -1,8 +1,8 @@
 <script>
-    export let data; 
-    export let chartValue;
 
-    import { flatGroup, groups, area, stack, scaleLinear, scaleTime, max, extent } from "d3"
+    import { flatGroup, groups, area, stack, scaleLinear, scaleTime, max, extent } from "d3";
+    import { colorDict } from '$lib/utils/utils'
+    let { data, chartValue } = $props();
 
     function quitarDuplicados(datos) {
         const NewArray = groups(datos, (d) => d.Titulo);
@@ -76,19 +76,18 @@
 }
 
 // chart things
+let chartData = crearResumen(data, chartValue, "Todos")
 
-    let chartData = crearResumen(data, chartValue, "Todos")
+let keys = $derived([...new Set(data.map(d => d[chartValue]))])
 
-    $: keys = [...new Set(data.map(d => d[chartValue]))]
+let divWidth = $state(300)
+let startingPoint = chartValue === "Sexo" ? 50 : 0
 
-    let divWidth = 300
-    let startingPoint = chartValue === "Sexo" ? 50 : 0
-
-    let percentaje = false
-    $: stackValue = percentaje ? "Porcentaje" : "Acumulados"
+let percentaje = $state(false)
+let stackValue = $derived(percentaje ? "Porcentaje" : "Acumulados")
 
     
-$: stackedData = stack()
+let stackedData = $derived(stack()
     .keys(keys)
     (chartData.map(d => {
         // Asegúrate de que d[stackValue] tenga las propiedades necesarias
@@ -101,30 +100,30 @@ $: stackedData = stack()
                 return acc;
             }, {})
         };
-    }));
+    })));
 
-    $: x = scaleTime()
+    let x = $derived(scaleTime()
         .domain(extent(data, d => new Date(d.Fecha)))
-        .range([startingPoint, divWidth]);
+        .range([startingPoint, divWidth]));
 
-    $: y = scaleLinear()
+    let y = $derived(scaleLinear()
         .domain([0, max(stackedData[stackedData.length - 1], d => d[1])])
-        .range([300, 0]);
+        .range([300, 0]));
 
-    $: areaGenerator = area()
+    let areaGenerator = $derived(area()
         .x(d => x(new Date(d.data.fecha)))
         .y0(d => y(d[0]))
-        .y1(d => y(d[1]));
+        .y1(d => y(d[1])));
 
 
-    $: meetings = chartData.map(d => d.Fecha)
+    let meetings = $derived(chartData.map(d => d.Fecha))
 </script>
 
 
 <div>
     <div>
-        <button on:click={() => percentaje = false}>Mostrar en absoluto</button>
-        <button on:click={() => percentaje = true}>Mostrar como porcentaje</button>
+        <button class:active={percentaje === false} onclick={() => percentaje = false}>Número de charlas</button>
+        <button class:active={percentaje === true} onclick={() => percentaje = true}>Porcentaje de charlas</button>
     </div>
     
     <div class="chart" bind:clientWidth={divWidth}>
@@ -132,12 +131,12 @@ $: stackedData = stack()
         <svg style="height:100%" width={divWidth}>
             <g>
                 {#each stackedData as layer, i}
-                    <path class="layer" d={areaGenerator(layer)} style="fill:var(--{layer.key})" />
+                    <path class="layer" d={areaGenerator(layer)} style="fill:var(--{colorDict[layer.key] ?? layer.key})" />
                 {/each}
             </g>
     
             <g>
-                {#if percentaje && chartValue === "Sexo" }
+                {#if percentaje && chartValue === "Sexo"}
                     <text y={y(50)} x=5 alignment-baseline="middle" >50%</text>
                     <line x1=40 x2={divWidth} y1={y(50)} y2={y(50)} stroke="black" stroke-width=1 />
                 {/if}
@@ -168,6 +167,22 @@ $: stackedData = stack()
 
     text {
         font-size: 12px
+    }
+
+    button {
+        background-color: transparent;
+        color: black;
+        border: solid black 1px;
+        border-radius: 50px;
+        padding: .3rem .9rem;
+        cursor: pointer;
+
+        transition: color .5s, background-color .5s
+    }
+
+    button.active {
+        background-color: black;
+        color: white
     }
 
 </style>

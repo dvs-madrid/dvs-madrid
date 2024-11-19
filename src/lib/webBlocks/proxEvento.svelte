@@ -2,10 +2,10 @@
 	import { onMount } from "svelte";
     import { timeDay, timeMonth } from 'd3-time'
 
-    export let date;
+    let { date } = $props();
 
-    let fecha = ''
-    let timeToEvent = undefined
+    let fecha = $state('')
+    let timeToEvent = $state(undefined)
 
     function interval(then, now) {
         if (then <= now) throw new Error("Time’s up!");

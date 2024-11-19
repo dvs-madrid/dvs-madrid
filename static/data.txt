@@ -153,6 +153,9 @@ tw: albertohv_
 
 nombre: Sonia Mochón
 
+nombre: Laura Navarro
+tw: LauraNavarroSol
+
 
 # Recursos para visualizar datos: cursos, herramientas...
 

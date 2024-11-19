@@ -57,12 +57,19 @@ svg {
 :root {
     --Hombre: #52BF9E;
     --Mujer: #8652EB;
+
     --DVS: #2db1a4;
     --Diseño: orange;
     --Producto: red;
-    --Business-Intelligence: blue;
+    --BI: blue;
     --GIS: yellow;
     --ONG: green;
     --Programación: pink;
     --Taller: grey;
+
+    --Consultoría: orange;
+    --Universidad: yellow;
+    --Estudio: blue;
+    --Medios: grey;
+
 }

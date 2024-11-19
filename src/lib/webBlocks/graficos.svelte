@@ -1,14 +1,16 @@
 <script>
-    export let data;
 
     import { csvParse, groups, ascending } from "d3";
 	import { onMount } from "svelte";
+    import { colorDict } from '$lib/utils/utils'
+
     import DistribucionXsexo from '$lib/charts/distribucionXsexo.svelte';
     import AreaChart from "../charts/areaChart.svelte";
+    let { data } = $props();
 
-    let parsedData = []
-    let numCharlas = 0
-    let numPersonas = 0
+    let parsedData = $state([])
+    let numCharlas = $state(0)
+    let numPersonas = $state(0)
 
     onMount(async () => {
         parsedData = await csvParse(data)
@@ -26,16 +28,18 @@
 <h2>Así somos</h2>
 
 <div>
+    
     <div>
         <DistribucionXsexo data={parsedData} charlas={numCharlas.length} personas={numPersonas} />
     </div>
+
     <div style="display: flex;flex-direction:column">
-        <div style="display: flex;flex-wrap:wrap;align-items: center;">
+        <div style="display: flex;flex-wrap:wrap;align-items: center;margin-top: 4rem">
             <div class="container">
                 <p>La temática de las charlas también ha ido variando:</p>
                 <div class="values-container">
                     {#each uniqueValues('Tema') as value}
-                        <p class="value" style="--accent-color:var(--{value})">{value}</p>
+                        <p class="value" style="--accent-color:var(--{colorDict[value] ?? value})">{value}</p>
                     {/each}
                 </div>
             </div>
@@ -43,12 +47,13 @@
                 <AreaChart data={parsedData} chartValue="Tema" />
             </div>
         </div>
-        <div style="display: flex;flex-wrap:wrap;align-items: center;">
+
+        <div style="display: flex;flex-wrap:wrap;align-items: center;margin-top: 4rem">
             <div class="container">
                 <p>Y la procedencia de los ponentes:</p>
                 <div class="values-container">
                     {#each uniqueValues('Tipo de Organización') as value}
-                        <p class="value" style="--accent-color:var(--{value})">{value}</p>
+                        <p class="value" style="--accent-color:var(--{colorDict[value] ?? value})">{value}</p>
                     {/each}
                 </div>
             </div>

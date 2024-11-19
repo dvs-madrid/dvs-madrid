@@ -4,12 +4,10 @@
     
     import AreaChart from "./areaChart.svelte";
 
-    export let data;
-    export let charlas;
-    export let personas
+    let { data, charlas, personas } = $props();
 
-    let ready = false
-    let globalDistribution = undefined
+    let ready = $state(false)
+    let globalDistribution = $state(undefined)
     let meetingDistribution = undefined
 
     onMount( async () => {

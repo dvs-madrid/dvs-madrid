@@ -11,7 +11,7 @@
     import Personas from '$lib/webBlocks/personas.svelte';
     import Recursos from '$lib/webBlocks/recursos.svelte';
 
-    let text = {};
+    let text = undefined;
     let ready = false
 
     onMount(async () => {
@@ -35,7 +35,6 @@
         <Graficos data={text.data} />
         <Personas personas={text.personas} />
         <Recursos recursos={text.recursos} />
-        
 
         <!-- footer -->
         <div style="width: 100%; border-top: 1px solid black">
