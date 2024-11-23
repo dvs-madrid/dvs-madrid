@@ -6,8 +6,8 @@ Esta web está desarrollada con **Svelte 5 y SvelteKit**. Puedes proponer cualqu
 
 https://dvs-madrid.netlify.app 
 
-
-#### Cómo ver la web en local
+---
+### Cómo ver la web en local
 
 Para poder visualizar esta web necesitarás tener la versión 22 de Node.js. Para facilitar su uso, está el archivo `.nvmrc` con la versión exacta en la que ha sido desarrollada. Si no lo tienes, te recomiendo tener instalado `NVM` en tu ordenador, lo que facilitará el moverte entre diferentes proyectos y diferentes versiones de `Node`. Si no tienes `NVM` instalado [aquí](https://medium.com/@priscillashamin/how-to-install-and-configure-nvm-on-mac-os-43e3366c75a6) puedes ver cómo hacerlo desde 0.
 
@@ -34,8 +34,8 @@ Y para ver los cambios que realizas en los archivos usa:
 ```
 npm run dev
 ```
-
-#### Cómo añadir recursos
+---
+### Cómo añadir recursos
 
 
 Las diferentes secciones de la web se alimentan del archivo `data.txt` que se encuentra en la carpeta `static`. Los datos están escritos en el formato [ArchieML](https://archieml.org/) para simplificar la accesibilidad del proyecto.
