@@ -69,6 +69,7 @@ tema: DVS
 
 
 # Personas relacionadas con la visualización de datos en Madrid
+# De momento las categorías que acepta de cada uno son nombre, tw (twitter), web y bsky (Bluesky)
 
 [personas]
 nombre: Adrián Maqueda
@@ -147,12 +148,16 @@ tw: LauraNavarroSol
 nombre: Better Data Visualizations with Svelte
 link: https://www.newline.co/courses/better-data-visualizations-with-svelte
 
+
+
 [recursos.Canales]
 nombre: Matthias Stahl (h_i_g_s_c_h_)
 link: https://www.youtube.com/@h_i_g_s_c_h_videos
 
 nombre: Joy of Code
 link: https://www.youtube.com/@JoyofCodeDev
+
+
 
 [recursos.Herramientas]
 nombre: Datawrapper
@@ -176,6 +181,8 @@ link: https://d3js.org/
 nombre: Svelte
 link: https://svelte.dev/
 
+
+
 [recursos.Libros]
 nombre: Visualizing Complexity: Modular Information Design Handbook
 
@@ -186,9 +193,9 @@ nombre: Data Sketches: A journey of imagination, exploration, and beautiful data
 []
 
 
-# Datos sobre las charlas
+# Datos sobre las charlas para hacer los gráficos
 
-data: Nombre,Titulo,Afiliacion,Tipo de Organización,Tema,Fecha,Sexo,Curso
+graficos: Nombre,Titulo,Afiliacion,Tipo de Organización,Tema,Fecha,Sexo,Curso
 Irene de la Torre,Un año de DVS Madrid,DVS,DVS,DVS,2024-09-26,Mujer,24-25
 Sonia Mochón,La visualización de datos en el periodismo deportivo,Diario AS,Medio de comunicación,Diseño,2024-09-26,Mujer,24-25
 Rafa Höhr,DMS for newsrooms,Prodigioso Volcán,Consultoría,Producto,2024-09-26,Hombre,24-25

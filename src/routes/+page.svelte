@@ -36,7 +36,7 @@
 
         <ProxEvento date={text.prox}/>
         <Charlas charlas={text.charlas} />
-        <Graficos data={text.data} />
+        <Graficos data={text.graficos} />
         <Personas personas={text.personas} />
         <Recursos recursos={text.recursos} />
 
