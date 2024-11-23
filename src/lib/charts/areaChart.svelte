@@ -1,6 +1,6 @@
 <script>
 
-    import { flatGroup, groups, area, stack, scaleLinear, scaleTime, max, extent } from "d3";
+    import { flatGroup, groups, area, stack, scaleLinear, scaleTime, max, extent, bisector } from "d3";
     import { colorDict } from '$lib/utils/utils'
     let { data, chartValue } = $props();
 
@@ -32,7 +32,7 @@
         const anteriores = presentaciones.filter(
             (e) => new Date(e.Fecha) <= new Date(d[0])
         );
-        
+
         const tipos = flatGroup(anteriores, (e) => e[variable]);
         let totalPonentes = anteriores.length;  // Total de ponentes hasta la fecha
         let acumulados = {};
@@ -86,7 +86,7 @@ let startingPoint = chartValue === "Sexo" ? 50 : 0
 let percentaje = $state(false)
 let stackValue = $derived(percentaje ? "Porcentaje" : "Acumulados")
 
-    
+
 let stackedData = $derived(stack()
     .keys(keys)
     (chartData.map(d => {
@@ -104,11 +104,11 @@ let stackedData = $derived(stack()
 
     let x = $derived(scaleTime()
         .domain(extent(data, d => new Date(d.Fecha)))
-        .range([startingPoint, divWidth]));
+        .range([startingPoint, divWidth - 5]));
 
     let y = $derived(scaleLinear()
         .domain([0, max(stackedData[stackedData.length - 1], d => d[1])])
-        .range([300, 0]));
+        .range([300, 5]));
 
     let areaGenerator = $derived(area()
         .x(d => x(new Date(d.data.fecha)))
@@ -117,6 +117,29 @@ let stackedData = $derived(stack()
 
 
     let meetings = $derived(chartData.map(d => d.Fecha))
+
+    // hover stuff
+    // Añade estas funciones y variables
+    let hoveredData = $state(null);
+    let cursorPosition = $state(null)
+
+    function getDataAtPosition(position) {
+        if (!position) return null;
+
+        // Convierte la posición del cursor a una fecha usando la escala
+        const date = x.invert(position);
+
+        // Encuentra el índice más cercano en los datos
+        const index = bisector(d => d.Fecha).center(chartData, date);
+
+        // Devuelve los datos para esa fecha
+        return chartData[index];
+    }
+
+    // Actualiza hoveredData cuando se mueve el cursor
+    $effect(() => {
+        hoveredData = getDataAtPosition(cursorPosition);
+    });
 </script>
 
 
@@ -125,32 +148,43 @@ let stackedData = $derived(stack()
         <button class:active={percentaje === false} onclick={() => percentaje = false}>Número de charlas</button>
         <button class:active={percentaje === true} onclick={() => percentaje = true}>Porcentaje de charlas</button>
     </div>
-    
-    <div class="chart" bind:clientWidth={divWidth}>
-    
-        <svg style="height:100%" width={divWidth}>
+
+    <div class="chart" bind:clientWidth={divWidth} >
+
+        <svg style="height:100%" width={divWidth}
+        	onpointermove={(event) => chartValue === 'Sexo' ? cursorPosition = event.layerX : null }
+         	onpointerout={() => cursorPosition = null}
+         >
             <g>
                 {#each stackedData as layer, i}
                     <path class="layer" d={areaGenerator(layer)} style="fill:var(--{colorDict[layer.key] ?? layer.key})" />
                 {/each}
             </g>
-    
+
             <g>
                 {#if percentaje && chartValue === "Sexo"}
                     <text y={y(50)} x=5 alignment-baseline="middle" >50%</text>
                     <line x1=40 x2={divWidth} y1={y(50)} y2={y(50)} stroke="black" stroke-width=1 />
                 {/if}
-    
+
                 {#each meetings as meeting}
                     <line x1={x(meeting)} x2={x(meeting)} y1={0} y2={300} stroke="white" stroke-width=1  />
                     <text x={x(meeting)} y={320} alignment-baseline="baseline" text-anchor={x(meeting) < 20 ? 'start' : x(meeting) > divWidth - 20 ? 'end' : 'middle'} >
                         {new Intl.DateTimeFormat('es-ES', {dateStyle: 'short'}).format(new Date(meeting))}
                     </text>
                 {/each}
-    
+
             </g>
+
+            {#if hoveredData !== null}
+            	<g id="tooltip" style="transform:translateX({x(hoveredData.Fecha)}px)">
+                	<line x1=0 x2=0 y2=300 y1={y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)} stroke="black" />
+                	<circle cx=0 cy=0 r=5 style="transform:translateY({y(hoveredData[stackValue].Mujer)}px)" />
+                	<circle cx=0 cy=0 r=5 style="transform:translateY({y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}px)" />
+             	</g>
+            {/if}
         </svg>
-    
+
     </div>
 </div>
 
@@ -159,6 +193,7 @@ let stackedData = $derived(stack()
     .chart {
         width: 100%;
         height: 350px;
+        position: relative;
     }
 
     .layer {
@@ -168,21 +203,4 @@ let stackedData = $derived(stack()
     text {
         font-size: 12px
     }
-
-    button {
-        background-color: transparent;
-        color: black;
-        border: solid black 1px;
-        border-radius: 50px;
-        padding: .3rem .9rem;
-        cursor: pointer;
-
-        transition: color .5s, background-color .5s
-    }
-
-    button.active {
-        background-color: black;
-        color: white
-    }
-
 </style>

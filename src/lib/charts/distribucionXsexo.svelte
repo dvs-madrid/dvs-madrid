@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from "svelte";
     import { groups } from "d3";
-    
-    import AreaChart from "./areaChart.svelte";
+
+    import AreaChart from "$lib/charts/areaChart.svelte";
 
     let { data, charlas, personas } = $props();
 
@@ -52,7 +52,7 @@
 <div class="container">
     <p>Pero la proporción no ha sido siempre igual, sino que ha ido evolucionando en cada meetup:</p>
     <!-- distribution by meeting -->
-    <AreaChart {data} chartValue="Sexo" />    
+    <AreaChart {data} chartValue="Sexo" />
 </div>
 
 {/if}

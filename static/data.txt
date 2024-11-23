@@ -1,6 +1,6 @@
 titulo: DVS Madrid
 
-subtitulo: <p>Esta es la página del grupo de visualización de datos de Madrid. Aquí puedes enterarte de lo último de las últimas charlas y de la próxima. Además también podrás encontrar información sobre nosotros y recursos interesantes relacionados con la visualización de datos.</p><p>Para estar al día de las próximas charlas o proponer una puedes unirte a nuestro grupo de Slack de la Data Visualization Society. Si echas en falta a alguna persona en el listado o quieres añadir cualquier recurso a la página puedes rellenar este formulario, hacer una Pull Request en GitHub o contactarme por Twitter/X.</p>
+subtitulo: <p>Esta es la página del grupo de visualización de datos de Madrid. Aquí puedes enterarte de lo último de las últimas charlas y de la próxima. Además también podrás encontrar información sobre nosotros y recursos interesantes relacionados con la visualización de datos.</p><p>Para estar al día de las próximas charlas o proponer una puedes unirte a nuestro grupo de Slack de la Data Visualization Society. Si echas en falta a alguna persona en el listado o quieres añadir cualquier recurso a la página puedes rellenar este formulario, hacer una Pull Request en GitHub o contactarme por Twitter/X o Bluesky.</p>
 :end
 
 prox: 2025-09-26
@@ -66,6 +66,7 @@ curso: 23-24
 nombre: Adrián Maqueda
 tw: adrimaqueda
 web: adrimaqueda.com
+bsky: adrimaqueda.com
 
 nombre: Irene de la Torre
 web: https://irenedelatorrearenas.wordpress.com/
@@ -97,9 +98,6 @@ tw: leymarta
 nombre: Emma Esser
 tw: emma_esserdiaz
 
-nombre Guillermo Villar
-tw: _gvillar
-
 nombre: Rafael Höhr
 tw: rafahohr
 
@@ -112,27 +110,10 @@ tw: anabelruizaire
 nombre: Santi Espinosa
 tw: Saigesp
 
-nombre: Paula Guisado
-tw: PauGuisado
-
-nombre: Darío Ojeda
-tw: DarioOjeda
-
-nombre: María Hernández
-
 nombre: Carlos Muñoz
 tw: CarlosMunozDiaz
 
-nombre: Javier García
-tw: JGF92
-
 nombre: Elena Sánchez
-
-nombre: José R. Pérez
-tw: josernalist
-
-nombre: Lina Smith
-tw: Linasmithg
 
 nombre: Beatriz Martínez
 tw: maritrinez
@@ -140,16 +121,11 @@ tw: maritrinez
 nombre: Arantxa Herranz
 tw: aherranz
 
-nombre: Adelaida
-
 nombre: Javi Álvarez Liébana
 tw: DadosdeLaplace
 
 nombre: Ana Somavilla
 tw: nitasomo
-
-nombre: Alberto Hernández
-tw: albertohv_
 
 nombre: Sonia Mochón
 
@@ -168,7 +144,7 @@ nombre: Matthias Stahl (h_i_g_s_c_h_)
 link: https://www.youtube.com/@h_i_g_s_c_h_videos
 
 nombre: Joy of Code
-link: https://www.youtube.com/@JoyofCodeDev 
+link: https://www.youtube.com/@JoyofCodeDev
 
 [recursos.Herramientas]
 nombre: Datawrapper
@@ -197,7 +173,7 @@ nombre: Visualizing Complexity: Modular Information Design Handbook
 
 nombre: How Charts Lie: Getting Smarter about Visual Information
 
-nombre: Data Sketches: A journey of imagination, exploration, and beautiful data visualizations 
+nombre: Data Sketches: A journey of imagination, exploration, and beautiful data visualizations
 
 []
 
