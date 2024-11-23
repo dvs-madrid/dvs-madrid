@@ -10,7 +10,6 @@
     import Graficos from '$lib/webBlocks/graficos.svelte';
     import Personas from '$lib/webBlocks/personas.svelte';
     import Recursos from '$lib/webBlocks/recursos.svelte';
-	import Formulario from '$lib/webBlocks/formulario.svelte';
 
     let text = undefined;
     let ready = false
@@ -23,16 +22,15 @@
         ready = true
     });
 
-    let showForm = false
 </script>
 
-<main class:blocked={showForm}>
+<main>
     {#if ready}
         <div style="margin-top: 100px">
             <h1>📊 DVS Madrid</h1>
             <div class="subtitle">
                 <p>Esta es la página del grupo de <b>visualización de datos de Madrid</b>. Aquí puedes enterarte de las últimas charlas y de la próxima. Además también podrás encontrar información sobre nosotros y recursos interesantes relacionados con la visualización de datos.</p>
-                <p>Para estar al día de las próximas charlas o proponer una puedes <b>unirte a nuestro grupo de Slack de la Data Visualization Society</b>. Si echas en falta a alguna <b>persona</b> en el listado o quieres añadir cualquier <b>recurso</b> a la página puedes rellenar <span onclick={() => showForm = true}>este formulario</span>, hacer una Pull Request en <a href="https://github.com/dvs-madrid/dvs-madrid" target="_blank">GitHub</a> o contactarme por <a href="https://x.com/adrimaqueda" target="_blank">Twitter/X</a> o <a href="https://bsky.app/profile/adrimaqueda.com" target="_blank">Bluesky</a>.</p>
+                <p>Para estar al día de las próximas charlas o proponer una puedes <b>unirte a nuestro grupo de Slack de la Data Visualization Society</b>. Si echas en falta a alguna <b>persona</b> en el listado o quieres añadir cualquier <b>recurso</b> a la página puedes hacer una Pull Request en <a href="https://github.com/dvs-madrid/dvs-madrid" target="_blank">GitHub</a> o contactarme por <a href="https://x.com/adrimaqueda" target="_blank">Twitter/X</a> o <a href="https://bsky.app/profile/adrimaqueda.com" target="_blank">Bluesky</a>.</p>
             </div>
         </div>
 
@@ -42,17 +40,10 @@
         <Personas personas={text.personas} />
         <Recursos recursos={text.recursos} />
 
-        <!-- footer -->
-        <!-- <div style="width: 100%; border-top: 1px solid black">
-            <p>Pull Request en Github. Únete a Slack. Usa el formulario</p>
-        </div> -->
-
     {:else}
         <div><h1>Cargando...</h1></div>
     {/if}
 </main>
-
-<Formulario {showForm} />
 
 <style>
     main {
@@ -66,9 +57,8 @@
         }
     }
 
-    main.blocked {
-        height: 100vh;
-        overflow: hidden;
+    .subtitle a{
+        text-decoration: underline;
     }
     
 </style>

@@ -5,53 +5,67 @@ prox: null
 [charlas]
 titulo: Un año de DVS Madrid (Irene de la Torre)
 curso: 24-25
+tema: DVS
 
 titulo: La visualización de datos en el periodismo deportivo (Sonia Mochón)
 curso: 24-25
+tema: Diseño
 
 titulo: DMS for newsrooms (Marta Ley, Juan Pablo Marín y Rafa Höhr)
 curso: 24-25
+tema: Producto
 
 titulo: Las tripas del chart builder de Graphext (Victoriano Izquierdo y Juan Morales)
 link: https://www.youtube.com/watch?v=q68486gfNP4&ab_channel=DVS-Madrid
 curso: 23-24
+tema: Business Intelligence
 
 titulo: Seeing the City Through Data: An Urbanist's Perspective (Ksenia Orlova)
 link: https://www.youtube.com/watch?v=_eqk0qosAd4&t=246s&ab_channel=DVS-Madrid
 curso: 23-24
+tema: GIS
 
 titulo: Los hacks de la visualización de la Edad de Plata (Beatriz Martínez)
 link: https://www.youtube.com/watch?v=4wcG9DESVtI
 curso: 23-24
+tema: Diseño
 
 titulo: Comunicando y visualizando en R con Quarto (Javi Álvarez)
 link: https://www.youtube.com/watch?v=HhTm_CET_vk&ab_channel=DVS-Madrid
 curso: 23-24
+tema: Programación
 
 titulo: Viz for Social Good (Aida Horaniet)
 link: https://www.youtube.com/watch?v=yhqBeMXmt28&ab_channel=DVS-Madrid
 curso: 23-24
+tema: ONG
 
 titulo: España y Europa en llamas (Adrián Maqueda)
 link: https://www.youtube.com/watch?v=Nj7o3K_BxEc&t=306s
 curso: 23-24
+tema: GIS
 
 titulo: Visualización de datos con bloques de construcción (Pablo Almunia)
 link: https://www.youtube.com/watch?v=QDbvojirwvY
 curso: 23-24
+tema: Taller
 
 titulo: Love, sustainability & data (Couple in Data)
 link: https://www.youtube.com/watch?v=ibhSQ1XHl_g&ab_channel=DVS-Madrid
 curso: 23-24
+tema: Diseño
 
 titulo: Animando mapas con d3.js, Mapbox y Observable (Irene de la Torre)
 curso: 23-24
+tema: Programación
 
 titulo: Componentes reutilizables con d3.js (Santi Espinosa)
 curso: 23-24
+tema: Programación
 
 titulo: Mesa redonda sobre Outlier 2023 (Sergio Galán)
 curso: 23-24
+tema: DVS
 
 
 # Personas relacionadas con la visualización de datos en Madrid

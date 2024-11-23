@@ -31,7 +31,7 @@
 {#snippet stackedCharts(type)}
  <div style="display: flex;flex-wrap:wrap;align-items: center;margin-top: 4rem">
      <div class="container">
-         <!-- <p>La temática de las charlas también ha ido variando:</p> -->
+         <p>{type === 'Tema' ? 'Charlas según temática:' : 'Charlas según ponente:'}</p>
          <div class="values-container">
              {#each uniqueValues(type) as value}
                  <p class="value" style="--accent-color:var(--{colorDict[value] ?? value})" onclick={() => selectedValue = value} >
@@ -72,5 +72,17 @@
 <style>
     a {
     	text-decoration: underline;
+    }
+
+    .values-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: .5rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .value {
+        margin: 0;
     }
 </style>
