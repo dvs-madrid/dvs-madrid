@@ -2,6 +2,10 @@
     font-family: sans-serif;
 }
 
+body {
+    margin: 0;
+}
+
 
 h2 {
     margin-bottom: 0;
@@ -12,7 +16,8 @@ h2 {
 
 
 ul, p, a, div {
-    color: #4c4e67
+    color: #4c4e67;
+    line-height: 1.5;
 }
 
 ul {
@@ -25,8 +30,6 @@ ul {
 li {
     margin-bottom: 20px
 }
-
-
 
 a {
     text-decoration: none;
@@ -42,8 +45,8 @@ svg {
 
 button {
     background-color: transparent;
-    color: black;
-    border: solid black 1px;
+    color: #212529;
+    border: solid #212529 1px;
     border-radius: 50px;
     padding: .3rem .9rem;
     cursor: pointer;
@@ -52,8 +55,8 @@ button {
 }
 
 button.active {
-    background-color: black;
-    color: white
+    background-color: #212529;
+    color: #f8f9fa
 }
 
 .container {
@@ -68,6 +71,10 @@ button.active {
     }
 }
 
+.subtitle a{
+    text-decoration: underline;
+}
+
 /* COLORES */
 
 :root {
@@ -75,17 +82,17 @@ button.active {
     --Mujer: #8652EB;
 
     --DVS: #2db1a4;
-    --Diseño: orange;
-    --Producto: red;
-    --BI: blue;
-    --GIS: yellow;
-    --ONG: green;
-    --Programación: pink;
-    --Taller: grey;
+    --Diseño: #fab9ff;
+    --Producto: #d7ec8a;
+    --BI: #5eb4f3;
+    --GIS: #bf643c;
+    --ONG: #ffc653;
+    --Programación: #4f55af;
+    --Taller: #99b0a7;
 
-    --Consultoría: orange;
-    --Universidad: yellow;
-    --Estudio: blue;
-    --Medios: grey;
+    --Consultoría: #fab9ff;
+    --Universidad: #ffc653;
+    --Estudio: #637ddc;
+    --Medios: #99b0a7;
 
 }

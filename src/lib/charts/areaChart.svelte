@@ -83,8 +83,8 @@ let keys = $derived([...new Set(data.map(d => d[chartValue]))])
 let divWidth = $state(300)
 let startingPoint = chartValue === "Sexo" ? 50 : 0
 
-let percentaje = $state(false)
-let stackValue = $derived(percentaje ? "Porcentaje" : "Acumulados")
+let porcentaje = $state(false)
+let stackValue = $derived(porcentaje ? "Porcentaje" : "Acumulados")
 
 
 let stackedData = $derived(stack()
@@ -145,8 +145,8 @@ let stackedData = $derived(stack()
 
 <div>
     <div>
-        <button class:active={percentaje === false} onclick={() => percentaje = false}>Número de charlas</button>
-        <button class:active={percentaje === true} onclick={() => percentaje = true}>Porcentaje de charlas</button>
+        <button class:active={porcentaje === false} onclick={() => porcentaje = false}>Número de charlas</button>
+        <button class:active={porcentaje === true} onclick={() => porcentaje = true}>Porcentaje de charlas</button>
     </div>
 
     <div class="chart" bind:clientWidth={divWidth} >
@@ -154,6 +154,7 @@ let stackedData = $derived(stack()
         <svg style="height:100%" width={divWidth}
         	onpointermove={(event) => chartValue === 'Sexo' ? cursorPosition = event.layerX : null }
          	onpointerout={() => cursorPosition = null}
+            overflow="visible"
          >
             <g>
                 {#each stackedData as layer, i}
@@ -162,14 +163,14 @@ let stackedData = $derived(stack()
             </g>
 
             <g>
-                {#if percentaje && chartValue === "Sexo"}
+                {#if porcentaje && chartValue === "Sexo"}
                     <text y={y(50)} x=5 alignment-baseline="middle" >50%</text>
-                    <line x1=40 x2={divWidth} y1={y(50)} y2={y(50)} stroke="black" stroke-width=1 />
+                    <line x1=40 x2={divWidth} y1={y(50)} y2={y(50)} stroke="grey" stroke-width=2 stroke-dasharray="6" />
                 {/if}
 
                 {#each meetings as meeting}
-                    <line x1={x(meeting)} x2={x(meeting)} y1={0} y2={300} stroke="white" stroke-width=1  />
-                    <text x={x(meeting)} y={320} alignment-baseline="baseline" text-anchor={x(meeting) < 20 ? 'start' : x(meeting) > divWidth - 20 ? 'end' : 'middle'} >
+                    <line x1={x(meeting)} x2={x(meeting)} y1={0} y2={300} stroke="white" stroke-width=3  />
+                    <text x={x(meeting)} y={320} alignment-baseline="baseline" text-anchor={x(meeting) < 20 ? 'start' : x(meeting) > divWidth - 20 ? 'end' : 'middle'} style="font-weight:{hoveredData?.Fecha === meeting ? '900' : 'normal'}; opacity:{hoveredData === null ? '1' : hoveredData?.Fecha === meeting ? '1' : .3}" >
                         {new Intl.DateTimeFormat('es-ES', {dateStyle: 'short'}).format(new Date(meeting))}
                     </text>
                 {/each}
@@ -177,13 +178,27 @@ let stackedData = $derived(stack()
             </g>
 
             {#if hoveredData !== null}
-            	<g id="tooltip" style="transform:translateX({x(hoveredData.Fecha)}px)">
-                	<line x1=0 x2=0 y2=300 y1={y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)} stroke="black" />
-                	<circle cx=0 cy=0 r=5 style="transform:translateY({y(hoveredData[stackValue].Mujer)}px)" />
-                	<circle cx=0 cy=0 r=5 style="transform:translateY({y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}px)" />
+            	<g class="tooltip" style="transform:translateX({x(hoveredData.Fecha)}px)">
+                	<line x1=0 x2=0 y2=300 y1={y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)} stroke="black" stroke-width=3 />
+
+                	<circle cx=0 cy={y(hoveredData[stackValue].Mujer)} r=5 />
+                	<circle cx=0 cy={y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)} r=5 />
+
              	</g>
             {/if}
         </svg>
+
+        {#if hoveredData !== null}
+        <div class="tooltip" style="position: absolute;height:calc(100% - 2rem - 50px);width:100%;bottom:50px">
+            <div style="position: absolute;top:{y(hoveredData[stackValue].Mujer) + 5}px;left:{x(hoveredData.Fecha)}px;transform:translateX({x(hoveredData.Fecha) > 100 ? 'calc(-100% - 10px)' : '10px'})" class="tooltip-text">
+                {Math.round(hoveredData[stackValue].Mujer)}{porcentaje ? '%' : ''}
+            </div>
+
+            <div style="position: absolute;top:{y(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre) - 5 }px;left:{x(hoveredData.Fecha)}px;transform:translateX({x(hoveredData.Fecha) > 100 ? 'calc(-100% - 10px)' : '10px'}) translateY(-100%)" class="tooltip-text">
+                {Math.round(hoveredData[stackValue].Hombre)}{porcentaje ? '%' : ''}
+            </div>
+        </div>
+        {/if}
 
     </div>
 </div>
@@ -194,6 +209,7 @@ let stackedData = $derived(stack()
         width: 100%;
         height: 350px;
         position: relative;
+        padding-top: 2rem;
     }
 
     .layer {
@@ -203,4 +219,18 @@ let stackedData = $derived(stack()
     text {
         font-size: 12px
     }
+
+    .tooltip {
+        pointer-events: none;
+    }
+
+    .tooltip-text {
+        color: #222;
+        background-color: rgba(255,255,255,.75);
+        padding: 5px 10px;
+        border-radius: 5px;
+        backdrop-filter: blur(2px);
+        font-size:13px
+    }
+
 </style>

@@ -34,7 +34,10 @@
          <!-- <p>La temática de las charlas también ha ido variando:</p> -->
          <div class="values-container">
              {#each uniqueValues(type) as value}
-                 <p class="value" style="--accent-color:var(--{colorDict[value] ?? value})" onclick={() => selectedValue = value} >{value}</p>
+                 <p class="value" style="--accent-color:var(--{colorDict[value] ?? value})" onclick={() => selectedValue = value} >
+                    <span style="background-color:var(--{colorDict[value] ?? value});height:1cap;width:1cap;display:inline-block"></span>
+                    {value}
+                </p>
              {/each}
          </div>
      </div>

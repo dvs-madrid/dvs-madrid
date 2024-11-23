@@ -6,7 +6,7 @@
 
 
 <div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">
-    <h2>Quienes somos</h2>
+    <h2>Quiénes somos</h2>
 
     <div style="display: grid;grid-template-columns: repeat(auto-fill, 300px);column-gap: 10px;row-gap: 20px">
         {#each sortedPersonas as persona}
@@ -54,5 +54,15 @@
 <style>
     svg {
         height: 1.2cap;
+    }
+
+    .persona {
+        display: flex;
+        gap: .5cap
+    }
+
+    .persona a {
+        display: flex;
+        align-items: center
     }
 </style>

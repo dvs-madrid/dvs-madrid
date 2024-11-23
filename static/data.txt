@@ -1,10 +1,4 @@
-titulo: DVS Madrid
-
-subtitulo: <p>Esta es la página del grupo de visualización de datos de Madrid. Aquí puedes enterarte de lo último de las últimas charlas y de la próxima. Además también podrás encontrar información sobre nosotros y recursos interesantes relacionados con la visualización de datos.</p><p>Para estar al día de las próximas charlas o proponer una puedes unirte a nuestro grupo de Slack de la Data Visualization Society. Si echas en falta a alguna persona en el listado o quieres añadir cualquier recurso a la página puedes rellenar este formulario, hacer una Pull Request en GitHub o contactarme por Twitter/X o Bluesky.</p>
-:end
-
-prox: 2025-09-26
-
+prox: null
 
 # listado de charlas
 
