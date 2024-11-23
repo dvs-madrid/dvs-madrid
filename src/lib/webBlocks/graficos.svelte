@@ -73,6 +73,4 @@
     a {
     	text-decoration: underline;
     }
-
-    .container
 </style>
