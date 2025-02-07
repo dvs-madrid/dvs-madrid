@@ -1,4 +1,4 @@
-prox: null
+prox: 2025-03-04
 
 # listado de charlas
 
