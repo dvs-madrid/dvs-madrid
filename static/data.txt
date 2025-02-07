@@ -1,4 +1,6 @@
-prox: 2025-03-04
+prox.date: 2025-03-04
+prox.link: https://www.eventbrite.com/e/entradas-dvs-madrid-marzo-2025-pablo-almunia-alberto-pino-y-rompehielos-1237836324769
+
 
 # listado de charlas
 

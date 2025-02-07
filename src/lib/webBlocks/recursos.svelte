@@ -13,12 +13,12 @@
             <div>
                 <h4>{key}</h4>
                 <ul>
-                    {#each recurso.sort((a,b) => ascending(a.nombre,b.nombre)) as info}
-                    {#if info.link}
-                        <li><a href={info.link} target="_blank" >{info.nombre}</a></li>
-                        {:else}
-                        <li>{info.nombre}</li>
-                    {/if}
+                    {#each recurso.toSorted((a,b) => ascending(a.nombre, b.nombre)) as info}
+                        {#if info.link}
+                            <li><a href={info.link} target="_blank" >{info.nombre}</a></li>
+                            {:else}
+                            <li>{info.nombre}</li>
+                        {/if}
                     {/each}
                 </ul>
             </div>

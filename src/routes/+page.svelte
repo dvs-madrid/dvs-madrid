@@ -11,8 +11,8 @@
     import Personas from '$lib/webBlocks/personas.svelte';
     import Recursos from '$lib/webBlocks/recursos.svelte';
 
-    let text = undefined;
-    let ready = false
+    let text = $state(undefined);
+    let ready = $state(false)
 
     onMount(async () => {
         const response = await fetch('data.txt');
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <ProxEvento date={text.prox}/>
+        <ProxEvento date={text.prox.date} link={text.prox.link} />
         <Charlas charlas={text.charlas} />
         <Graficos data={text.graficos} />
         <Personas personas={text.personas} />

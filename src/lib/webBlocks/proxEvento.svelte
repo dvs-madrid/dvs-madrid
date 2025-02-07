@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
     import { timeDay, timeMonth } from 'd3-time'
 
-    let { date } = $props();
+    let { date, link } = $props();
 
     let fecha = $state('')
     let timeToEvent = $state(undefined)
@@ -31,8 +31,8 @@
     {#if timeToEvent?.days > 0}
     <div style="text-align: center;padding-top:2rem">
         <p class="date">{fecha}</p>
-        <p class="countdown">¡Nos vemos en {timeToEvent.months} meses y {timeToEvent.days} días!</p>
-        <p class="tickets">Consigue tus entradas aquí 🎟️</p>
+        <p class="countdown">¡Nos vemos en {timeToEvent.days} días!</p>
+        <a href={link} class="tickets">Consigue tus entradas aquí 🎟️</a>
     </div>
     {:else}
     <div class="tbd">
