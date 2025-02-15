@@ -22,6 +22,7 @@
 	"type": "module",
 	"dependencies": {
 		"archieml": "^0.5.0",
-		"d3": "^7.9.0"
+		"d3": "^7.9.0",
+		"temporal-polyfill": "^0.2.5"
 	}
 }
