@@ -15,7 +15,10 @@ h2 {
 }
 
 
-ul, p, a, div {
+ul,
+p,
+a,
+div {
     color: #4c4e67;
     line-height: 1.5;
 }
@@ -65,7 +68,7 @@ button.active {
     flex-direction: column
 }
 
-@media(width >= 600px) {
+@media(width >=600px) {
     .container {
         width: 50%;
     }
@@ -85,6 +88,8 @@ button.active {
     --ONG: #ffc653;
     --Programación: #4f55af;
     --Taller: #99b0a7;
+    --Arte: #f39159;
+    --Networking: #aaaaaa;
 
     --Consultoría: #fab9ff;
     --Universidad: #ffc653;

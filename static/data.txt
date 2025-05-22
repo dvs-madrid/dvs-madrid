@@ -5,6 +5,20 @@ prox.link: https://www.eventbrite.com/e/entradas-dvs-madrid-marzo-2025-pablo-alm
 # listado de charlas
 
 [charlas]
+titulo: Primera sesión rompehielos de DVS Madrid
+curso: 24-25
+tema: Networking
+
+titulo: D∆T∆_P®1//T1//G
+curso: 24-25
+tema: Arte
+link: https://www.youtube.com/watch?v=LyxoALFE_zc&ab_channel=DVS-Madrid
+
+titulo: Graphane: declarative data visualization
+curso: 24-25
+tema: Programación
+link: https://www.youtube.com/watch?v=XvdSES88CVg&ab_channel=DVS-Madrid
+
 titulo: Un año de DVS Madrid (Irene de la Torre)
 curso: 24-25
 tema: DVS
@@ -201,6 +215,9 @@ nombre: Data Sketches: A journey of imagination, exploration, and beautiful data
 # Datos sobre las charlas para hacer los gráficos
 
 graficos: Nombre,Titulo,Afiliacion,Tipo de Organización,Tema,Fecha,Sexo,Curso
+Irene de la Torre,Primera sesión rompehielos de DVS Madrid,DVS,DVS,Networking,2025-03-24,Mujer,24-25
+Alberto Pino González,D∆T∆_P®1//T1//G,Freelance,Estudio de diseño,Arte,2025-03-24,Hombre,24-25
+Pablo Almunia,Graphane: declarative data visualization,Graphery,Consultoría,Programación,2025-03-24,Hombre,24-25
 Irene de la Torre,Un año de DVS Madrid,DVS,DVS,DVS,2024-09-26,Mujer,24-25
 Sonia Mochón,La visualización de datos en el periodismo deportivo,Diario AS,Medio de comunicación,Diseño,2024-09-26,Mujer,24-25
 Rafa Höhr,DMS for newsrooms,Prodigioso Volcán,Consultoría,Producto,2024-09-26,Hombre,24-25
