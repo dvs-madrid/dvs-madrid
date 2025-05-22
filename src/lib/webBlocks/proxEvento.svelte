@@ -8,17 +8,18 @@
 	let timeToEvent = $state(undefined);
 
 	function intervalString(interval) {
-		console.log(interval.days, interval.hours, interval.minutes);
 		if (interval.days <= -1) {
 			return undefined;
+		} else if (interval.days === 0 && interval.hours <= 0) {
+			return 'Está siendo ahora';
 		} else if (interval.days === 0) {
-			return `${interval.hours} horas`;
-		} else return `${interval.days} días`;
+			return `Nos vemos en ${interval.hours} horas`;
+		} else return `Nos vemos en ${interval.days} días`;
 	}
 
 	onMount(async () => {
 		let hoy = Temporal.Now.zonedDateTimeISO();
-		fecha = Temporal.ZonedDateTime.from(date + 'T18:00:00Z[Europe/Madrid]');
+		fecha = Temporal.ZonedDateTime.from(date + 'T17:00:00Z[Europe/Madrid]');
 
 		console.log(hoy.toString(), fecha.toString());
 
@@ -33,7 +34,7 @@
 	{#if timeToEvent !== undefined}
 		<div style="text-align: center;padding-top:2rem">
 			<p class="date">{fecha.toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short' })}</p>
-			<p class="countdown">¡Nos vemos en {timeToEvent}!</p>
+			<p class="countdown">¡{timeToEvent}!</p>
 			<a href={link} class="tickets">Consigue tus entradas aquí 🎟️</a>
 		</div>
 	{:else}
