@@ -21,8 +21,6 @@
 		let hoy = Temporal.Now.zonedDateTimeISO();
 		fecha = Temporal.ZonedDateTime.from(date + 'T17:00:00Z[Europe/Madrid]');
 
-		console.log(hoy.toString(), fecha.toString());
-
 		let interval = fecha.since(hoy, { largestUnit: 'day' });
 
 		timeToEvent = intervalString(interval);

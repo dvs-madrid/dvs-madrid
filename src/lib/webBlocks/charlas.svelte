@@ -8,6 +8,15 @@
 	let activeCharlas = $derived(charlas.filter((d) => d.curso === selectedCurso));
 </script>
 
+{#snippet tituloCompleto(charla)}
+	{charla.titulo + ' (' + charla.ponentes + ')'}
+	<span
+		class="tema {charla.tema}"
+		style="background-color: var(--{colorDict[charla.tema] ?? charla.tema}, #aaa)"
+		>{charla.tema}</span
+	>
+{/snippet}
+
 <div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">
 	<h2>De qué hemos hablado</h2>
 
@@ -23,16 +32,11 @@
 	</div>
 
 	<ul>
-		{#each activeCharlas as charla}
+		{#each activeCharlas as charla, i}
 			<li>
 				{#if charla.link}
-					<a href={charla.link} target="_blank"
-						>{charla.titulo}
-						<span
-							class="tema {charla.tema}"
-							style="background-color: var(--{colorDict[charla.tema] ?? charla.tema})"
-							>{charla.tema}</span
-						>
+					<a href={charla.link} target="_blank">
+						{@render tituloCompleto(charla)}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 576 512"
@@ -44,12 +48,7 @@
 						>
 					</a>
 				{:else}
-					{charla.titulo}
-					<span
-						class="tema {charla.tema}"
-						style="background-color: var(--{colorDict[charla.tema] ?? charla.tema})"
-						>{charla.tema}</span
-					>
+					{@render tituloCompleto(charla)}
 				{/if}
 			</li>
 		{/each}

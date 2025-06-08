@@ -65,7 +65,9 @@ button.active {
 .container {
     width: 100%;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 @media(width >=600px) {
