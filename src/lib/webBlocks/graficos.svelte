@@ -21,7 +21,7 @@
 			<p>{type === 'Tema' ? 'Charlas según temática:' : 'Charlas según ponente:'}</p>
 			<div class="values-container">
 				{#each uniqueValues(type) as value}
-					<p
+					<button
 						class="value"
 						style="--accent-color:var(--{colorDict[value] ?? value})"
 						onclick={() => (selectedValue = value)}
@@ -31,7 +31,7 @@
 								value});height:1cap;width:1cap;display:inline-block"
 						></span>
 						{value}
-					</p>
+					</button>
 				{/each}
 			</div>
 		</div>

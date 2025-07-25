@@ -1,6 +1,7 @@
 <script>
 	let { charlas } = $props();
 	import { colorDict } from '$lib/utils/utils';
+	import { fly } from 'svelte/transition';
 
 	let cursos = [...new Set(charlas.map((d) => d.curso))].sort();
 	let selectedCurso = $state('24-25');
@@ -32,8 +33,8 @@
 	</div>
 
 	<ul>
-		{#each activeCharlas as charla, i}
-			<li>
+		{#each activeCharlas as charla, i (charla.id)}
+			<li in:fly={{ y: 200, delay: i * 100 }}>
 				{#if charla.link}
 					<a href={charla.link} target="_blank">
 						{@render tituloCompleto(charla)}

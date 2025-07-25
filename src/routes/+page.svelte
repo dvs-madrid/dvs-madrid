@@ -52,7 +52,7 @@
 		</div>
 
 		<ProxEvento date={text.prox.date} link={text.prox.link} />
-		<Charlas charlas={data.charlas} />
+		<Charlas charlas={data.charlas.map((d, i) => ({ ...d, id: i }))} />
 		<Graficos data={data.graficos} />
 		<Personas personas={text.personas} />
 		<Recursos recursos={text.recursos} />
