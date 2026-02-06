@@ -29,7 +29,7 @@
 		ready = true;
 	});
 
-	let years = ['En total', ...[...new Set(data.map((d) => d.Curso))].reverse()];
+	let years = $derived(['En total', ...[...new Set(data.map((d) => d.Curso))].reverse()]);
 	let selectedYear = $state('En total');
 
 	let genderDistribution = $derived.by(() => {
@@ -63,53 +63,82 @@
 	);
 </script>
 
-<div style="display: flex; flex-wrap:wrap">
+<div class="gender-section">
 	{#if ready}
-		<!-- global distribution -->
 		<div class="container">
-			<div
-				style="display: flex;align-items:center;justify-content: center;column-gap:10px;margin-top:1rem"
-			>
-				{#each years as year}
+			<div class="year-filters">
+				{#each years as year (year)}
 					<button class={[selectedYear === year && 'active']} onclick={() => (selectedYear = year)}
 						>{year}</button
 					>
 				{/each}
 			</div>
-			<p>
-				{text} hemos realizado <b>{yearRecount.charlas} charlas</b> y han presentado
-				<b>{yearRecount.ponentes} personas diferentes</b>. El porcentaje de ponentes se queda así:
+			<p class="summary">
+				{text} hemos realizado <strong>{yearRecount.charlas} charlas</strong> y han presentado
+				<strong>{yearRecount.ponentes} personas diferentes</strong>. El porcentaje de ponentes se
+				queda así:
 			</p>
-			<div style="height: 300px;display:flex;align-items: flex-end; justify-content: space-evenly">
-				{#each genderDistribution as sex}
+			<div class="bar-chart">
+				{#each genderDistribution as sex (sex.genero)}
 					<div class="column">
-						<div
-							style="height: {sex.percent}%; width: 100px;background-color:var(--{sex.genero});transition:all .3s"
-						>
+						<div class="bar" style="height: {sex.percent}%; background-color: var(--{sex.genero})">
 							<p class="percent">{Math.round(sex.percent)}%</p>
 						</div>
-						<p style="margin-top:1rem">{sex.genero}</p>
+						<p class="bar-label">{sex.genero}</p>
 					</div>
 				{/each}
 			</div>
 		</div>
 
 		<div class="container">
-			<p>
+			<p class="summary">
 				Pero la proporción no ha sido siempre igual, sino que ha ido evolucionando en cada meetup:
 			</p>
-			<!-- distribution by meeting -->
 			<AreaChart {data} chartValue="Sexo" />
 		</div>
 	{/if}
 </div>
 
 <style>
+	.gender-section {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.year-filters {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		margin-top: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.summary {
+		font-size: 0.9rem;
+	}
+
+	.bar-chart {
+		height: 280px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-evenly;
+		padding: 0 1rem;
+	}
+
 	.column {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.bar {
+		width: 80px;
+		border-radius: 6px 6px 0 0;
+		transition: height 0.4s ease;
+		position: relative;
 	}
 
 	.column p {
@@ -119,7 +148,19 @@
 	}
 
 	.percent {
-		position: relative;
-		top: -20px;
+		position: absolute;
+		top: -28px;
+		left: 0;
+		right: 0;
+		font-weight: 700;
+		font-size: 1.1rem;
+		color: #1a1c2e;
+	}
+
+	.bar-label {
+		margin-top: 0.75rem !important;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: #9b9db5;
 	}
 </style>

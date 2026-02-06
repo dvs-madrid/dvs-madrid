@@ -4,14 +4,12 @@
 	let { recursos } = $props();
 </script>
 
-<div style="display: flex; flex-direction: column; gap: 1rem;margin-bottom: 50px">
+<section class="recursos-section">
 	<h2>Recursos para visualizar datos</h2>
 
-	<div
-		style="display: grid;grid-template-columns: repeat(auto-fill, 300px);column-gap: 10px;row-gap: 20px; justify-content: space-between;"
-	>
+	<div class="recursos-grid">
 		{#each Object.entries(recursos) as [key, recurso]}
-			<div>
+			<div class="recurso-group">
 				<h4>{key}</h4>
 				<ul>
 					{#each recurso.toSorted((a, b) => ascending(a.nombre, b.nombre)) as info}
@@ -25,4 +23,34 @@
 			</div>
 		{/each}
 	</div>
-</div>
+</section>
+
+<style>
+	.recursos-section {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.recursos-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		column-gap: 24px;
+		row-gap: 16px;
+	}
+
+	.recurso-group {
+		padding: 1rem 0;
+	}
+
+	a {
+		color: #5258b5;
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+		color: #7b46d9;
+	}
+</style>

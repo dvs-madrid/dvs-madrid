@@ -1,59 +1,64 @@
-# Web grupo de Madrid de la Data Visualization Society 
+# Web grupo de Madrid de la Data Visualization Society
 
-Este es el repositorio que da vida a la web del grupo de la DVS en Madrid. 
+Este es el repositorio que da vida a la web del grupo de la DVS en Madrid.
 
 Esta web está desarrollada con **Svelte 5 y SvelteKit**. Puedes proponer cualquier tipo de cambio haciendo una Pull Request.
 
-https://dvs-madrid.netlify.app 
+https://dvs-madrid.netlify.app
 
 ---
+
+### Stack técnico
+
+- **Svelte 5** + **SvelteKit 2** — Framework
+- **Vite 7** — Bundler
+- **D3.js** — Visualización de datos
+- **ArchieML** — Formato de datos legible para humanos
+- **Netlify** — Despliegue
+
+### Arquitectura de datos
+
+La web se alimenta de dos fuentes:
+
+1. **Google Sheets** (servidor) — Datos detallados de charlas y ponentes para las gráficas. Se obtiene en `+page.server.ts` como CSV.
+2. **`static/data.txt`** (servidor) — Próximo evento, personas y recursos. Escrito en formato [ArchieML](https://archieml.org/) y parseado en el servidor.
+
+Todo el contenido se carga en el servidor (SSR), no hay fetch en el cliente.
+
+---
+
 ### Cómo ver la web en local
 
-Para poder visualizar esta web necesitarás tener la versión 22 de Node.js. Para facilitar su uso, está el archivo `.nvmrc` con la versión exacta en la que ha sido desarrollada. Si no lo tienes, te recomiendo tener instalado `NVM` en tu ordenador, lo que facilitará el moverte entre diferentes proyectos y diferentes versiones de `Node`. Si no tienes `NVM` instalado [aquí](https://medium.com/@priscillashamin/how-to-install-and-configure-nvm-on-mac-os-43e3366c75a6) puedes ver cómo hacerlo desde 0.
-
-Una vez tengas instalado `NVM` abre la carpeta en la que tengas el proyecto en la terminal y ejecuta el comando para instalar la versión de Node de este proyecto
+Necesitarás tener **Node.js 24** instalado. El archivo `.nvmrc` contiene la versión exacta. Si no tienes `NVM` instalado, [aquí](https://medium.com/@priscillashamin/how-to-install-and-configure-nvm-on-mac-os-43e3366c75a6) puedes ver cómo hacerlo.
 
 ```
 nvm install
-```
-
-Luego, para usar esa versión, ejecuta:
-
-```
 nvm use
-```
-
-Ahora ya podrás instalar las dependencias de este proyecto:
-
-```
 npm install
-```
-
-Y para ver los cambios que realizas en los archivos usa:
-
-```
 npm run dev
 ```
+
 ---
-### Cómo añadir recursos
 
+### Cómo añadir contenido
 
-Las diferentes secciones de la web se alimentan del archivo `data.txt` que se encuentra en la carpeta `static`. Los datos están escritos en el formato [ArchieML](https://archieml.org/) para simplificar la accesibilidad del proyecto.
+Las secciones de personas y recursos se editan en el archivo `static/data.txt`, escrito en formato [ArchieML](https://archieml.org/).
 
-En el archivo se encuentran diferentes secciones que se corresponden con las secciones de la web. Cada sección está encabezada por una palabra entre corchetes (por ejemplo, [charlas]) y dentro están los diferentes objetos que la compoenen. 
-
-**Para añadir una nueva persona a la lista** se haría de la siguiente forma: habría que ir a la parte del documento encabezada por [personas] y añadir las diferentes propiedades que queramos. Como mínimo hay que añadir el nombre, además, actualmente también está pensado para mostrar página web, cuenta de twitter y de Bluesky. 
-
-Un ejemplo sería:
+**Para añadir una nueva persona** ve a la sección `[personas]` y añade las propiedades. Como mínimo hay que añadir el nombre. Opcionalmente se puede incluir cuenta de Twitter/X (`tw`), Bluesky (`bsky`), web (`web`) y LinkedIn (`linkedin`).
 
 ```
 nombre: Menganito de Tal
 bsky: menganito.bsky.social
+tw: menganito
 ```
 
-Si quieres añadir cualquier otra referencia puedes hacerlo, pero, ten en cuenta que para que se muestre tendrás que cambiar el código del componente `personas.svelte`.
+**Para añadir nuevos recursos de dataviz** busca la categoría correspondiente (Cursos, Canales, Herramientas, Libros). Para crear una nueva categoría, escribe un nuevo corchete que empiece por `recursos.` seguido del nombre, por ejemplo `[recursos.Películas]`.
 
+Cada recurso necesita un `nombre` y opcionalmente un `link`:
 
-**Para añadir nuevos recursos de dataviz** el procedimiento es similar al anterior. Tendrás que buscar en el documento el tipo de recurso que quieres añadir. Actualmente hay cursos, canales de Youtube, libros y herramientas. Pero se pueden añadir cuantas categorías queramos. Para añadir una nueva categoría simplemente hay que escribir un nuevo corchete que empiece por `recursos.` y después poner el nombre de la categoría. Por ejemplo, si quisieramos añadir la categoría *Películas*, sería `[recursos.Películas]`.
+```
+nombre: Nombre del recurso
+link: https://ejemplo.com
+```
 
-Todos los recursos tienen una estructura similar. Cada uno necesita tener un `nombre` y puede tener un `link`.
+**Para actualizar las charlas y los datos de los gráficos** hay que editar la [hoja de cálculo de Google Sheets](https://docs.google.com/spreadsheets/d/1hPkvrszhubYai9_wbDN-MWowaqom54KLw7p8_GhwJ4s/edit).

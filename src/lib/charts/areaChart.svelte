@@ -15,30 +15,25 @@
 
 	let { data, chartValue } = $props();
 
-	// Funciones helper usando composición más clara
 	const quitarDuplicados = (datos) => {
 		const agrupados = groups(datos, (d) => d.Titulo);
 		return agrupados.map(([_, grupo]) => grupo[0]);
 	};
 
 	const crearResumen = (datos, variable) => {
-		// Decidir si filtrar duplicados basado en la variable
 		const presentaciones = ['Sexo', 'Tipo de Organización'].includes(variable)
 			? datos
 			: quitarDuplicados(datos);
 
-		// Agrupar por fecha y obtener categorías únicas
 		const fechasAgrupadas = flatGroup(presentaciones, (d) => d.Fecha);
 		const categorias = [...new Set(datos.map((e) => e[variable]))];
 
-		// Procesar cada fecha para crear datos acumulativos
 		const resumenPorFecha = fechasAgrupadas.reduce((acc, [fecha, _]) => {
 			const fechaActual = new Date(fecha);
 			const presentacionesHastaFecha = presentaciones.filter(
 				(e) => new Date(e.Fecha) <= fechaActual
 			);
 
-			// Contar por categoría
 			const conteosPorCategoria = flatGroup(presentacionesHastaFecha, (e) => e[variable]);
 			const acumulados = categorias.reduce((catAcc, categoria) => {
 				const grupo = conteosPorCategoria.find(([cat]) => cat === categoria);
@@ -63,23 +58,19 @@
 			return acc;
 		}, {});
 
-		// Convertir a array y ordenar
 		return Object.values(resumenPorFecha).sort((a, b) => a.Fecha - b.Fecha);
 	};
 
-	// Estados reactivos usando runes de Svelte 5
 	let divWidth = $state(300);
 	let porcentaje = $state(false);
 	let hoveredData = $state(null);
 	let cursorPosition = $state(null);
 
-	// Valores derivados optimizados
 	const chartData = $derived(crearResumen(data, chartValue, 'Todos'));
 	const keys = $derived([...new Set(data.map((d) => d[chartValue]))]);
 	const startingPoint = $derived(chartValue === 'Sexo' ? 50 : 0);
 	const stackValue = $derived(porcentaje ? 'Porcentaje' : 'Acumulados');
 
-	// Datos para el stack chart
 	const stackedData = $derived(
 		stack().keys(keys)(
 			chartData.map((d) => ({
@@ -92,7 +83,6 @@
 		)
 	);
 
-	// Escalas de D3
 	const xScale = $derived(
 		scaleTime()
 			.domain(extent(data, (d) => new Date(d.Fecha)))
@@ -108,7 +98,6 @@
 			.range([300, 5])
 	);
 
-	// Generador de áreas
 	const areaGenerator = $derived(
 		area()
 			.x((d) => xScale(new Date(d.data.fecha)))
@@ -119,7 +108,6 @@
 
 	const meetings = $derived(chartData.map((d) => d.Fecha));
 
-	// Helper para obtener datos en posición del cursor
 	const getDataAtPosition = (position) => {
 		if (!position || !chartData.length) return null;
 
@@ -128,12 +116,10 @@
 		return chartData[index] || null;
 	};
 
-	// Efecto para actualizar datos hover
 	$effect(() => {
 		hoveredData = getDataAtPosition(cursorPosition);
 	});
 
-	// Manejadores de eventos más limpios
 	const handlePointerMove = (event) => {
 		if (chartValue === 'Sexo') {
 			cursorPosition = event.layerX;
@@ -148,12 +134,10 @@
 		porcentaje = valor;
 	};
 
-	// Helper para formatear fechas
 	const formatDate = (date) => {
 		return new Intl.DateTimeFormat('es-ES', { dateStyle: 'short' }).format(new Date(date));
 	};
 
-	// Helpers para tooltip positioning
 	const getTooltipTransform = (fecha) => {
 		return xScale(fecha) > 100 ? 'calc(-100% - 10px)' : '10px';
 	};
@@ -166,15 +150,12 @@
 
 <div>
 	<div class="controls">
-		<button class:active={!porcentaje} onclick={() => togglePorcentaje(false)}>
-			Número de charlas
-		</button>
-		<button class:active={porcentaje} onclick={() => togglePorcentaje(true)}>
-			Porcentaje de charlas
-		</button>
+		<button class:active={!porcentaje} onclick={() => togglePorcentaje(false)}> Cantidad </button>
+		<button class:active={porcentaje} onclick={() => togglePorcentaje(true)}> Porcentaje </button>
 	</div>
 
 	<div class="chart" bind:clientWidth={divWidth}>
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<svg
 			style="height: 100%"
 			width={divWidth}
@@ -182,7 +163,6 @@
 			onpointerout={handlePointerOut}
 			overflow="visible"
 		>
-			<!-- Capas del gráfico de área -->
 			<g class="layers">
 				{#each stackedData as layer (layer.key)}
 					<path
@@ -193,23 +173,20 @@
 				{/each}
 			</g>
 
-			<!-- Líneas y etiquetas -->
 			<g class="annotations">
-				<!-- Línea de referencia del 50% para sexo -->
 				{#if porcentaje && chartValue === 'Sexo'}
-					<text y={yScale(50)} x="5" alignment-baseline="middle">50%</text>
+					<text y={yScale(50)} x="5" alignment-baseline="middle" class="ref-label">50%</text>
 					<line
 						x1="40"
 						x2={divWidth}
 						y1={yScale(50)}
 						y2={yScale(50)}
-						stroke="grey"
-						stroke-width="2"
-						stroke-dasharray="6"
+						stroke="#9b9db5"
+						stroke-width="1.5"
+						stroke-dasharray="4 3"
 					/>
 				{/if}
 
-				<!-- Líneas de fechas de reuniones -->
 				{#each meetings as meeting (meeting.getTime())}
 					<line
 						x1={xScale(meeting)}
@@ -217,7 +194,7 @@
 						y1={0}
 						y2={300}
 						stroke="white"
-						stroke-width="3"
+						stroke-width="2.5"
 					/>
 					<text
 						x={xScale(meeting)}
@@ -237,7 +214,6 @@
 				{/each}
 			</g>
 
-			<!-- Tooltip visual en SVG -->
 			{#if hoveredData !== null && chartValue === 'Sexo'}
 				<g class="tooltip-svg" style="transform: translateX({xScale(hoveredData.Fecha)}px)">
 					<line
@@ -245,20 +221,20 @@
 						x2="0"
 						y2="300"
 						y1={yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}
-						stroke="black"
-						stroke-width="3"
+						stroke="#1a1c2e"
+						stroke-width="2"
 					/>
-					<circle cx="0" cy={yScale(hoveredData[stackValue].Mujer)} r="5" />
+					<circle cx="0" cy={yScale(hoveredData[stackValue].Mujer)} r="4" fill="#1a1c2e" />
 					<circle
 						cx="0"
 						cy={yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}
-						r="5"
+						r="4"
+						fill="#1a1c2e"
 					/>
 				</g>
 			{/if}
 		</svg>
 
-		<!-- Tooltip HTML -->
 		{#if hoveredData !== null && chartValue === 'Sexo'}
 			<div class="tooltip-container">
 				<div
@@ -287,6 +263,11 @@
 </div>
 
 <style>
+	.controls {
+		display: flex;
+		gap: 0.4rem;
+	}
+
 	.chart {
 		width: 100%;
 		height: 350px;
@@ -296,25 +277,38 @@
 
 	.layer {
 		transition: d 0.5s ease;
+		opacity: 0.85;
+	}
+
+	.layer:hover {
+		opacity: 1;
 	}
 
 	text {
-		font-size: 12px;
+		font-size: 11px;
+		font-family: 'Inter', system-ui, sans-serif;
+	}
+
+	.ref-label {
+		fill: #9b9db5;
+		font-weight: 500;
 	}
 
 	.meeting-label {
-		transition: all 0.3s ease;
+		transition: all 0.25s ease;
 		font-weight: normal;
 		opacity: 1;
+		fill: #9b9db5;
 	}
 
 	.meeting-label.highlighted {
-		font-weight: 900;
+		font-weight: 800;
 		opacity: 1;
+		fill: #1a1c2e;
 	}
 
 	.meeting-label.dimmed {
-		opacity: 0.3;
+		opacity: 0.25;
 	}
 
 	.tooltip-svg {
@@ -330,13 +324,14 @@
 	}
 
 	.tooltip-text {
-		color: #222;
-		background-color: rgba(255, 255, 255, 0.9);
-		padding: 5px 10px;
-		border-radius: 5px;
-		backdrop-filter: blur(2px);
-		font-size: 13px;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		color: #1a1c2e;
+		background-color: rgba(255, 255, 255, 0.92);
+		padding: 4px 10px;
+		border-radius: 6px;
+		backdrop-filter: blur(4px);
+		font-size: 12px;
+		font-weight: 600;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 		white-space: nowrap;
 	}
 </style>
