@@ -1,6 +1,6 @@
 import { csv, descending, groups } from 'd3';
-import { readFileSync } from 'node:fs';
 import archieml from 'archieml';
+import archieRaw from '../../static/data.txt?raw';
 
 function charlasDataset(rawData) {
 	const charlasClean = groups(rawData, (d) => d.Titulo)
@@ -31,8 +31,7 @@ export async function load() {
 	const csvUrl = getCsvUrl(google_spreadsheet);
 	const data = await csv(csvUrl);
 
-	const archieFile = readFileSync('static/data.txt', 'utf-8');
-	const text = archieml.load(archieFile);
+	const text = archieml.load(archieRaw);
 
 	return {
 		charlas: charlasDataset(data),
