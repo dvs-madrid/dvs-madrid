@@ -1,0 +1,702 @@
+<html lang="es"><head>
+		<meta charset="utf-8">
+		<link rel="icon" href="http://localhost:5173/favicon.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Página del grupo de visualización de datos de Madrid (DVS Madrid). Charlas, recursos y comunidad.">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+		<title>DVS Madrid</title>
+		
+	
+	<style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/routes/global.css">* {
+	font-family:
+		'Inter',
+		system-ui,
+		-apple-system,
+		sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: #fafafa;
+	color: #2d2f45;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+	font-size: 2.5rem;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+	color: #1a1c2e;
+}
+
+h2 {
+	font-size: 1.6rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	margin-bottom: 0.25rem;
+	padding-bottom: 0.75rem;
+	padding-top: 3rem;
+	border-bottom: 2px solid #e8e8ee;
+	color: #1a1c2e;
+}
+
+h4 {
+	font-weight: 600;
+	color: #1a1c2e;
+	margin-bottom: 0.5rem;
+}
+
+ul,
+p,
+a,
+div {
+	color: #3d3f57;
+	line-height: 1.65;
+}
+
+p {
+	font-size: 0.95rem;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-position: inside;
+	list-style-type: none;
+}
+
+li {
+	margin-bottom: 16px;
+	padding-left: 1.2em;
+	position: relative;
+}
+
+li::before {
+	content: '\2014';
+	position: absolute;
+	left: 0;
+	color: #9b9db5;
+}
+
+a {
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+svg {
+	height: 1.2cap;
+}
+
+button {
+	background-color: transparent;
+	color: #3d3f57;
+	border: 1.5px solid #d0d1dc;
+	border-radius: 50px;
+	padding: 0.35rem 1rem;
+	cursor: pointer;
+	font-size: 0.85rem;
+	font-weight: 500;
+	font-family: inherit;
+	transition:
+		color 0.25s,
+		background-color 0.25s,
+		border-color 0.25s,
+		box-shadow 0.25s;
+}
+
+button:hover {
+	border-color: #8b8da5;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+button.active {
+	background-color: #1a1c2e;
+	color: #f8f9fa;
+	border-color: #1a1c2e;
+	box-shadow: 0 2px 8px rgba(26, 28, 46, 0.2);
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0 1rem;
+	box-sizing: border-box;
+}
+
+@media (width >= 600px) {
+	.container {
+		width: 50%;
+	}
+}
+
+/* COLORES */
+
+:root {
+	--Hombre: #3ab08a;
+	--Mujer: #7b46d9;
+
+	--DVS: #2db1a4;
+	--Diseño: #e89ef0;
+	--Producto: #b5cc5a;
+	--BI: #4a9fe0;
+	--GIS: #c06a3e;
+	--ONG: #f0b840;
+	--Programación: #5258b5;
+	--Taller: #7fa899;
+	--Arte: #e8824e;
+	--Networking: #9a9a9a;
+
+	--Consultoría: #e89ef0;
+	--Universidad: #f0b840;
+	--Estudio: #637ddc;
+	--Medios: #7fa899;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/webBlocks/proxEvento.svelte?svelte&amp;type=style&amp;lang.css">
+	.event-card.s-kZSdU9LxGHtw {
+		background: linear-gradient(135deg, #1a1c2e 0%, #2d2f55 100%);
+		border-radius: 16px;
+		padding: 2.5rem;
+		margin-top: 1rem;
+		color: white;
+	}
+
+	.event-label.s-kZSdU9LxGHtw {
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: rgba(255, 255, 255, 0.5);
+		margin-bottom: 1.5rem;
+	}
+
+	.event-content.s-kZSdU9LxGHtw {
+		text-align: center;
+		padding: 1rem 0;
+	}
+
+	.date.s-kZSdU9LxGHtw {
+		font-weight: 600;
+		font-size: 1.15rem;
+		color: white;
+		margin-bottom: 0.5rem;
+	}
+
+	.countdown.s-kZSdU9LxGHtw {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: white;
+		margin-bottom: 2rem;
+		letter-spacing: -0.02em;
+	}
+
+	.tickets-btn.s-kZSdU9LxGHtw {
+		display: inline-block;
+		background: #7b46d9;
+		color: white;
+		padding: 0.7rem 1.6rem;
+		border-radius: 50px;
+		font-weight: 600;
+		font-size: 0.9rem;
+		text-decoration: none;
+		transition:
+			background 0.25s,
+			transform 0.15s,
+			box-shadow 0.25s;
+	}
+
+	.tickets-btn.s-kZSdU9LxGHtw:hover {
+		background: #6a3bbf;
+		transform: translateY(-1px);
+		box-shadow: 0 4px 16px rgba(123, 70, 217, 0.4);
+		text-decoration: none;
+	}
+
+	.tbd.s-kZSdU9LxGHtw {
+		text-align: center;
+		padding: 1.5rem 0;
+	}
+
+	.tbd.s-kZSdU9LxGHtw p:where(.s-kZSdU9LxGHtw) {
+		color: rgba(255, 255, 255, 0.85);
+		font-size: 1.1rem;
+		margin: 0.5rem 0;
+	}
+
+	.tbd.s-kZSdU9LxGHtw a:where(.s-kZSdU9LxGHtw) {
+		color: #c4a8ff;
+		text-decoration: underline;
+		font-weight: 600;
+	}
+
+	.channel.s-kZSdU9LxGHtw {
+		display: inline-block;
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 0.9rem;
+	}
+
+	@media (width > 550px) {
+		.event-card.s-kZSdU9LxGHtw {
+			padding: 3rem;
+		}
+
+		.date.s-kZSdU9LxGHtw {
+			font-size: 1.3rem;
+		}
+
+		.countdown.s-kZSdU9LxGHtw {
+			font-size: 2.2rem;
+		}
+	}
+ .s-kZSdU9LxGHtw{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/webBlocks/charlas.svelte?svelte&amp;type=style&amp;lang.css">
+	.charlas-section.s-rs7QnTatvhEs {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.filters.s-rs7QnTatvhEs {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		flex-wrap: wrap;
+	}
+
+	.filter-label.s-rs7QnTatvhEs {
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: #9b9db5;
+		margin-right: 0.25rem;
+	}
+
+	.charla-link.s-rs7QnTatvhEs {
+		display: inline;
+	}
+
+	.charla-link.s-rs7QnTatvhEs:hover {
+		text-decoration-color: #e44;
+	}
+
+	.charla-text.s-rs7QnTatvhEs {
+		margin-right: 0.5rem;
+	}
+
+	.charla-titulo.s-rs7QnTatvhEs {
+		font-weight: 500;
+	}
+
+	.charla-ponentes.s-rs7QnTatvhEs {
+		color: #9b9db5;
+	}
+
+	.charla-ponentes.s-rs7QnTatvhEs::before {
+		content: '(';
+	}
+
+	.charla-ponentes.s-rs7QnTatvhEs::after {
+		content: ')';
+	}
+
+	.yt-icon.s-rs7QnTatvhEs {
+		margin-left: 4px;
+		margin-bottom: -2px;
+		opacity: 0.7;
+		transition: opacity 0.2s;
+	}
+
+	.charla-link.s-rs7QnTatvhEs:hover .yt-icon:where(.s-rs7QnTatvhEs) {
+		opacity: 1;
+	}
+
+	.tema.s-rs7QnTatvhEs {
+		display: inline-block;
+		padding: 2px 10px;
+		border-radius: 50px;
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: #eeeeee;
+		vertical-align: middle;
+	}
+
+	.tema.Producto.s-rs7QnTatvhEs {
+		color: #444;
+	}
+
+	.tema.Diseño.s-rs7QnTatvhEs,
+	.tema.ONG.s-rs7QnTatvhEs {
+		color: #333;
+	}
+
+	button.s-rs7QnTatvhEs {
+		margin: 0;
+	}
+ .s-rs7QnTatvhEs{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/charts/areaChart.svelte?svelte&amp;type=style&amp;lang.css">
+	.controls.s-ztKtA14ALUZV {
+		display: flex;
+		gap: 0.4rem;
+	}
+
+	.chart.s-ztKtA14ALUZV {
+		width: 100%;
+		height: 350px;
+		position: relative;
+		padding-top: 2rem;
+	}
+
+	.layer.s-ztKtA14ALUZV {
+		transition: d 0.5s ease;
+		opacity: 0.85;
+	}
+
+	.layer.s-ztKtA14ALUZV:hover {
+		opacity: 1;
+	}
+
+	text.s-ztKtA14ALUZV {
+		font-size: 11px;
+		font-family: 'Inter', system-ui, sans-serif;
+	}
+
+	.ref-label.s-ztKtA14ALUZV {
+		fill: #9b9db5;
+		font-weight: 500;
+	}
+
+	.meeting-label.s-ztKtA14ALUZV {
+		transition: all 0.25s ease;
+		font-weight: normal;
+		opacity: 1;
+		fill: #9b9db5;
+	}
+
+	.meeting-label.highlighted.s-ztKtA14ALUZV {
+		font-weight: 800;
+		opacity: 1;
+		fill: #1a1c2e;
+	}
+
+	.meeting-label.dimmed.s-ztKtA14ALUZV {
+		opacity: 0.25;
+	}
+
+	.tooltip-svg.s-ztKtA14ALUZV {
+		pointer-events: none;
+	}
+
+	.tooltip-container.s-ztKtA14ALUZV {
+		position: absolute;
+		height: calc(100% - 2rem - 50px);
+		width: 100%;
+		bottom: 50px;
+		pointer-events: none;
+	}
+
+	.tooltip-text.s-ztKtA14ALUZV {
+		color: #1a1c2e;
+		background-color: rgba(255, 255, 255, 0.92);
+		padding: 4px 10px;
+		border-radius: 6px;
+		backdrop-filter: blur(4px);
+		font-size: 12px;
+		font-weight: 600;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		white-space: nowrap;
+	}
+ .s-ztKtA14ALUZV{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/charts/distribucionXsexo.svelte?svelte&amp;type=style&amp;lang.css">
+	.gender-section.s-l8Az7mrBMjKd {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.year-filters.s-l8Az7mrBMjKd {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		margin-top: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.summary.s-l8Az7mrBMjKd {
+		font-size: 0.9rem;
+	}
+
+	.bar-chart.s-l8Az7mrBMjKd {
+		height: 280px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-evenly;
+		padding: 0 1rem;
+	}
+
+	.column.s-l8Az7mrBMjKd {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.bar.s-l8Az7mrBMjKd {
+		width: 80px;
+		border-radius: 6px 6px 0 0;
+		transition: height 0.4s ease;
+		position: relative;
+	}
+
+	.column.s-l8Az7mrBMjKd p:where(.s-l8Az7mrBMjKd) {
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	.percent.s-l8Az7mrBMjKd {
+		position: absolute;
+		top: -28px;
+		left: 0;
+		right: 0;
+		font-weight: 700;
+		font-size: 1.1rem;
+		color: #1a1c2e;
+	}
+
+	.bar-label.s-l8Az7mrBMjKd {
+		margin-top: 0.75rem !important;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: #9b9db5;
+	}
+ .s-l8Az7mrBMjKd{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/webBlocks/graficos.svelte?svelte&amp;type=style&amp;lang.css">
+	.attribution.s-lFE9IX1vvODe a:where(.s-lFE9IX1vvODe) {
+		text-decoration: underline;
+		color: #5258b5;
+	}
+
+	.attribution.s-lFE9IX1vvODe a:where(.s-lFE9IX1vvODe):hover {
+		color: #7b46d9;
+	}
+
+	.attribution.s-lFE9IX1vvODe {
+		font-size: 0.85rem;
+		color: #9b9db5;
+	}
+
+	.charts-stack.s-lFE9IX1vvODe {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.stacked-row.s-lFE9IX1vvODe {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		margin-top: 3rem;
+	}
+
+	.chart-label.s-lFE9IX1vvODe {
+		font-weight: 600;
+		font-size: 0.9rem;
+		color: #1a1c2e;
+	}
+
+	.values-container.s-lFE9IX1vvODe {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.4rem 0.6rem;
+		margin-bottom: 1rem;
+	}
+
+	.value.s-lFE9IX1vvODe {
+		margin: 0;
+		font-size: 0.8rem;
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+
+	.color-dot.s-lFE9IX1vvODe {
+		height: 10px;
+		width: 10px;
+		display: inline-block;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+ .s-lFE9IX1vvODe{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/webBlocks/personas.svelte?svelte&amp;type=style&amp;lang.css">
+	.personas-section.s-QWH40hzSu0Ff {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.personas-grid.s-QWH40hzSu0Ff {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		column-gap: 16px;
+		row-gap: 12px;
+	}
+
+	.persona.s-QWH40hzSu0Ff {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.4rem 0;
+	}
+
+	.persona-name.s-QWH40hzSu0Ff {
+		font-weight: 500;
+		font-size: 0.9rem;
+	}
+
+	.persona-links.s-QWH40hzSu0Ff {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.persona-links.s-QWH40hzSu0Ff a:where(.s-QWH40hzSu0Ff) {
+		display: flex;
+		align-items: center;
+		opacity: 0.4;
+		transition: opacity 0.2s;
+	}
+
+	.persona-links.s-QWH40hzSu0Ff a:where(.s-QWH40hzSu0Ff):hover {
+		opacity: 0.8;
+		text-decoration: none;
+	}
+
+	svg.s-QWH40hzSu0Ff {
+		height: 0.9rem;
+	}
+ .s-QWH40hzSu0Ff{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/lib/webBlocks/recursos.svelte?svelte&amp;type=style&amp;lang.css">
+	.recursos-section.s-8gXrW_9ri-aW {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.recursos-grid.s-8gXrW_9ri-aW {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		column-gap: 24px;
+		row-gap: 16px;
+	}
+
+	.recurso-group.s-8gXrW_9ri-aW {
+		padding: 1rem 0;
+	}
+
+	a.s-8gXrW_9ri-aW {
+		color: #5258b5;
+		text-decoration: none;
+	}
+
+	a.s-8gXrW_9ri-aW:hover {
+		text-decoration: underline;
+		color: #7b46d9;
+	}
+ .s-8gXrW_9ri-aW{}</style><style type="text/css" data-vite-dev-id="/Users/irene.arenas/Documents/Personal/dvs-madrid/src/routes/+page.svelte?svelte&amp;type=style&amp;lang.css">
+	main.s-y_bCXRrkrYfP {
+		max-width: 920px;
+		margin: auto;
+		padding-bottom: 3rem;
+	}
+
+	@media (width <= 930px) {
+		main.s-y_bCXRrkrYfP {
+			margin: 0 16px;
+		}
+	}
+
+	.hero.s-y_bCXRrkrYfP {
+		padding-top: 5rem;
+		padding-bottom: 1rem;
+	}
+
+	.hero-badge.s-y_bCXRrkrYfP {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #7b46d9;
+		background: #f0e8ff;
+		padding: 0.3rem 0.8rem;
+		border-radius: 50px;
+		margin-bottom: 1rem;
+	}
+
+	.subtitle.s-y_bCXRrkrYfP a:where(.s-y_bCXRrkrYfP) {
+		text-decoration: underline;
+		font-weight: 600;
+		color: #5258b5;
+	}
+
+	.subtitle.s-y_bCXRrkrYfP a:where(.s-y_bCXRrkrYfP):hover {
+		color: #7b46d9;
+	}
+
+	footer.s-y_bCXRrkrYfP {
+		text-align: center;
+		padding: 3rem 0 1rem;
+		border-top: 1px solid #e8e8ee;
+		margin-top: 3rem;
+	}
+
+	footer.s-y_bCXRrkrYfP p:where(.s-y_bCXRrkrYfP) {
+		font-size: 0.85rem;
+		color: #9b9db5;
+	}
+
+	footer.s-y_bCXRrkrYfP a:where(.s-y_bCXRrkrYfP) {
+		color: #9b9db5;
+		text-decoration: underline;
+	}
+ .s-y_bCXRrkrYfP{}</style></head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><!----><main class="s-y_bCXRrkrYfP"><header class="hero s-y_bCXRrkrYfP"><div class="hero-badge s-y_bCXRrkrYfP">Data Visualization Society</div> <h1 class="s-y_bCXRrkrYfP">DVS Madrid</h1> <div class="subtitle s-y_bCXRrkrYfP"><p class="s-y_bCXRrkrYfP">Esta es la página del grupo de <strong class="s-y_bCXRrkrYfP">visualización de datos de Madrid</strong>. Aquí
+				puedes enterarte de las últimas charlas y de la próxima. Además también podrás encontrar
+				información sobre nosotros y recursos interesantes relacionados con la visualización de
+				datos.</p> <p class="s-y_bCXRrkrYfP">Para estar al día de las próximas charlas o proponer una puedes <a href="https://www.datavisualizationsociety.org/slack-community" class="s-y_bCXRrkrYfP">unirte a nuestro grupo de Slack de la Data Visualization Society</a>. Si echas en falta a alguna <strong class="s-y_bCXRrkrYfP">persona</strong> en el listado o quieres añadir
+				cualquier <strong class="s-y_bCXRrkrYfP">recurso</strong> a la página puedes hacer una Pull Request en <a href="https://github.com/dvs-madrid/dvs-madrid" target="_blank" class="s-y_bCXRrkrYfP">GitHub</a> o contactarme por <a href="https://x.com/adrimaqueda" target="_blank" class="s-y_bCXRrkrYfP">Twitter/X</a> o <a href="https://bsky.app/profile/adrimaqueda.com" target="_blank" class="s-y_bCXRrkrYfP">Bluesky</a>.</p></div></header> <div class="event-card s-kZSdU9LxGHtw"><div class="event-label s-kZSdU9LxGHtw">Próximo evento</div> <!--[!--><div class="tbd s-kZSdU9LxGHtw"><p class="s-kZSdU9LxGHtw">Aún estamos decidiendo la fecha.</p> <p class="s-kZSdU9LxGHtw">Entérate en <a href="https://www.datavisualizationsociety.org/slack-community" class="s-kZSdU9LxGHtw">Slack</a> <span class="channel s-kZSdU9LxGHtw">(#location-madrid)</span></p></div><!--]--></div><!----> <section class="charlas-section s-rs7QnTatvhEs"><h2 class="s-rs7QnTatvhEs">De qué hemos hablado</h2> <div class="filters s-rs7QnTatvhEs"><span class="filter-label s-rs7QnTatvhEs">Curso:</span> <!--[--><button class="s-rs7QnTatvhEs">23-24</button><button class="s-rs7QnTatvhEs active">24-25</button><button class="s-rs7QnTatvhEs">25-26</button><!--]--></div> <ul class="s-rs7QnTatvhEs"><!--[--><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">Visualizar datos: retos de ayer y de hoy</span> <span class="charla-ponentes s-rs7QnTatvhEs">Irene de la Torre, Beatriz Martínez, Raquel Cabero Quiles, Rafa Höhr y Marina Lorenzo Sánchez</span></span> <span class="tema Industria s-rs7QnTatvhEs" style="background-color: var(--Industria, #aaa)">Industria</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">Explorar la visualización cualitativa: una invitación</span> <span class="charla-ponentes s-rs7QnTatvhEs">Marina Lorenzo Sánchez</span></span> <span class="tema Research s-rs7QnTatvhEs" style="background-color: var(--Research, #aaa)">Research</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">Primera sesión rompehielos de DVS Madrid</span> <span class="charla-ponentes s-rs7QnTatvhEs">Irene de la Torre</span></span> <span class="tema Networking s-rs7QnTatvhEs" style="background-color: var(--Networking, #aaa)">Networking</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">D∆T∆_P®1//T1//G</span> <span class="charla-ponentes s-rs7QnTatvhEs">Alberto Pino González</span></span> <span class="tema Arte s-rs7QnTatvhEs" style="background-color: var(--Arte, #aaa)">Arte</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">Graphane: declarative data visualization</span> <span class="charla-ponentes s-rs7QnTatvhEs">Pablo Almunia</span></span> <span class="tema Programación s-rs7QnTatvhEs" style="background-color: var(--Programación, #aaa)">Programación</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">Un año de DVS Madrid</span> <span class="charla-ponentes s-rs7QnTatvhEs">Irene de la Torre</span></span> <span class="tema DVS s-rs7QnTatvhEs" style="background-color: var(--DVS, #aaa)">DVS</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">La visualización de datos en el periodismo deportivo</span> <span class="charla-ponentes s-rs7QnTatvhEs">Sonia Mochón</span></span> <span class="tema Diseño s-rs7QnTatvhEs" style="background-color: var(--Diseño, #aaa)">Diseño</span><!--]--></li><li class="s-rs7QnTatvhEs"><!--[!--><span class="charla-text s-rs7QnTatvhEs"><span class="charla-titulo s-rs7QnTatvhEs">DMS for newsrooms</span> <span class="charla-ponentes s-rs7QnTatvhEs">Rafa Höhr, Juan Pablo Marín y Marta Ley</span></span> <span class="tema Producto s-rs7QnTatvhEs" style="background-color: var(--Producto, #aaa)">Producto</span><!--]--></li><!--]--></ul></section><!----> <h2 class="s-lFE9IX1vvODe">Así somos</h2> <div class="s-lFE9IX1vvODe"><div class="gender-section s-l8Az7mrBMjKd"><!--[!--><div class="container s-l8Az7mrBMjKd"><div class="year-filters s-l8Az7mrBMjKd"><button class="active s-l8Az7mrBMjKd">En total</button><button class="s-l8Az7mrBMjKd">23-24</button><button class="s-l8Az7mrBMjKd">24-25</button><button class="s-l8Az7mrBMjKd">25-26</button></div> <p class="summary s-l8Az7mrBMjKd">Desde que empezamos hemos realizado <strong class="s-l8Az7mrBMjKd">25 charlas</strong> y han presentado <strong class="s-l8Az7mrBMjKd">25 personas diferentes</strong>. El porcentaje de ponentes se
+				queda así:</p> <div class="bar-chart s-l8Az7mrBMjKd"><div class="column s-l8Az7mrBMjKd"><div class="bar s-l8Az7mrBMjKd" style="height: 51.5152%; background-color: var(--Hombre);"><p class="percent s-l8Az7mrBMjKd">52%</p></div> <p class="bar-label s-l8Az7mrBMjKd">Hombre</p></div><div class="column s-l8Az7mrBMjKd"><div class="bar s-l8Az7mrBMjKd" style="height: 48.4848%; background-color: var(--Mujer);"><p class="percent s-l8Az7mrBMjKd">48%</p></div> <p class="bar-label s-l8Az7mrBMjKd">Mujer</p></div></div></div> <div class="container s-l8Az7mrBMjKd"><p class="summary s-l8Az7mrBMjKd">Pero la proporción no ha sido siempre igual, sino que ha ido evolucionando en cada meetup:</p> <div class="s-ztKtA14ALUZV"><div class="controls s-ztKtA14ALUZV"><button class="s-ztKtA14ALUZV active">Cantidad</button> <button class="s-ztKtA14ALUZV">Porcentaje</button></div> <div class="chart s-ztKtA14ALUZV"><svg style="height: 100%" overflow="visible" class="s-ztKtA14ALUZV" width="428"><g class="layers s-ztKtA14ALUZV"><path class="layer s-ztKtA14ALUZV" d="M50,282.121C68.048,282.121,68.048,264.242,86.097,264.242C115.983,264.242,115.983,246.364,145.87,246.364C160.813,246.364,160.813,228.485,175.757,228.485C202.926,228.485,202.926,210.606,230.096,210.606C264.834,210.606,264.834,192.727,299.572,192.727C311.022,192.727,311.022,183.788,322.472,183.788C353.717,183.788,353.717,165.909,384.963,165.909C403.981,165.909,403.981,148.03,423,148.03L423,300C403.981,300,403.981,300,384.963,300C353.717,300,353.717,300,322.472,300C311.022,300,311.022,300,299.572,300C264.834,300,264.834,300,230.096,300C202.926,300,202.926,300,175.757,300C160.813,300,160.813,300,145.87,300C115.983,300,115.983,300,86.097,300C68.048,300,68.048,300,50,300Z" style="fill: var(--Hombre);"></path><path class="layer s-ztKtA14ALUZV" d="M50,264.242C68.048,264.242,68.048,237.424,86.097,237.424C115.983,237.424,115.983,210.606,145.87,210.606C160.813,210.606,160.813,174.848,175.757,174.848C202.926,174.848,202.926,130.152,230.096,130.152C264.834,130.152,264.834,103.333,299.572,103.333C311.022,103.333,311.022,49.697,322.472,49.697C353.717,49.697,353.717,31.818,384.963,31.818C403.981,31.818,403.981,5,423,5L423,148.03C403.981,148.03,403.981,165.909,384.963,165.909C353.717,165.909,353.717,183.788,322.472,183.788C311.022,183.788,311.022,192.727,299.572,192.727C264.834,192.727,264.834,210.606,230.096,210.606C202.926,210.606,202.926,228.485,175.757,228.485C160.813,228.485,160.813,246.364,145.87,246.364C115.983,246.364,115.983,264.242,86.097,264.242C68.048,264.242,68.048,282.121,50,282.121Z" style="fill: var(--Mujer);"></path></g><g class="annotations s-ztKtA14ALUZV"><!----><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="50" x2="50"></line><text alignment-baseline="baseline" y="320" x="50" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">20/6/23</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="86.09677419354838" x2="86.09677419354838"></line><text alignment-baseline="baseline" y="320" x="86.09677419354838" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">21/9/23</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="145.86992715920917" x2="145.86992715920917"></line><text alignment-baseline="baseline" y="320" x="145.86992715920917" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">22/2/24</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="175.75650364203955" x2="175.75650364203955"></line><text alignment-baseline="baseline" y="320" x="175.75650364203955" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">9/5/24</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="230.09573361082207" x2="230.09573361082207"></line><text alignment-baseline="baseline" y="320" x="230.09573361082207" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">26/9/24</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="299.5723204994797" x2="299.5723204994797"></line><text alignment-baseline="baseline" y="320" x="299.5723204994797" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">24/3/25</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="322.47242455775233" x2="322.47242455775233"></line><text alignment-baseline="baseline" y="320" x="322.47242455775233" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">22/5/25</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="384.96253902185225" x2="384.96253902185225"></line><text alignment-baseline="baseline" y="320" x="384.96253902185225" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">30/10/25</text><line stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV" y1="0" y2="300" x1="423" x2="423"></line><text alignment-baseline="baseline" y="320" x="423" text-anchor="end" class="meeting-label s-ztKtA14ALUZV">5/2/26</text><!----></g><!----></svg> <!----></div></div><!----></div><!--]--></div><!----> <div class="charts-stack s-lFE9IX1vvODe"><div class="stacked-row s-lFE9IX1vvODe"><div class="container s-lFE9IX1vvODe"><p class="chart-label s-lFE9IX1vvODe">Charlas según temática:</p> <div class="values-container s-lFE9IX1vvODe"><!--[--><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Arte)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Arte)"></span> Arte</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--BI)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--BI)"></span> Business Intelligence</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--DVS)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--DVS)"></span> DVS</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Diseño)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Diseño)"></span> Diseño</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--GIS)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--GIS)"></span> GIS</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Industria)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Industria)"></span> Industria</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Networking)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Networking)"></span> Networking</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Participativo)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Participativo)"></span> Participativo</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Producto)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Producto)"></span> Producto</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Programación)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Programación)"></span> Programación</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Research)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Research)"></span> Research</button><!--]--></div></div> <div class="container s-lFE9IX1vvODe"><div class="s-ztKtA14ALUZV"><div class="controls s-ztKtA14ALUZV"><button class="s-ztKtA14ALUZV active">Cantidad</button> <button class="s-ztKtA14ALUZV">Porcentaje</button></div> <div class="chart s-ztKtA14ALUZV"><svg style="height: 100%" width="428" overflow="visible" class="s-ztKtA14ALUZV"><g class="layers s-ztKtA14ALUZV"><!--[--><path class="layer s-ztKtA14ALUZV" d="M0,300C20.468,300,20.468,300,40.935,300C74.828,300,74.828,288.2,108.721,288.2C125.668,288.2,125.668,276.4,142.614,276.4C173.426,276.4,173.426,276.4,204.237,276.4C243.632,276.4,243.632,276.4,283.027,276.4C296.012,276.4,296.012,276.4,308.997,276.4C344.43,276.4,344.43,264.6,379.864,264.6C401.432,264.6,401.432,252.8,423,252.8L423,300C401.432,300,401.432,300,379.864,300C344.43,300,344.43,300,308.997,300C296.012,300,296.012,300,283.027,300C243.632,300,243.632,300,204.237,300C173.426,300,173.426,300,142.614,300C125.668,300,125.668,300,108.721,300C74.828,300,74.828,300,40.935,300C20.468,300,20.468,300,0,300Z" style="fill: var(--GIS)"></path><path class="layer s-ztKtA14ALUZV" d="M0,300C20.468,300,20.468,300,40.935,300C74.828,300,74.828,288.2,108.721,288.2C125.668,288.2,125.668,276.4,142.614,276.4C173.426,276.4,173.426,276.4,204.237,276.4C243.632,276.4,243.632,276.4,283.027,276.4C296.012,276.4,296.012,264.6,308.997,264.6C344.43,264.6,344.43,252.8,379.864,252.8C401.432,252.8,401.432,217.4,423,217.4L423,252.8C401.432,252.8,401.432,264.6,379.864,264.6C344.43,264.6,344.43,276.4,308.997,276.4C296.012,276.4,296.012,276.4,283.027,276.4C243.632,276.4,243.632,276.4,204.237,276.4C173.426,276.4,173.426,276.4,142.614,276.4C125.668,276.4,125.668,288.2,108.721,288.2C74.828,288.2,74.828,300,40.935,300C20.468,300,20.468,300,0,300Z" style="fill: var(--Research)"></path><path class="layer s-ztKtA14ALUZV" d="M0,276.4C20.468,276.4,20.468,276.4,40.935,276.4C74.828,276.4,74.828,252.8,108.721,252.8C125.668,252.8,125.668,241,142.614,241C173.426,241,173.426,241,204.237,241C243.632,241,243.632,229.2,283.027,229.2C296.012,229.2,296.012,217.4,308.997,217.4C344.43,217.4,344.43,193.8,379.864,193.8C401.432,193.8,401.432,158.4,423,158.4L423,217.4C401.432,217.4,401.432,252.8,379.864,252.8C344.43,252.8,344.43,264.6,308.997,264.6C296.012,264.6,296.012,276.4,283.027,276.4C243.632,276.4,243.632,276.4,204.237,276.4C173.426,276.4,173.426,276.4,142.614,276.4C125.668,276.4,125.668,288.2,108.721,288.2C74.828,288.2,74.828,300,40.935,300C20.468,300,20.468,300,0,300Z" style="fill: var(--Programación)"></path><path class="layer s-ztKtA14ALUZV" d="M0,276.4C20.468,276.4,20.468,276.4,40.935,276.4C74.828,276.4,74.828,252.8,108.721,252.8C125.668,252.8,125.668,241,142.614,241C173.426,241,173.426,241,204.237,241C243.632,241,243.632,229.2,283.027,229.2C296.012,229.2,296.012,205.6,308.997,205.6C344.43,205.6,344.43,182,379.864,182C401.432,182,401.432,146.6,423,146.6L423,158.4C401.432,158.4,401.432,193.8,379.864,193.8C344.43,193.8,344.43,217.4,308.997,217.4C296.012,217.4,296.012,229.2,283.027,229.2C243.632,229.2,243.632,241,204.237,241C173.426,241,173.426,241,142.614,241C125.668,241,125.668,252.8,108.721,252.8C74.828,252.8,74.828,276.4,40.935,276.4C20.468,276.4,20.468,276.4,0,276.4Z" style="fill: var(--Industria)"></path><path class="layer s-ztKtA14ALUZV" d="M0,276.4C20.468,276.4,20.468,276.4,40.935,276.4C74.828,276.4,74.828,252.8,108.721,252.8C125.668,252.8,125.668,241,142.614,241C173.426,241,173.426,241,204.237,241C243.632,241,243.632,217.4,283.027,217.4C296.012,217.4,296.012,193.8,308.997,193.8C344.43,193.8,344.43,170.2,379.864,170.2C401.432,170.2,401.432,134.8,423,134.8L423,146.6C401.432,146.6,401.432,182,379.864,182C344.43,182,344.43,205.6,308.997,205.6C296.012,205.6,296.012,229.2,283.027,229.2C243.632,229.2,243.632,241,204.237,241C173.426,241,173.426,241,142.614,241C125.668,241,125.668,252.8,108.721,252.8C74.828,252.8,74.828,276.4,40.935,276.4C20.468,276.4,20.468,276.4,0,276.4Z" style="fill: var(--Networking)"></path><path class="layer s-ztKtA14ALUZV" d="M0,276.4C20.468,276.4,20.468,276.4,40.935,276.4C74.828,276.4,74.828,252.8,108.721,252.8C125.668,252.8,125.668,241,142.614,241C173.426,241,173.426,241,204.237,241C243.632,241,243.632,205.6,283.027,205.6C296.012,205.6,296.012,182,308.997,182C344.43,182,344.43,158.4,379.864,158.4C401.432,158.4,401.432,123,423,123L423,134.8C401.432,134.8,401.432,170.2,379.864,170.2C344.43,170.2,344.43,193.8,308.997,193.8C296.012,193.8,296.012,217.4,283.027,217.4C243.632,217.4,243.632,241,204.237,241C173.426,241,173.426,241,142.614,241C125.668,241,125.668,252.8,108.721,252.8C74.828,252.8,74.828,276.4,40.935,276.4C20.468,276.4,20.468,276.4,0,276.4Z" style="fill: var(--Arte)"></path><path class="layer s-ztKtA14ALUZV" d="M0,252.8C20.468,252.8,20.468,252.8,40.935,252.8C74.828,252.8,74.828,229.2,108.721,229.2C125.668,229.2,125.668,217.4,142.614,217.4C173.426,217.4,173.426,205.6,204.237,205.6C243.632,205.6,243.632,170.2,283.027,170.2C296.012,170.2,296.012,146.6,308.997,146.6C344.43,146.6,344.43,123,379.864,123C401.432,123,401.432,87.6,423,87.6L423,123C401.432,123,401.432,158.4,379.864,158.4C344.43,158.4,344.43,182,308.997,182C296.012,182,296.012,205.6,283.027,205.6C243.632,205.6,243.632,241,204.237,241C173.426,241,173.426,241,142.614,241C125.668,241,125.668,252.8,108.721,252.8C74.828,252.8,74.828,276.4,40.935,276.4C20.468,276.4,20.468,276.4,0,276.4Z" style="fill: var(--DVS)"></path><path class="layer s-ztKtA14ALUZV" d="M0,252.8C20.468,252.8,20.468,229.2,40.935,229.2C74.828,229.2,74.828,205.6,108.721,205.6C125.668,205.6,125.668,182,142.614,182C173.426,182,173.426,158.4,204.237,158.4C243.632,158.4,243.632,123,283.027,123C296.012,123,296.012,99.4,308.997,99.4C344.43,99.4,344.43,75.8,379.864,75.8C401.432,75.8,401.432,40.4,423,40.4L423,87.6C401.432,87.6,401.432,123,379.864,123C344.43,123,344.43,146.6,308.997,146.6C296.012,146.6,296.012,170.2,283.027,170.2C243.632,170.2,243.632,205.6,204.237,205.6C173.426,205.6,173.426,217.4,142.614,217.4C125.668,217.4,125.668,229.2,108.721,229.2C74.828,229.2,74.828,252.8,40.935,252.8C20.468,252.8,20.468,252.8,0,252.8Z" style="fill: var(--Diseño)"></path><path class="layer s-ztKtA14ALUZV" d="M0,252.8C20.468,252.8,20.468,229.2,40.935,229.2C74.828,229.2,74.828,205.6,108.721,205.6C125.668,205.6,125.668,182,142.614,182C173.426,182,173.426,146.6,204.237,146.6C243.632,146.6,243.632,111.2,283.027,111.2C296.012,111.2,296.012,87.6,308.997,87.6C344.43,87.6,344.43,64,379.864,64C401.432,64,401.432,28.6,423,28.6L423,40.4C401.432,40.4,401.432,75.8,379.864,75.8C344.43,75.8,344.43,99.4,308.997,99.4C296.012,99.4,296.012,123,283.027,123C243.632,123,243.632,158.4,204.237,158.4C173.426,158.4,173.426,182,142.614,182C125.668,182,125.668,205.6,108.721,205.6C74.828,205.6,74.828,229.2,40.935,229.2C20.468,229.2,20.468,252.8,0,252.8Z" style="fill: var(--Producto)"></path><path class="layer s-ztKtA14ALUZV" d="M0,252.8C20.468,252.8,20.468,229.2,40.935,229.2C74.828,229.2,74.828,205.6,108.721,205.6C125.668,205.6,125.668,170.2,142.614,170.2C173.426,170.2,173.426,134.8,204.237,134.8C243.632,134.8,243.632,99.4,283.027,99.4C296.012,99.4,296.012,75.8,308.997,75.8C344.43,75.8,344.43,52.2,379.864,52.2C401.432,52.2,401.432,16.8,423,16.8L423,28.6C401.432,28.6,401.432,64,379.864,64C344.43,64,344.43,87.6,308.997,87.6C296.012,87.6,296.012,111.2,283.027,111.2C243.632,111.2,243.632,146.6,204.237,146.6C173.426,146.6,173.426,182,142.614,182C125.668,182,125.668,205.6,108.721,205.6C74.828,205.6,74.828,229.2,40.935,229.2C20.468,229.2,20.468,252.8,0,252.8Z" style="fill: var(--BI)"></path><path class="layer s-ztKtA14ALUZV" d="M0,252.8C20.468,252.8,20.468,229.2,40.935,229.2C74.828,229.2,74.828,193.8,108.721,193.8C125.668,193.8,125.668,158.4,142.614,158.4C173.426,158.4,173.426,123,204.237,123C243.632,123,243.632,87.6,283.027,87.6C296.012,87.6,296.012,64,308.997,64C344.43,64,344.43,40.4,379.864,40.4C401.432,40.4,401.432,5,423,5L423,16.8C401.432,16.8,401.432,52.2,379.864,52.2C344.43,52.2,344.43,75.8,308.997,75.8C296.012,75.8,296.012,99.4,283.027,99.4C243.632,99.4,243.632,134.8,204.237,134.8C173.426,134.8,173.426,170.2,142.614,170.2C125.668,170.2,125.668,205.6,108.721,205.6C74.828,205.6,74.828,229.2,40.935,229.2C20.468,229.2,20.468,252.8,0,252.8Z" style="fill: var(--Participativo)"></path><!--]--></g><g class="annotations s-ztKtA14ALUZV"><!--[!--><!--]--><!--[--><line x1="0" x2="0" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="0" y="320" alignment-baseline="baseline" text-anchor="start" class="meeting-label s-ztKtA14ALUZV">20/6/23</text><line x1="40.935483870967744" x2="40.935483870967744" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="40.935483870967744" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">21/9/23</text><line x1="108.72112382934444" x2="108.72112382934444" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="108.72112382934444" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">22/2/24</text><line x1="142.61394380853278" x2="142.61394380853278" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="142.61394380853278" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">9/5/24</text><line x1="204.2372528616025" x2="204.2372528616025" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="204.2372528616025" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">26/9/24</text><line x1="283.0270551508845" x2="283.0270551508845" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="283.0270551508845" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">24/3/25</text><line x1="308.996878251821" x2="308.996878251821" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="308.996878251821" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">22/5/25</text><line x1="379.8636836628512" x2="379.8636836628512" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="379.8636836628512" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">30/10/25</text><line x1="423" x2="423" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="423" y="320" alignment-baseline="baseline" text-anchor="end" class="meeting-label s-ztKtA14ALUZV">5/2/26</text><!--]--></g><!--[!--><!--]--></svg> <!--[!--><!--]--></div></div><!----></div></div><!----> <div class="stacked-row s-lFE9IX1vvODe"><div class="container s-lFE9IX1vvODe"><p class="chart-label s-lFE9IX1vvODe">Charlas según ponente:</p> <div class="values-container s-lFE9IX1vvODe"><!--[--><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Consultoría)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Consultoría)"></span> Consultoría</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--DVS)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--DVS)"></span> DVS</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Estudio)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Estudio)"></span> Estudio de diseño</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Medios)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Medios)"></span> Medio de comunicación</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Producto)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Producto)"></span> Producto</button><button class="value s-lFE9IX1vvODe" style="--accent-color:var(--Universidad)"><span class="color-dot s-lFE9IX1vvODe" style="background-color:var(--Universidad)"></span> Universidad</button><!--]--></div></div> <div class="container s-lFE9IX1vvODe"><div class="s-ztKtA14ALUZV"><div class="controls s-ztKtA14ALUZV"><button class="s-ztKtA14ALUZV active">Cantidad</button> <button class="s-ztKtA14ALUZV">Porcentaje</button></div> <div class="chart s-ztKtA14ALUZV"><svg style="height: 100%" width="428" overflow="visible" class="s-ztKtA14ALUZV"><g class="layers s-ztKtA14ALUZV"><!--[--><path class="layer s-ztKtA14ALUZV" d="M0,291.061C20.468,291.061,20.468,282.121,40.935,282.121C74.828,282.121,74.828,282.121,108.721,282.121C125.668,282.121,125.668,282.121,142.614,282.121C173.426,282.121,173.426,273.182,204.237,273.182C243.632,273.182,243.632,264.242,283.027,264.242C296.012,264.242,296.012,237.424,308.997,237.424C344.43,237.424,344.43,237.424,379.864,237.424C401.432,237.424,401.432,228.485,423,228.485L423,300C401.432,300,401.432,300,379.864,300C344.43,300,344.43,300,308.997,300C296.012,300,296.012,300,283.027,300C243.632,300,243.632,300,204.237,300C173.426,300,173.426,300,142.614,300C125.668,300,125.668,300,108.721,300C74.828,300,74.828,300,40.935,300C20.468,300,20.468,300,0,300Z" style="fill: var(--Consultoría)"></path><path class="layer s-ztKtA14ALUZV" d="M0,282.121C20.468,282.121,20.468,273.182,40.935,273.182C74.828,273.182,74.828,264.242,108.721,264.242C125.668,264.242,125.668,264.242,142.614,264.242C173.426,264.242,173.426,237.424,204.237,237.424C243.632,237.424,243.632,228.485,283.027,228.485C296.012,228.485,296.012,192.727,308.997,192.727C344.43,192.727,344.43,174.848,379.864,174.848C401.432,174.848,401.432,156.97,423,156.97L423,228.485C401.432,228.485,401.432,237.424,379.864,237.424C344.43,237.424,344.43,237.424,308.997,237.424C296.012,237.424,296.012,264.242,283.027,264.242C243.632,264.242,243.632,273.182,204.237,273.182C173.426,273.182,173.426,282.121,142.614,282.121C125.668,282.121,125.668,282.121,108.721,282.121C74.828,282.121,74.828,282.121,40.935,282.121C20.468,282.121,20.468,291.061,0,291.061Z" style="fill: var(--Medios)"></path><path class="layer s-ztKtA14ALUZV" d="M0,282.121C20.468,282.121,20.468,273.182,40.935,273.182C74.828,273.182,74.828,246.364,108.721,246.364C125.668,246.364,125.668,237.424,142.614,237.424C173.426,237.424,173.426,210.606,204.237,210.606C243.632,210.606,243.632,201.667,283.027,201.667C296.012,201.667,296.012,156.97,308.997,156.97C344.43,156.97,344.43,139.091,379.864,139.091C401.432,139.091,401.432,112.273,423,112.273L423,156.97C401.432,156.97,401.432,174.848,379.864,174.848C344.43,174.848,344.43,192.727,308.997,192.727C296.012,192.727,296.012,228.485,283.027,228.485C243.632,228.485,243.632,237.424,204.237,237.424C173.426,237.424,173.426,264.242,142.614,264.242C125.668,264.242,125.668,264.242,108.721,264.242C74.828,264.242,74.828,273.182,40.935,273.182C20.468,273.182,20.468,282.121,0,282.121Z" style="fill: var(--Universidad)"></path><path class="layer s-ztKtA14ALUZV" d="M0,273.182C20.468,273.182,20.468,246.364,40.935,246.364C74.828,246.364,74.828,219.545,108.721,219.545C125.668,219.545,125.668,201.667,142.614,201.667C173.426,201.667,173.426,174.848,204.237,174.848C243.632,174.848,243.632,156.97,283.027,156.97C296.012,156.97,296.012,103.333,308.997,103.333C344.43,103.333,344.43,85.455,379.864,85.455C401.432,85.455,401.432,58.636,423,58.636L423,112.273C401.432,112.273,401.432,139.091,379.864,139.091C344.43,139.091,344.43,156.97,308.997,156.97C296.012,156.97,296.012,201.667,283.027,201.667C243.632,201.667,243.632,210.606,204.237,210.606C173.426,210.606,173.426,237.424,142.614,237.424C125.668,237.424,125.668,246.364,108.721,246.364C74.828,246.364,74.828,273.182,40.935,273.182C20.468,273.182,20.468,282.121,0,282.121Z" style="fill: var(--Estudio)"></path><path class="layer s-ztKtA14ALUZV" d="M0,264.242C20.468,264.242,20.468,237.424,40.935,237.424C74.828,237.424,74.828,210.606,108.721,210.606C125.668,210.606,125.668,192.727,142.614,192.727C173.426,192.727,173.426,156.97,204.237,156.97C243.632,156.97,243.632,130.152,283.027,130.152C296.012,130.152,296.012,76.515,308.997,76.515C344.43,76.515,344.43,58.636,379.864,58.636C401.432,58.636,401.432,31.818,423,31.818L423,58.636C401.432,58.636,401.432,85.455,379.864,85.455C344.43,85.455,344.43,103.333,308.997,103.333C296.012,103.333,296.012,156.97,283.027,156.97C243.632,156.97,243.632,174.848,204.237,174.848C173.426,174.848,173.426,201.667,142.614,201.667C125.668,201.667,125.668,219.545,108.721,219.545C74.828,219.545,74.828,246.364,40.935,246.364C20.468,246.364,20.468,273.182,0,273.182Z" style="fill: var(--DVS)"></path><path class="layer s-ztKtA14ALUZV" d="M0,264.242C20.468,264.242,20.468,237.424,40.935,237.424C74.828,237.424,74.828,210.606,108.721,210.606C125.668,210.606,125.668,174.848,142.614,174.848C173.426,174.848,173.426,130.152,204.237,130.152C243.632,130.152,243.632,103.333,283.027,103.333C296.012,103.333,296.012,49.697,308.997,49.697C344.43,49.697,344.43,31.818,379.864,31.818C401.432,31.818,401.432,5,423,5L423,31.818C401.432,31.818,401.432,58.636,379.864,58.636C344.43,58.636,344.43,76.515,308.997,76.515C296.012,76.515,296.012,130.152,283.027,130.152C243.632,130.152,243.632,156.97,204.237,156.97C173.426,156.97,173.426,192.727,142.614,192.727C125.668,192.727,125.668,210.606,108.721,210.606C74.828,210.606,74.828,237.424,40.935,237.424C20.468,237.424,20.468,264.242,0,264.242Z" style="fill: var(--Producto)"></path><!--]--></g><g class="annotations s-ztKtA14ALUZV"><!--[!--><!--]--><!--[--><line x1="0" x2="0" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="0" y="320" alignment-baseline="baseline" text-anchor="start" class="meeting-label s-ztKtA14ALUZV">20/6/23</text><line x1="40.935483870967744" x2="40.935483870967744" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="40.935483870967744" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">21/9/23</text><line x1="108.72112382934444" x2="108.72112382934444" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="108.72112382934444" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">22/2/24</text><line x1="142.61394380853278" x2="142.61394380853278" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="142.61394380853278" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">9/5/24</text><line x1="204.2372528616025" x2="204.2372528616025" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="204.2372528616025" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">26/9/24</text><line x1="283.0270551508845" x2="283.0270551508845" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="283.0270551508845" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">24/3/25</text><line x1="308.996878251821" x2="308.996878251821" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="308.996878251821" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">22/5/25</text><line x1="379.8636836628512" x2="379.8636836628512" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="379.8636836628512" y="320" alignment-baseline="baseline" text-anchor="middle" class="meeting-label s-ztKtA14ALUZV">30/10/25</text><line x1="423" x2="423" y1="0" y2="300" stroke="white" stroke-width="2.5" class="s-ztKtA14ALUZV"></line><text x="423" y="320" alignment-baseline="baseline" text-anchor="end" class="meeting-label s-ztKtA14ALUZV">5/2/26</text><!--]--></g><!--[!--><!--]--></svg> <!--[!--><!--]--></div></div><!----></div></div><!----></div></div> <p class="attribution s-lFE9IX1vvODe">Datos recopilados por Irene de la Torre, puedes ver más gráficos en su <a href="https://observablehq.com/d/450f4d2787da3030" class="s-lFE9IX1vvODe">notebook de Observable</a></p><!----> <section class="personas-section s-QWH40hzSu0Ff"><h2 class="s-QWH40hzSu0Ff">Quiénes somos</h2> <div class="personas-grid s-QWH40hzSu0Ff"><!--[--><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Adrián Maqueda</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[--><a href="https://bsky.app/profile/adrimaqueda.com" target="_blank" aria-label="Bluesky de Adrián Maqueda" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="s-QWH40hzSu0Ff"><path d="M123.6 34.5c66.4 50.1 137.9 151.5 164.2 206C314 186 385.5 84.5 452 34.5c48-36.1 125.6-64.1 125.6 24.9c0 17.8-10.1 149.2-16.1 170.5c-20.7 74.2-96.1 93.1-163.1 81.6c117.2 20 147 86.3 82.6 152.6C358.7 590 305.2 432.5 291.5 392.1c-2.5-7.5-3.7-10.9-3.7-7.9c0-3.1-1.2 .4-3.7 7.9C270.4 432.5 216.9 590 94.6 464.1C30.2 397.8 60 331.5 177.2 311.5C110.2 322.9 34.8 304 14.1 229.8C8.1 208.5-2 77.1-2 59.3c0-88.9 77.7-61 125.6-24.9z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[--><a href="https://x.com/adrimaqueda" target="_blank" aria-label="Twitter de Adrián Maqueda" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[--><a href="adrimaqueda.com" target="_blank" aria-label="Web de Adrián Maqueda" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="s-QWH40hzSu0Ff"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Ainhoa Díez</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/ainhoa10ruiz" target="_blank" aria-label="Twitter de Ainhoa Díez" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Álvaro Merino</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/Alvaro_Merino_" target="_blank" aria-label="Twitter de Álvaro Merino" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Ana Ruiz</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/anabelruizaire" target="_blank" aria-label="Twitter de Ana Ruiz" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Ana Somavilla</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/nitasomo" target="_blank" aria-label="Twitter de Ana Somavilla" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Arantxa Herranz</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/aherranz" target="_blank" aria-label="Twitter de Arantxa Herranz" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Beatriz Martínez</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/maritrinez" target="_blank" aria-label="Twitter de Beatriz Martínez" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Blanca Rogel</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/blanca_rogel" target="_blank" aria-label="Twitter de Blanca Rogel" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Carlos Muñoz</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/CarlosMunozDiaz" target="_blank" aria-label="Twitter de Carlos Muñoz" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Carmen Torrecillas</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/carmen_TM_" target="_blank" aria-label="Twitter de Carmen Torrecillas" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Elena Sánchez</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Emma Esser</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/emma_esserdiaz" target="_blank" aria-label="Twitter de Emma Esser" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Irene de la Torre</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/inari_ta" target="_blank" aria-label="Twitter de Irene de la Torre" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[--><a href="https://irenedelatorrearenas.wordpress.com/" target="_blank" aria-label="Web de Irene de la Torre" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="s-QWH40hzSu0Ff"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Javi Álvarez Liébana</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/DadosdeLaplace" target="_blank" aria-label="Twitter de Javi Álvarez Liébana" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Laura Navarro</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/LauraNavarroSol" target="_blank" aria-label="Twitter de Laura Navarro" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Marta Ley</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/leymarta" target="_blank" aria-label="Twitter de Marta Ley" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Pablo Almunia</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Rafael Höhr</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/rafahohr" target="_blank" aria-label="Twitter de Rafael Höhr" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Ricardo Meneses</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/ricardomenesesf" target="_blank" aria-label="Twitter de Ricardo Meneses" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Santi Espinosa</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/Saigesp" target="_blank" aria-label="Twitter de Santi Espinosa" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Sergio Galán</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/sergioeclectico" target="_blank" aria-label="Twitter de Sergio Galán" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Sonia Mochón</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Victoriano Izquierdo</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/victorianoi" target="_blank" aria-label="Twitter de Victoriano Izquierdo" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><div class="persona s-QWH40hzSu0Ff"><span class="persona-name s-QWH40hzSu0Ff">Yolanda Clemente</span> <span class="persona-links s-QWH40hzSu0Ff"><!--[!--><!--]--> <!--[--><a href="https://x.com/yolsclemente" target="_blank" aria-label="Twitter de Yolanda Clemente" class="s-QWH40hzSu0Ff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="s-QWH40hzSu0Ff"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" class="s-QWH40hzSu0Ff"></path></svg></a><!--]--> <!--[!--><!--]--> <!--[!--><!--]--></span></div><!--]--></div></section><!----> <section class="recursos-section s-8gXrW_9ri-aW"><h2 class="s-8gXrW_9ri-aW">Recursos para visualizar datos</h2> <div class="recursos-grid s-8gXrW_9ri-aW"><!--[--><div class="recurso-group s-8gXrW_9ri-aW"><h4 class="s-8gXrW_9ri-aW">Cursos</h4> <ul class="s-8gXrW_9ri-aW"><!--[--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://www.newline.co/courses/better-data-visualizations-with-svelte" target="_blank" class="s-8gXrW_9ri-aW">Better Data Visualizations with Svelte</a></li><!--]--><!--]--></ul></div><div class="recurso-group s-8gXrW_9ri-aW"><h4 class="s-8gXrW_9ri-aW">Canales</h4> <ul class="s-8gXrW_9ri-aW"><!--[--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://www.youtube.com/@JoyofCodeDev" target="_blank" class="s-8gXrW_9ri-aW">Joy of Code</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://www.youtube.com/@h_i_g_s_c_h_videos" target="_blank" class="s-8gXrW_9ri-aW">Matthias Stahl (h_i_g_s_c_h_)</a></li><!--]--><!--]--></ul></div><div class="recurso-group s-8gXrW_9ri-aW"><h4 class="s-8gXrW_9ri-aW">Herramientas</h4> <ul class="s-8gXrW_9ri-aW"><!--[--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://d3js.org/" target="_blank" class="s-8gXrW_9ri-aW">D3</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://www.datawrapper.de/" target="_blank" class="s-8gXrW_9ri-aW">Datawrapper</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://flourish.studio/" target="_blank" class="s-8gXrW_9ri-aW">Flourish</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://www.graphext.com/" target="_blank" class="s-8gXrW_9ri-aW">Graphext</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://observablehq.com/" target="_blank" class="s-8gXrW_9ri-aW">Observable</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://www.rawgraphs.io/" target="_blank" class="s-8gXrW_9ri-aW">RawGraphs</a></li><!--]--><!--[--><li class="s-8gXrW_9ri-aW"><a href="https://svelte.dev/" target="_blank" class="s-8gXrW_9ri-aW">Svelte</a></li><!--]--><!--]--></ul></div><div class="recurso-group s-8gXrW_9ri-aW"><h4 class="s-8gXrW_9ri-aW">Libros</h4> <ul class="s-8gXrW_9ri-aW"><!--[--><!--[!--><li class="s-8gXrW_9ri-aW">Data Sketches: A journey of imagination, exploration, and beautiful data visualizations</li><!--]--><!--[!--><li class="s-8gXrW_9ri-aW">How Charts Lie: Getting Smarter about Visual Information</li><!--]--><!--[!--><li class="s-8gXrW_9ri-aW">Visualizing Complexity: Modular Information Design Handbook</li><!--]--><!--]--></ul></div><!--]--></div></section><!----> <footer class="s-y_bCXRrkrYfP"><p class="s-y_bCXRrkrYfP">Hecho con Svelte por la comunidad de DVS Madrid · <a href="https://github.com/dvs-madrid/dvs-madrid" target="_blank" class="s-y_bCXRrkrYfP">GitHub</a></p></footer></main><!----><!----><!----><!--]--> <!--[!--><div id="svelte-announcer" aria-live="assertive" aria-atomic="true" style="position: absolute; left: 0; top: 0; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px"><!----></div><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_dev = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/node_modules/@sveltejs/kit/src/runtime/client/entry.js"),
+						import("/@fs/Users/irene.arenas/Documents/Personal/dvs-madrid/.svelte-kit/generated/client/app.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data: [null,{type:"data",data:{charlas:[{titulo:"UX a escala planetaria: herramientas de datos para la acción climática",ponentes:"Sergio Estella",curso:"25-26",tema:"GIS",fecha:new Date(1770249600000)},{titulo:"Investigaciones y técnicas de Osint",ponentes:"Oliver Imhof",curso:"25-26",tema:"Research",fecha:new Date(1770249600000)},{titulo:"El mundo nos habla: representación de datos y el acto de escuchar",ponentes:"Sara Lenzi",curso:"25-26",tema:"Research",fecha:new Date(1770249600000)},{titulo:"Mapeando ‘Las fuerzas que mueven el mundo’",ponentes:"Álvaro Merino",curso:"25-26",tema:"GIS",fecha:new Date(1761782400000)},{titulo:"Visualizaciones Interactivas con Svelte",ponentes:"Adrián Maqueda",curso:"25-26",tema:"Programación",fecha:new Date(1761782400000)},{titulo:"Visualizar datos: retos de ayer y de hoy",ponentes:"Irene de la Torre, Beatriz Martínez, Raquel Cabero Quiles, Rafa Höhr y Marina Lorenzo Sánchez",curso:"24-25",tema:"Industria",fecha:new Date(1747872000000)},{titulo:"Explorar la visualización cualitativa: una invitación",ponentes:"Marina Lorenzo Sánchez",curso:"24-25",tema:"Research",fecha:new Date(1747872000000)},{titulo:"Primera sesión rompehielos de DVS Madrid",ponentes:"Irene de la Torre",curso:"24-25",tema:"Networking",fecha:new Date(1742774400000)},{titulo:"D∆T∆_P®1//T1//G",ponentes:"Alberto Pino González",curso:"24-25",tema:"Arte",fecha:new Date(1742774400000)},{titulo:"Graphane: declarative data visualization",ponentes:"Pablo Almunia",curso:"24-25",tema:"Programación",fecha:new Date(1742774400000)},{titulo:"Un año de DVS Madrid",ponentes:"Irene de la Torre",curso:"24-25",tema:"DVS",fecha:new Date(1727308800000)},{titulo:"La visualización de datos en el periodismo deportivo",ponentes:"Sonia Mochón",curso:"24-25",tema:"Diseño",fecha:new Date(1727308800000)},{titulo:"DMS for newsrooms",ponentes:"Rafa Höhr, Juan Pablo Marín y Marta Ley",curso:"24-25",tema:"Producto",fecha:new Date(1727308800000)},{titulo:"Las tripas del chart builder de Graphext",ponentes:"Victoriano Izquierdo y Juan Morales",curso:"23-24",tema:"Business Intelligence",fecha:new Date(1715212800000)},{titulo:"Los hacks de la visualización de la Edad de Plata",ponentes:"Beatriz Martínez",curso:"23-24",tema:"Diseño",fecha:new Date(1715212800000)},{titulo:"La Mirada del Urbanista a Través de los Datos",ponentes:"Ksenia Orlova",curso:"23-24",tema:"GIS",fecha:new Date(1715212800000)},{titulo:"España y Europa en llamas",ponentes:"Adrián Maqueda",curso:"23-24",tema:"GIS",fecha:new Date(1708560000000)},{titulo:"Viz for Social Good: Qué es y cómo participar",ponentes:"Aida Horaniet",curso:"23-24",tema:"Participativo",fecha:new Date(1708560000000)},{titulo:"Comunicando y visualizando en R con Quarto",ponentes:"Javi Álvarez",curso:"23-24",tema:"Programación",fecha:new Date(1708560000000)},{titulo:"Visualización de datos con bloques de construcción (una dinámica participativa)",ponentes:"Pablo Almunia",curso:"23-24",tema:"Diseño",fecha:new Date(1695254400000)},{titulo:"Love, sustainability & data",ponentes:"Eduardo España y Johana Dueñas",curso:"23-24",tema:"Diseño",fecha:new Date(1695254400000)},{titulo:"Presentación DVS Madrid y Prodigioso Volcán",ponentes:"Elena Sánchez",curso:"23-24",tema:"DVS",fecha:new Date(1687219200000)},{titulo:"Animando mapas con d3.js, Mapbox y Observable",ponentes:"Irene de la Torre",curso:"23-24",tema:"Programación",fecha:new Date(1687219200000)},{titulo:"Componentes reutilizables con d3.js",ponentes:"Santi Espinosa",curso:"23-24",tema:"Programación",fecha:new Date(1687219200000)},{titulo:"Mesa redonda sobre Outlier 2023",ponentes:"Sergio Galán",curso:"23-24",tema:"DVS",fecha:new Date(1687219200000)}],graficos:[{Nombre:"Sergio Estella",Titulo:"UX a escala planetaria: herramientas de datos para la acción climática",Afiliacion:"Vizzuality","Tipo de Organización":"Consultoría",Tema:"GIS",Formato:"Presentación",Fecha:"2026-02-05",Sexo:"Hombre",Curso:"25-26"},{Nombre:"Oliver Imhof",Titulo:"Investigaciones y técnicas de Osint",Afiliacion:"Freelance","Tipo de Organización":"Medio de comunicación",Tema:"Research",Formato:"Presentación",Fecha:"2026-02-05",Sexo:"Hombre",Curso:"25-26"},{Nombre:"Sara Lenzi",Titulo:"El mundo nos habla: representación de datos y el acto de escuchar",Afiliacion:"Universidad de Deusto y Ikerbasque","Tipo de Organización":"Universidad",Tema:"Research",Formato:"Presentación",Fecha:"2026-02-05",Sexo:"Mujer",Curso:"25-26"},{Nombre:"Álvaro Merino",Titulo:"Mapeando ‘Las fuerzas que mueven el mundo’",Afiliacion:"El Orden Mundial","Tipo de Organización":"Medio de comunicación",Tema:"GIS",Formato:"Presentación",Fecha:"2025-10-30",Sexo:"Hombre",Curso:"25-26"},{Nombre:"Adrián Maqueda",Titulo:"Visualizaciones Interactivas con Svelte",Afiliacion:"CIVIO","Tipo de Organización":"Medio de comunicación",Tema:"Programación",Formato:"Taller",Fecha:"2025-10-30",Sexo:"Hombre",Curso:"25-26"},{Nombre:"Irene de la Torre",Titulo:"Visualizar datos: retos de ayer y de hoy",Afiliacion:"Financial Times","Tipo de Organización":"Medio de comunicación",Tema:"Industria",Formato:"Mesa redonda",Fecha:"2025-05-22",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Beatriz Martínez",Titulo:"Visualizar datos: retos de ayer y de hoy",Afiliacion:"Visualizados","Tipo de Organización":"Estudio de diseño",Tema:"Industria",Formato:"Mesa redonda",Fecha:"2025-05-22",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Raquel Cabero Quiles",Titulo:"Visualizar datos: retos de ayer y de hoy",Afiliacion:"IE Universidad","Tipo de Organización":"Universidad",Tema:"Industria",Formato:"Mesa redonda",Fecha:"2025-05-22",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Rafa Höhr",Titulo:"Visualizar datos: retos de ayer y de hoy",Afiliacion:"Prodigioso Volcán","Tipo de Organización":"Consultoría",Tema:"Industria",Formato:"Mesa redonda",Fecha:"2025-05-22",Sexo:"Hombre",Curso:"24-25"},{Nombre:"Marina Lorenzo Sánchez",Titulo:"Visualizar datos: retos de ayer y de hoy",Afiliacion:"Materia Prima","Tipo de Organización":"Consultoría",Tema:"Industria",Formato:"Mesa redonda",Fecha:"2025-05-22",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Marina Lorenzo Sánchez",Titulo:"Explorar la visualización cualitativa: una invitación",Afiliacion:"Materia Prima","Tipo de Organización":"Consultoría",Tema:"Research",Formato:"Presentación",Fecha:"2025-05-22",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Irene de la Torre",Titulo:"Primera sesión rompehielos de DVS Madrid",Afiliacion:"DVS","Tipo de Organización":"DVS",Tema:"Networking",Formato:"Rompehielos",Fecha:"2025-03-24",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Alberto Pino González",Titulo:"D∆T∆_P®1//T1//G",Afiliacion:"Freelance","Tipo de Organización":"Estudio de diseño",Tema:"Arte",Formato:"Presentación",Fecha:"2025-03-24",Sexo:"Hombre",Curso:"24-25"},{Nombre:"Pablo Almunia",Titulo:"Graphane: declarative data visualization",Afiliacion:"Graphery","Tipo de Organización":"Consultoría",Tema:"Programación",Formato:"Presentación",Fecha:"2025-03-24",Sexo:"Hombre",Curso:"24-25"},{Nombre:"Irene de la Torre",Titulo:"Un año de DVS Madrid",Afiliacion:"DVS","Tipo de Organización":"DVS",Tema:"DVS",Formato:"Presentación",Fecha:"2024-09-26",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Sonia Mochón",Titulo:"La visualización de datos en el periodismo deportivo",Afiliacion:"Diario AS","Tipo de Organización":"Medio de comunicación",Tema:"Diseño",Formato:"Presentación",Fecha:"2024-09-26",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Rafa Höhr",Titulo:"DMS for newsrooms",Afiliacion:"Prodigioso Volcán","Tipo de Organización":"Consultoría",Tema:"Producto",Formato:"Presentación",Fecha:"2024-09-26",Sexo:"Hombre",Curso:"24-25"},{Nombre:"Juan Pablo Marín",Titulo:"DMS for newsrooms",Afiliacion:"DataSketch","Tipo de Organización":"Producto",Tema:"Producto",Formato:"Presentación",Fecha:"2024-09-26",Sexo:"Hombre",Curso:"24-25"},{Nombre:"Marta Ley",Titulo:"DMS for newsrooms",Afiliacion:"El Confidencial","Tipo de Organización":"Medio de comunicación",Tema:"Producto",Formato:"Presentación",Fecha:"2024-09-26",Sexo:"Mujer",Curso:"24-25"},{Nombre:"Victoriano Izquierdo",Titulo:"Las tripas del chart builder de Graphext",Afiliacion:"Graphext","Tipo de Organización":"Producto",Tema:"Business Intelligence",Formato:"Presentación",Fecha:"2024-05-09",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Juan Morales",Titulo:"Las tripas del chart builder de Graphext",Afiliacion:"Graphext","Tipo de Organización":"Producto",Tema:"Business Intelligence",Formato:"Presentación",Fecha:"2024-05-09",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Beatriz Martínez",Titulo:"Los hacks de la visualización de la Edad de Plata",Afiliacion:"Visualizados","Tipo de Organización":"Estudio de diseño",Tema:"Diseño",Formato:"Presentación",Fecha:"2024-05-09",Sexo:"Mujer",Curso:"23-24"},{Nombre:"Ksenia Orlova",Titulo:"La Mirada del Urbanista a Través de los Datos",Afiliacion:"Gdańsk University of Technology","Tipo de Organización":"Universidad",Tema:"GIS",Formato:"Presentación",Fecha:"2024-05-09",Sexo:"Mujer",Curso:"23-24"},{Nombre:"Adrián Maqueda",Titulo:"España y Europa en llamas",Afiliacion:"CIVIO","Tipo de Organización":"Medio de comunicación",Tema:"GIS",Formato:"Presentación",Fecha:"2024-02-22",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Aida Horaniet",Titulo:"Viz for Social Good: Qué es y cómo participar",Afiliacion:"Universidad de Luxemburgo","Tipo de Organización":"Universidad",Tema:"Participativo",Formato:"Presentación",Fecha:"2024-02-22",Sexo:"Mujer",Curso:"23-24"},{Nombre:"Javi Álvarez",Titulo:"Comunicando y visualizando en R con Quarto",Afiliacion:"Universidad Complutense","Tipo de Organización":"Universidad",Tema:"Programación",Formato:"Presentación",Fecha:"2024-02-22",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Pablo Almunia",Titulo:"Visualización de datos con bloques de construcción (una dinámica participativa)",Afiliacion:"Corus Consulting","Tipo de Organización":"Consultoría",Tema:"Diseño",Formato:"Taller",Fecha:"2023-09-21",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Eduardo España",Titulo:"Love, sustainability & data",Afiliacion:"Couple in Data","Tipo de Organización":"Estudio de diseño",Tema:"Diseño",Formato:"Presentación",Fecha:"2023-09-21",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Johana Dueñas",Titulo:"Love, sustainability & data",Afiliacion:"Couple in Data","Tipo de Organización":"Estudio de diseño",Tema:"Diseño",Formato:"Presentación",Fecha:"2023-09-21",Sexo:"Mujer",Curso:"23-24"},{Nombre:"Elena Sánchez",Titulo:"Presentación DVS Madrid y Prodigioso Volcán",Afiliacion:"DVS","Tipo de Organización":"DVS",Tema:"DVS",Formato:"Presentación",Fecha:"2023-06-20",Sexo:"Mujer",Curso:"23-24"},{Nombre:"Irene de la Torre",Titulo:"Animando mapas con d3.js, Mapbox y Observable",Afiliacion:"Financial Times","Tipo de Organización":"Medio de comunicación",Tema:"Programación",Formato:"Presentación",Fecha:"2023-06-20",Sexo:"Mujer",Curso:"23-24"},{Nombre:"Santi Espinosa",Titulo:"Componentes reutilizables con d3.js",Afiliacion:"Galeo","Tipo de Organización":"Consultoría",Tema:"Programación",Formato:"Presentación",Fecha:"2023-06-20",Sexo:"Hombre",Curso:"23-24"},{Nombre:"Sergio Galán",Titulo:"Mesa redonda sobre Outlier 2023",Afiliacion:"Graphic Method","Tipo de Organización":"Estudio de diseño",Tema:"DVS",Formato:"Mesa redonda",Fecha:"2023-06-20",Sexo:"Hombre",Curso:"23-24"}],prox:{date:"2025-05-22",link:"https://www.eventbrite.com/e/entradas-dvs-madrid-marzo-2025-pablo-almunia-alberto-pino-y-rompehielos-1237836324769"},personas:[{nombre:"Adrián Maqueda",tw:"adrimaqueda",web:"adrimaqueda.com",bsky:"adrimaqueda.com"},{nombre:"Irene de la Torre",web:"https://irenedelatorrearenas.wordpress.com/",tw:"inari_ta"},{nombre:"Carmen Torrecillas",tw:"carmen_TM_"},{nombre:"Álvaro Merino",tw:"Alvaro_Merino_"},{nombre:"Ainhoa Díez",tw:"ainhoa10ruiz"},{nombre:"Pablo Almunia"},{nombre:"Sergio Galán",tw:"sergioeclectico"},{nombre:"Yolanda Clemente",tw:"yolsclemente"},{nombre:"Blanca Rogel",tw:"blanca_rogel"},{nombre:"Marta Ley",tw:"leymarta"},{nombre:"Emma Esser",tw:"emma_esserdiaz"},{nombre:"Rafael Höhr",tw:"rafahohr"},{nombre:"Victoriano Izquierdo",tw:"victorianoi"},{nombre:"Ana Ruiz",tw:"anabelruizaire"},{nombre:"Santi Espinosa",tw:"Saigesp"},{nombre:"Carlos Muñoz",tw:"CarlosMunozDiaz"},{nombre:"Elena Sánchez"},{nombre:"Beatriz Martínez",tw:"maritrinez"},{nombre:"Arantxa Herranz",tw:"aherranz"},{nombre:"Javi Álvarez Liébana",tw:"DadosdeLaplace"},{nombre:"Ana Somavilla",tw:"nitasomo"},{nombre:"Sonia Mochón"},{nombre:"Laura Navarro",tw:"LauraNavarroSol"},{nombre:"Ricardo Meneses",tw:"ricardomenesesf"}],recursos:{Cursos:[{nombre:"Better Data Visualizations with Svelte",link:"https://www.newline.co/courses/better-data-visualizations-with-svelte"}],Canales:[{nombre:"Matthias Stahl (h_i_g_s_c_h_)",link:"https://www.youtube.com/@h_i_g_s_c_h_videos"},{nombre:"Joy of Code",link:"https://www.youtube.com/@JoyofCodeDev"}],Herramientas:[{nombre:"Datawrapper",link:"https://www.datawrapper.de/"},{nombre:"Flourish",link:"https://flourish.studio/"},{nombre:"RawGraphs",link:"https://www.rawgraphs.io/"},{nombre:"Graphext",link:"https://www.graphext.com/"},{nombre:"Observable",link:"https://observablehq.com/"},{nombre:"D3",link:"https://d3js.org/"},{nombre:"Svelte",link:"https://svelte.dev/"}],Libros:[{nombre:"Visualizing Complexity: Modular Information Design Handbook"},{nombre:"How Charts Lie: Getting Smarter about Visual Information"},{nombre:"Data Sketches: A journey of imagination, exploration, and beautiful data visualizations"}]}},uses:{}}],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	
+
+</body></html>

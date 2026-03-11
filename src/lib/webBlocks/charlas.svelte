@@ -10,15 +10,20 @@
 </script>
 
 {#snippet tituloCompleto(charla)}
-	<span class="charla-text">
-		<span class="charla-titulo">{charla.titulo}</span>
-		<span class="charla-ponentes">{charla.ponentes}</span>
-	</span>
-	<span
-		class="tema {charla.tema}"
-		style="background-color: var(--{colorDict[charla.tema] ?? charla.tema}, #aaa)"
-		>{charla.tema}</span
-	>
+	<div class="inline charla">
+		<div class="wrapper-tema">
+			<p
+				class="tema {charla.tema}"
+				style="background-color: var(--{colorDict[charla.tema] ?? charla.tema}, #aaa)"
+			>
+				{charla.tema}
+			</p>
+		</div>
+		<p class="charla-text">
+			<span class="charla-titulo">{charla.titulo}</span>
+			<span class="charla-ponentes">{charla.ponentes}</span>
+		</p>
+	</div>
 {/snippet}
 
 <section class="charlas-section">
@@ -68,15 +73,21 @@
 	.filters {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: 0.5rem;
 		flex-wrap: wrap;
 	}
 
 	.filter-label {
-		font-size: 0.85rem;
-		font-weight: 500;
-		color: #9b9db5;
-		margin-right: 0.25rem;
+		color: #var(--grey);
+		font-size: 1.125rem;
+	}
+
+	.charla {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 0.5rem;
+		align-self: stretch;
 	}
 
 	.charla-link {
@@ -92,11 +103,11 @@
 	}
 
 	.charla-titulo {
-		font-weight: 500;
+		font-weight: 700;
 	}
 
 	.charla-ponentes {
-		color: #9b9db5;
+		color: var(--black);
 	}
 
 	.charla-ponentes::before {
@@ -118,13 +129,21 @@
 		opacity: 1;
 	}
 
+	.wrapper-tema {
+		min-width: 10.6rem;
+		display: flex;
+		justify-content: flex-end;
+	}
+
 	.tema {
 		display: inline-block;
-		padding: 2px 10px;
-		border-radius: 50px;
-		font-size: 0.75rem;
-		font-weight: 500;
-		color: #eeeeee;
+		padding: 0.25rem 0.5rem;
+		border-radius: var(--radius-nonui);
+		border: 1px solid rgba(0, 0, 0, 0.4);
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+		font-weight: 700;
+		color: var(--white);
 		vertical-align: middle;
 	}
 

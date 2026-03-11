@@ -11,32 +11,35 @@
 </script>
 
 <main>
-	<header class="hero">
-		<div class="hero-badge">Data Visualization Society</div>
-		<h1>DVS Madrid</h1>
+	<header class="hero inline">
+		<div class="hero-badge">Conecta con fans de la visualización de datos</div>
+		<h1>Data Visualization Society <span class="accent">Madrid</span></h1>
 		<div class="subtitle">
 			<p>
-				Esta es la página del grupo de <strong>visualización de datos de Madrid</strong>. Aquí
-				puedes enterarte de las últimas charlas y de la próxima. Además también podrás encontrar
-				información sobre nosotros y recursos interesantes relacionados con la visualización de
-				datos.
-			</p>
-			<p>
-				Para estar al día de las próximas charlas o proponer una puedes <a
-					href="https://www.datavisualizationsociety.org/slack-community"
-					>unirte a nuestro grupo de Slack de la Data Visualization Society</a
-				>. Si echas en falta a alguna <strong>persona</strong> en el listado o quieres añadir
-				cualquier
-				<strong>recurso</strong>
-				a la página puedes hacer una Pull Request en
-				<a href="https://github.com/dvs-madrid/dvs-madrid" target="_blank">GitHub</a>
-				o contactarme por <a href="https://x.com/adrimaqueda" target="_blank">Twitter/X</a> o
-				<a href="https://bsky.app/profile/adrimaqueda.com" target="_blank">Bluesky</a>.
+				Bienvenidos a la página del grupo de
+				<strong>visualización de datos de Madrid</strong> (comúnmente conocido también como DVS Madrid).
+				Aquí puedes enterarte de nuestros próximos eventos o saber más de las charlas que hemos organizado.
+				También podrás encontrar información sobre nosotros y recursos interesantes relacionados con gráficos,
+				infografía o datos.
 			</p>
 		</div>
 	</header>
 
 	<ProxEvento date={data.prox.date} link={data.prox.link} />
+	<div class="inline">
+		<p>
+			Para estar al día de las próximas charlas o proponer una puedes <a
+				href="https://www.datavisualizationsociety.org/slack-community"
+				>unirte a nuestro grupo de Slack de la Data Visualization Society</a
+			>. Si echas en falta a alguna <strong>persona</strong> en el listado o quieres añadir
+			cualquier
+			<strong>recurso</strong>
+			a la página puedes hacer una Pull Request en
+			<a href="https://github.com/dvs-madrid/dvs-madrid" target="_blank">GitHub</a>
+			o contactarnos por <a href="https://x.com/adrimaqueda" target="_blank">Twitter/X</a> o
+			<a href="https://bsky.app/profile/adrimaqueda.com" target="_blank">Bluesky</a>.
+		</p>
+	</div>
 	<Charlas charlas={data.charlas.map((d, i) => ({ ...d, id: i }))} />
 	<Graficos data={data.graficos} />
 	<Personas personas={data.personas} />
@@ -52,7 +55,7 @@
 
 <style>
 	main {
-		max-width: 920px;
+		max-width: var(--max-fullwidth);
 		margin: auto;
 		padding-bottom: 3rem;
 	}
@@ -63,6 +66,11 @@
 		}
 	}
 
+	.inline {
+		width: 100%;
+		max-width: var(--max-inline);
+	}
+
 	.hero {
 		padding-top: 5rem;
 		padding-bottom: 1rem;
@@ -70,25 +78,27 @@
 
 	.hero-badge {
 		display: inline-block;
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		font-weight: 600;
+		line-height: 16px;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: #7b46d9;
-		background: #f0e8ff;
-		padding: 0.3rem 0.8rem;
-		border-radius: 50px;
+		color: var(--grey);
 		margin-bottom: 1rem;
+	}
+
+	h1 .accent {
+		color: var(--dvs-green);
+		font-style: italic;
+		font-weight: 400;
 	}
 
 	.subtitle a {
 		text-decoration: underline;
-		font-weight: 600;
-		color: #5258b5;
 	}
 
 	.subtitle a:hover {
-		color: #7b46d9;
+		color: var(--dvs-dark-purple);
 	}
 
 	footer {
