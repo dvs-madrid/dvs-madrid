@@ -171,20 +171,25 @@
 						style="fill: var(--{colorDict[layer.key] ?? layer.key})"
 					/>
 				{/each}
+				{#each stackedData as layer (layer.key)}
+					<path class="area-hover" d={areaGenerator(layer)} />
+				{/each}
 			</g>
 
 			<g class="annotations">
 				{#if porcentaje && chartValue === 'Sexo'}
-					<text y={yScale(50)} x="5" alignment-baseline="middle" class="ref-label">50%</text>
-					<line
-						x1="40"
-						x2={divWidth}
-						y1={yScale(50)}
-						y2={yScale(50)}
-						stroke="#9b9db5"
-						stroke-width="1.5"
-						stroke-dasharray="4 3"
-					/>
+					{#each [30, 50, 70] as n}
+						<text y={yScale(n)} x="5" alignment-baseline="middle" class="axis ref-label">{n}%</text>
+						<line
+							x1="40"
+							x2={divWidth}
+							y1={yScale(n)}
+							y2={yScale(n)}
+							stroke="#000"
+							stroke-width={n === 50 ? 1.5 : 1}
+							stroke-dasharray={n === 50 ? '' : '4 3'}
+						/>
+					{/each}
 				{/if}
 
 				{#each meetings as meeting (meeting.getTime())}
@@ -293,9 +298,14 @@
 		-index: -10;
 	}
 
-	.layer:hover {
+	.layers .area-hover {
+		opacity: 0;
+		fill: rgba(0, 0, 0, 0);
+		stroke: black;
+		stroke-width: 2px;
+	}
+	.layers .area-hover:hover {
 		opacity: 1;
-		z-index: 10;
 	}
 
 	text {
