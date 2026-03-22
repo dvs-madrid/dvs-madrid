@@ -287,11 +287,15 @@
 
 	.layer {
 		transition: d 0.5s ease;
-		opacity: 0.85;
+		opacity: 1;
+		stroke: black;
+		stroke-width: 0.5px;
+		-index: -10;
 	}
 
 	.layer:hover {
 		opacity: 1;
+		z-index: 10;
 	}
 
 	text {

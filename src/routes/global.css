@@ -173,22 +173,26 @@ button.active {
 	--Hombre: #52bf9e;
 	--Mujer: #8652eb;
 
-	--otros: #b7b7b7;
-	--Programación: #4269d0;
-	--DVS: #3ca951;
-	--Diseño: #ff725c;
+	--otros: #d6d6d6;
+
+	/* tematica */
+	--DVS: #419050;
+	--Diseño: #e1578c;
 	--GIS: #efb118;
-	--Investigación: #6cc5b0;
-	--Producto: var(--otros);
-	--BI: var(--otros);
-	--ONG: var(--otros);
+	--Programación: #4269d0;
+	--Investigación: #5abfa0;
 	--Arte: var(--otros);
+	--BI: var(--otros);
+	--Industria: var(--otros);
 	--Networking: var(--otros);
+	--Participativo: var(--otros);
+	--Producto: var(--otros);
 
+	--ONG: var(--otros);
+
+	--Consultoría: #4269d0;
+	--Estudio: #e1578c;
+	--Medios: #efb118;
+	--Universidad: #5abfa0;
 	--Taller: #7fa899;
-
-	--Consultoría: #e89ef0;
-	--Universidad: #f0b840;
-	--Estudio: #637ddc;
-	--Medios: #7fa899;
 }
