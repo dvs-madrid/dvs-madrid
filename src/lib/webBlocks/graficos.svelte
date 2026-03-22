@@ -41,10 +41,9 @@
 {/snippet}
 
 <h2>Así somos</h2>
-
+<h3>Charlas por género</h3>
 <div>
 	<DistribucionXsexo {data} />
-
 	<div class="charts-stack">
 		{@render stackedCharts('Tema')}
 		{@render stackedCharts('Tipo de Organización')}

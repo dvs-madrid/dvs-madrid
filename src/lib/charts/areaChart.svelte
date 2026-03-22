@@ -148,7 +148,7 @@
 	};
 </script>
 
-<div>
+<div class="chart-wrapper">
 	<div class="controls">
 		<button class:active={!porcentaje} onclick={() => togglePorcentaje(false)}> Cantidad </button>
 		<button class:active={porcentaje} onclick={() => togglePorcentaje(true)}> Porcentaje </button>
@@ -263,16 +263,26 @@
 </div>
 
 <style>
-	.controls {
+	.chart-wrapper {
 		display: flex;
-		gap: 0.4rem;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+		align-self: stretch;
+	}
+
+	.controls {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
 	}
 
 	.chart {
 		width: 100%;
 		height: 350px;
 		position: relative;
-		padding-top: 2rem;
 	}
 
 	.layer {
@@ -296,15 +306,21 @@
 
 	.meeting-label {
 		transition: all 0.25s ease;
-		font-weight: normal;
-		opacity: 1;
-		fill: #9b9db5;
+		color: var(--grey);
+		font-weight: 400;
+		line-height: 20px;
+		font-size: 0.875rem;
+		opacity: 0.5;
 	}
 
 	.meeting-label.highlighted {
 		font-weight: 800;
 		opacity: 1;
-		fill: #1a1c2e;
+		fill: var(--black);
+		font-size: 1rem;
+		stroke: var(--white);
+		paint-order: stroke fill !important;
+		stroke-width: 5px;
 	}
 
 	.meeting-label.dimmed {

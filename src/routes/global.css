@@ -53,6 +53,13 @@ h2 {
 	color: var(--black);
 }
 
+h3 {
+	font-size: 1.25rem;
+	color: var(--black);
+	line-height: 1.2;
+	padding: 0.75px 0 0.25rem 0;
+}
+
 h4 {
 	font-weight: 600;
 	color: var(--black);
@@ -113,7 +120,7 @@ button {
 	color: var(--black);
 	border: 1.5px solid var(--grey);
 	border-radius: var(--radius-ui);
-	padding: 0.5rem 1rem;
+	padding: 0.375rem 1rem;
 	cursor: pointer;
 	font-size: 0.875rem;
 	font-weight: 600;
@@ -136,17 +143,27 @@ button.active {
 	box-shadow: 0 2px 8px 0 rgba(33, 33, 33, 0.4);
 }
 
+.row {
+	display: flex;
+	width: var(--max-width);
+	align-items: flex-start;
+	gap: 2.5rem;
+}
 .container {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 0 1rem;
+
 	box-sizing: border-box;
 }
 
 @media (width >= 600px) {
 	.container {
-		width: 50%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+		flex: 1 0 0;
 	}
 }
 
@@ -161,7 +178,7 @@ button.active {
 	--DVS: #3ca951;
 	--Diseño: #ff725c;
 	--GIS: #efb118;
-	--Research: #6cc5b0;
+	--Investigación: #6cc5b0;
 	--Producto: var(--otros);
 	--BI: var(--otros);
 	--ONG: var(--otros);

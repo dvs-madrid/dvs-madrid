@@ -75,6 +75,7 @@
 		align-items: center;
 		gap: 0.5rem;
 		flex-wrap: wrap;
+		padding: 0 0.125rem;
 	}
 
 	.filter-label {
@@ -137,23 +138,20 @@
 
 	.tema {
 		display: inline-block;
-		padding: 0.25rem 0.5rem;
+		padding: 0.1875rem 0.5rem;
 		border-radius: var(--radius-nonui);
-		border: 1px solid rgba(0, 0, 0, 0.4);
+		border: 1px solid rgba(0, 0, 0, 0.3);
 		font-size: 0.875rem;
 		line-height: 1.25rem;
 		font-weight: 700;
-		color: var(--white);
+		color: var(--black);
 		vertical-align: middle;
 	}
 
-	.tema.Producto {
-		color: #444;
-	}
-
-	.tema.Diseño,
-	.tema.ONG {
-		color: #333;
+	.tema.Programación,
+	.tema.DVS,
+	.tema.Diseño {
+		color: var(--white);
 	}
 
 	button {
