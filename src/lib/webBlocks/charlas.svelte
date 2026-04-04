@@ -149,7 +149,6 @@
 	}
 
 	.tema.Programación,
-	.tema.DVS,
 	.tema.Diseño {
 		color: var(--white);
 	}

@@ -17,9 +17,9 @@
 {#snippet stackedCharts(type)}
 	<div class="stacked-row">
 		<div class="container">
-			<p class="chart-label">
+			<h3 class="chart-label">
 				{type === 'Tema' ? 'Charlas según temática:' : 'Charlas según ponente:'}
-			</p>
+			</h3>
 			<div class="values-container">
 				{#each uniqueValues(type) as value}
 					<button
@@ -59,16 +59,16 @@
 <style>
 	.attribution a {
 		text-decoration: underline;
-		color: #5258b5;
+		color: var(--dvs-purple);
 	}
 
 	.attribution a:hover {
-		color: #7b46d9;
+		color: var(--dvs-dark-purple);
 	}
 
 	.attribution {
-		font-size: 0.85rem;
-		color: #9b9db5;
+		font-size: 0.875rem;
+		color: var(--grey);
 	}
 
 	.charts-stack {
@@ -79,15 +79,16 @@
 	.stacked-row {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
-		margin-top: 3rem;
+		align-items: flex-start;
+		margin-top: 5rem;
+		align-self: stretch;
+		gap: 2.5rem;
 	}
 
-	.chart-label {
-		font-weight: 600;
-		font-size: 0.9rem;
-		color: #1a1c2e;
+	.charts-stack .container {
+		gap: 0;
 	}
+
 
 	.values-container {
 		display: flex;
@@ -111,5 +112,6 @@
 		display: inline-block;
 		border-radius: 50%;
 		flex-shrink: 0;
+		border: 1px solid rgba(0, 0, 0, 0.4);
 	}
 </style>
