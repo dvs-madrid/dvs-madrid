@@ -10,73 +10,98 @@ nombre: Adrián Maqueda
 tw: adrimaqueda
 web: adrimaqueda.com
 bsky: adrimaqueda.com
+linkedin: adrián-maqueda-gonzález-522a0b12b
 
 nombre: Irene de la Torre
-web: https://irenedelatorrearenas.wordpress.com/
+web: https://irenedelatorrearenas.com/
 tw: inari_ta
+bsky: inari-ta.bsky.social
+linkedin: irenedelatorrearenas
 
 nombre: Carmen Torrecillas
 tw: carmen_TM_
+linkedin: carmen-torrecillas
 
 nombre: Álvaro Merino
 tw: Alvaro_Merino_
+linkedin: alvaro-merino-marquez
 
 nombre: Ainhoa Díez
 tw: ainhoa10ruiz
+linkedin: ainhoa-diez
 
 nombre: Pablo Almunia
+linkedin: pabloalmunia
 
 nombre: Sergio Galán
 tw: sergioeclectico
+linkedin: sergio-galán-nieto-52619531
 
 nombre: Yolanda Clemente
 tw: yolsclemente
+linkedin: yolanda-clemente-pomeda-481b6711
 
 nombre: Blanca Rogel
 tw: blanca_rogel
+linkedin: blanca-rogel-del-hoyo-9a82a229
 
 nombre: Marta Ley
 tw: leymarta
+linkedin: marta-ley-data
 
 nombre: Emma Esser
 tw: emma_esserdiaz
+linkedin: emma-esser-díaz-a54829205
 
 nombre: Rafael Höhr
 tw: rafahohr
+linkedin: rafaelhohr
 
 nombre: Victoriano Izquierdo
 tw: victorianoi
+linkedin: victorianoizquierdo
 
 nombre: Ana Ruiz
 tw: anabelruizaire
+linkedin: ana-ruiz-espinar-171721197
 
 nombre: Santi Espinosa
 tw: Saigesp
+linkedin: saigesp
 
 nombre: Carlos Muñoz
 tw: CarlosMunozDiaz
+linkedin: carlos-muñoz-díaz-763a9946
 
 nombre: Elena Sánchez
 
 nombre: Beatriz Martínez
 tw: maritrinez
+web: http://visualizados.com/
+linkedin: mtnez
 
 nombre: Arantxa Herranz
 tw: aherranz
+linkedin: arantxaherranz
 
 nombre: Javi Álvarez Liébana
 tw: DadosdeLaplace
+linkedin: javier-alvarez-liebana
 
 nombre: Ana Somavilla
 tw: nitasomo
+linkedin: ana-somavilla-morilla-
 
 nombre: Sonia Mochón
+linkedin: sonia-mochon-losada-721a0672
 
 nombre: Laura Navarro
 tw: LauraNavarroSol
+linkedin: laura-navarro-soler
 
 nombre: Ricardo Meneses
 tw: ricardomenesesf
+linkedin: ricardo-meneses-flores
 
 
 # Recursos para visualizar datos
