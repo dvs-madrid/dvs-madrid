@@ -110,12 +110,21 @@ linkedin: ricardo-meneses-flores
 nombre: Better Data Visualizations with Svelte
 link: https://www.newline.co/courses/better-data-visualizations-with-svelte
 
+nombre: Open Visualization Academy by Alberto Cairo
+link: https://openvisualizationacademy.org/
+
+nombre: Cursos de Federica Fragapane en Domestika
+link: https://www.domestika.org/es/federica_fragapane/courses
+
 [recursos.Canales]
 nombre: Matthias Stahl (h_i_g_s_c_h_)
 link: https://www.youtube.com/@h_i_g_s_c_h_videos
 
 nombre: Joy of Code
 link: https://www.youtube.com/@JoyofCodeDev
+
+nombre: The Coding Train
+link: https://www.youtube.com/thecodingtrain
 
 [recursos.Herramientas]
 nombre: Datawrapper
@@ -139,11 +148,35 @@ link: https://d3js.org/
 nombre: Svelte
 link: https://svelte.dev/
 
-[recursos.Libros]
-nombre: Visualizing Complexity: Modular Information Design Handbook
+nombre: p5
+link: https://p5js.org/
 
-nombre: How Charts Lie: Getting Smarter about Visual Information
+[recursos.Libros]
+nombre: Building Science Graphics: An Illustrated Guide to Communicating Science through Diagrams and Visualizations
+link: https://www.goodreads.com/en/book/show/61283573-building-science-graphics
 
 nombre: Data Sketches: A journey of imagination, exploration, and beautiful data visualizations
+link: https://www.goodreads.com/book/show/52671442-data-sketches
+
+nombre: Design for Information
+link: https://www.goodreads.com/book/show/17318779-design-for-information
+
+nombre: Generative Design: Visualize, Program, and Create with JavaScript in p5.js
+link: https://www.goodreads.com/book/show/38743103-generative-design
+
+nombre: How Charts Lie: Getting Smarter about Visual Information
+link: https://www.goodreads.com/book/show/43726576-how-charts-lie
+
+nombre: Information Graphics
+link: https://www.goodreads.com/book/show/13162988-information-graphics
+
+nombre: The Wall Street Journal Guide to Information Graphics: The Dos and Don'ts of Presenting Data, Facts, and Figures
+link: https://www.goodreads.com/book/show/6542897-the-wall-street-journal-guide-to-information-graphics
+
+nombre: Understanding the World. The Atlas of Infographics
+link: https://www.goodreads.com/book/show/22282374-understanding-the-world-the-atlas-of-infographics
+
+nombre: Visualizing Complexity: Modular Information Design Handbook
+link: https://www.goodreads.com/book/show/59034995-visualizing-complexity
 
 []

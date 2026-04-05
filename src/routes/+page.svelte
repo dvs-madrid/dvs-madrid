@@ -110,11 +110,10 @@
 
 	footer p {
 		font-size: 0.85rem;
-		color: #9b9db5;
+		color: var(--grey);
 	}
 
 	footer a {
-		color: #9b9db5;
 		text-decoration: underline;
 	}
 </style>

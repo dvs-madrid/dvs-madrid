@@ -42,7 +42,6 @@
 							</svg>
 						</a>
 					{/if}
-
 					{#if persona.web}
 						<a href={persona.web} target="_blank" aria-label="Web de {persona.nombre}">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
@@ -79,7 +78,7 @@
 	.personas-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-		column-gap: 16px;
+		column-gap: 1rem;
 		row-gap: 0;
 	}
 

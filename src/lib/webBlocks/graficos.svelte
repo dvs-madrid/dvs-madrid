@@ -100,7 +100,6 @@
 
 	.value {
 		margin: 0;
-		font-size: 0.8rem;
 		display: flex;
 		align-items: center;
 		gap: 0.35rem;
