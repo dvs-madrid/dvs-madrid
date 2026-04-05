@@ -122,8 +122,10 @@
 	}
 
 	.summary {
-		margin-bottom: 0;
+		margin-bottom: 1rem;
 	}
+
+
 
 	.bar-chart {
 		height: 200px;

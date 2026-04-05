@@ -98,6 +98,17 @@
 		margin-bottom: 1rem;
 	}
 
+	@media (width < 600px) {
+		.values-container {
+			margin-bottom: 0 !important;
+		}
+
+		.stacked-row {
+			gap: 1.5rem;
+			margin-top: 2rem;
+		}
+	}
+
 	.value {
 		margin: 0;
 		display: flex;

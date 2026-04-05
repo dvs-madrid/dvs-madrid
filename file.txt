@@ -133,7 +133,7 @@ button.active {
 	box-sizing: border-box;
 }
 
-@media (width >= 600px) {
+@media (width >= var(--tablet-m)) {
 	.container {
 		width: 50%;
 	}

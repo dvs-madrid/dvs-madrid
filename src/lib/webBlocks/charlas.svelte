@@ -156,4 +156,24 @@
 	button {
 		margin: 0;
 	}
+
+	@media (width < 600px) {
+		.charla {
+			flex-direction: column;
+		}
+
+		.wrapper-tema {
+			min-width: auto !important;
+		}
+
+		.wrapper-tema .tema {
+			margin-bottom: 0;
+		}
+
+		.charla .charla-text {
+			margin-bottom: 2rem !important;
+			margin-right: 0;
+		}
+
+	}
 </style>

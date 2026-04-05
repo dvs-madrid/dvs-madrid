@@ -76,6 +76,12 @@
 		padding-bottom: 1rem;
 	}
 
+	@media (width < 600px) {
+		.hero {
+			padding-top: 3rem;
+		}
+	}
+
 	.hero-badge {
 		display: inline-block;
 		font-size: 0.875rem;

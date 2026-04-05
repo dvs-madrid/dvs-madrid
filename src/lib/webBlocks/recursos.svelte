@@ -41,6 +41,12 @@
 		row-gap: 1rem;
 	}
 
+	@media (width < 600px) {
+		.recursos-grid {
+			grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+		}
+	}
+
 	.recurso-group {
 		padding: 1rem 0;
 	}

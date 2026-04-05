@@ -21,6 +21,7 @@
 	--max-fullwidth: 980px;
 	--radius-nonui: 2px;
 	--radius-ui: 100px;
+	--tablet-m: 600px;
 }
 
 body {
@@ -147,10 +148,18 @@ button.active {
 
 .row {
 	display: flex;
-	width: var(--max-width);
+	width: 100%;
+	max-width: var(--max-fullwidth);
 	align-items: flex-start;
 	gap: 2.5rem;
 }
+
+@media (width < 600px) {
+	.row {
+		flex-direction: column;
+	}
+}
+
 .container {
 	width: 100%;
 	display: flex;
