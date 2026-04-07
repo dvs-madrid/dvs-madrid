@@ -39,9 +39,17 @@
 		</div>
 	{:else}
 		<div class="tbd">
-			<p>Aún estamos decidiendo la fecha.</p>
 			<p>
-				Entérate en
+				El siguiente evento será el 23 de abril. Consigue tus entradas en
+				<a
+					href="https://www.eventbrite.com/e/entradas-dvs-madrid-abr-2026-memoria-diseno-y-accesibilidad-1986891817913"
+				>
+					Eventbrite
+				</a>
+				.
+			</p>
+			<p>
+				Entérate de más en
 				<a href="https://www.datavisualizationsociety.org/slack-community">
 					Slack
 					<span class="channel">(#location-madrid)</span>
