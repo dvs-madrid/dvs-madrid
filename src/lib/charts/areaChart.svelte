@@ -185,7 +185,7 @@
 							x2={divWidth}
 							y1={yScale(n)}
 							y2={yScale(n)}
-							stroke="#000"
+							stroke="black"
 							stroke-width={n === 50 ? 1.5 : 1}
 							stroke-dasharray={n === 50 ? '' : '4 3'}
 						/>
@@ -198,8 +198,16 @@
 						x2={xScale(meeting)}
 						y1={0}
 						y2={300}
-						stroke="white"
-						stroke-width="2.5"
+						stroke="var(--white)"
+						stroke-width="1"
+					/>
+					<circle
+						cx={xScale(meeting)}
+						cy={300}
+						r="4"
+						stroke="var(--white)"
+						fill="var(--black)"
+						stroke-width="2px"
 					/>
 					<text
 						x={xScale(meeting)}
@@ -226,15 +234,15 @@
 						x2="0"
 						y2="300"
 						y1={yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}
-						stroke="#1a1c2e"
-						stroke-width="2"
+						stroke="var(--black)"
+						stroke-width="1.2"
 					/>
-					<circle cx="0" cy={yScale(hoveredData[stackValue].Mujer)} r="4" fill="#1a1c2e" />
+					<circle cx="0" cy={yScale(hoveredData[stackValue].Mujer)} r="3" fill="var(--black)" />
 					<circle
 						cx="0"
 						cy={yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}
-						r="4"
-						fill="#1a1c2e"
+						r="3"
+						fill="var(--black)"
 					/>
 				</g>
 			{/if}
@@ -304,6 +312,14 @@
 		stroke: black;
 		stroke-width: 2px;
 	}
+
+	.layers .area-hover,
+	.gender-section .layers .area-hover:hover {
+		opacity: 0 !important;
+		stroke-width: 0 !important;
+		stroke: rgba(0, 0, 0, 0);
+	}
+
 	.layers .area-hover:hover {
 		opacity: 1;
 	}
@@ -314,7 +330,7 @@
 	}
 
 	.ref-label {
-		fill: #9b9db5;
+		fill: var(--grey);
 		font-weight: 500;
 	}
 
@@ -323,8 +339,8 @@
 		color: var(--grey);
 		font-weight: 400;
 		line-height: 20px;
-		font-size: 0.875rem;
-		opacity: 0.5;
+		font-size: 0.625rem;
+		opacity: 0.2;
 	}
 
 	.meeting-label.highlighted {
@@ -354,7 +370,7 @@
 	}
 
 	.tooltip-text {
-		color: #1a1c2e;
+		color: var(--black);
 		background-color: rgba(255, 255, 255, 0.92);
 		padding: 4px 10px;
 		border-radius: 6px;
