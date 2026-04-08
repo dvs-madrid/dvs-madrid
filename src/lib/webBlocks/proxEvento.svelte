@@ -77,7 +77,6 @@
 		text-transform: uppercase;
 		color: var(--white);
 		margin-bottom: 1.5rem;
-		text-transform: uppercase;
 	}
 
 	.event-content {

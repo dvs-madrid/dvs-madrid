@@ -49,6 +49,9 @@
 
 	.recurso-group {
 		padding: 1rem 0;
+		ul li {
+			margin-bottom: 0.5rem;
+		}
 	}
 
 	a {

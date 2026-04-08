@@ -108,6 +108,12 @@
 
 	const meetings = $derived(chartData.map((d) => d.Fecha));
 
+	// Avoid overlapping x-axis labels: assume ~60px per label and only show
+	// every Nth date when there are more meetings than the chart can fit comfortably.
+	const labelStep = $derived(
+		Math.max(1, Math.ceil(meetings.length / Math.max(1, Math.floor(divWidth / 60))))
+	);
+
 	const getDataAtPosition = (position) => {
 		if (!position || !chartData.length) return null;
 
@@ -141,6 +147,55 @@
 	const getTooltipTransform = (fecha) => {
 		return xScale(fecha) > 100 ? 'calc(-100% - 10px)' : '10px';
 	};
+
+	// Tooltip layout. The .tooltip-container now spans `inset: 0 0 50px 0`
+	// inside a 350px tall .chart → 300px tall, ending right above the date
+	// label strip and exactly matching the SVG coordinate system used by yScale.
+	const tooltip_height = 28;
+	const tooltip_gap = 4;
+	const tooltip_area_height = 300;
+
+	// Compute the `top` of both tooltips together so we can:
+	//   1. anchor each one to its data point (yScale(value) ± 5)
+	//   2. enforce a minimum vertical gap so they never overlap on small values
+	//   3. clamp the bottom one so it can't slip into the date labels below
+	const tooltipTops = $derived.by(() => {
+		if (!hoveredData) return { mujerTop: 0, hombreTop: 0 };
+		const mujerVal = hoveredData[stackValue].Mujer;
+		const hombreVal = hoveredData[stackValue].Hombre;
+
+		// Ideal anchors. mujerTop = top edge of the bottom tooltip (no transform).
+		// hombreTop = bottom edge of the top tooltip (translateY(-100%)).
+		let mujerTop = yScale(mujerVal) + 5;
+		let hombreTop = yScale(mujerVal + hombreVal) - 5;
+
+		// Push them apart if the gap between the two tooltips is too small.
+		const minGap = tooltip_height + tooltip_gap;
+		if (mujerTop - hombreTop < minGap) {
+			const mid = (mujerTop + hombreTop) / 2;
+			mujerTop = mid + minGap / 2;
+			hombreTop = mid - minGap / 2;
+		}
+
+		// Clamp the bottom tooltip to keep it out of the date label area, then
+		// shift the top tooltip by the same amount so the gap is preserved.
+		const maxMujerTop = tooltip_area_height - tooltip_height - tooltip_gap;
+		if (mujerTop > maxMujerTop) {
+			const shift = mujerTop - maxMujerTop;
+			mujerTop -= shift;
+			hombreTop -= shift;
+		}
+
+		// Make sure the top tooltip never floats above the top of the chart.
+		const minHombreTop = tooltip_height + tooltip_gap;
+		if (hombreTop < minHombreTop) {
+			const shift = minHombreTop - hombreTop;
+			hombreTop += shift;
+			mujerTop += shift;
+		}
+
+		return { mujerTop, hombreTop };
+	});
 
 	const getTooltipStyle = (top, left, isTop = false) => {
 		const transform = getTooltipTransform(hoveredData.Fecha);
@@ -192,7 +247,7 @@
 					{/each}
 				{/if}
 
-				{#each meetings as meeting (meeting.getTime())}
+				{#each meetings as meeting, i (meeting.getTime())}
 					<line
 						x1={xScale(meeting)}
 						x2={xScale(meeting)}
@@ -209,21 +264,23 @@
 						fill="var(--black)"
 						stroke-width="2px"
 					/>
-					<text
-						x={xScale(meeting)}
-						y={320}
-						alignment-baseline="baseline"
-						text-anchor={xScale(meeting) < 20
-							? 'start'
-							: xScale(meeting) > divWidth - 20
-								? 'end'
-								: 'middle'}
-						class="meeting-label"
-						class:highlighted={hoveredData?.Fecha === meeting}
-						class:dimmed={hoveredData !== null && hoveredData?.Fecha !== meeting}
-					>
-						{formatDate(meeting)}
-					</text>
+					{#if i % labelStep === 0 || i === meetings.length - 1 || hoveredData?.Fecha === meeting}
+						<text
+							x={xScale(meeting)}
+							y={320}
+							alignment-baseline="baseline"
+							text-anchor={xScale(meeting) < 20
+								? 'start'
+								: xScale(meeting) > divWidth - 20
+									? 'end'
+									: 'middle'}
+							class="meeting-label"
+							class:highlighted={hoveredData?.Fecha === meeting}
+							class:dimmed={hoveredData !== null && hoveredData?.Fecha !== meeting}
+						>
+							{formatDate(meeting)}
+						</text>
+					{/if}
 				{/each}
 			</g>
 
@@ -252,21 +309,14 @@
 			<div class="tooltip-container">
 				<div
 					class="tooltip-text"
-					style={getTooltipStyle(
-						yScale(hoveredData[stackValue].Mujer) + 5,
-						xScale(hoveredData.Fecha)
-					)}
+					style={getTooltipStyle(tooltipTops.mujerTop, xScale(hoveredData.Fecha))}
 				>
 					{Math.round(hoveredData[stackValue].Mujer)}{porcentaje ? '%' : ''}
 				</div>
 
 				<div
 					class="tooltip-text"
-					style={getTooltipStyle(
-						yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre) - 5,
-						xScale(hoveredData.Fecha),
-						true
-					)}
+					style={getTooltipStyle(tooltipTops.hombreTop, xScale(hoveredData.Fecha), true)}
 				>
 					{Math.round(hoveredData[stackValue].Hombre)}{porcentaje ? '%' : ''}
 				</div>
@@ -303,7 +353,6 @@
 		opacity: 1;
 		stroke: black;
 		stroke-width: 0.5px;
-		-index: -10;
 	}
 
 	.layers .area-hover {
@@ -326,7 +375,7 @@
 
 	text {
 		font-size: 11px;
-		font-family: 'Inter', system-ui, sans-serif;
+		font-family: 'Poppins', system-ui, sans-serif;
 	}
 
 	.ref-label {
@@ -340,7 +389,7 @@
 		font-weight: 400;
 		line-height: 20px;
 		font-size: 0.625rem;
-		opacity: 0.2;
+		opacity: 0.6;
 	}
 
 	.meeting-label.highlighted {
@@ -363,9 +412,7 @@
 
 	.tooltip-container {
 		position: absolute;
-		height: calc(100% - 2rem - 50px);
-		width: 100%;
-		bottom: 50px;
+		inset: 0 0 50px 0;
 		pointer-events: none;
 	}
 
