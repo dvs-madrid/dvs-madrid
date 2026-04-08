@@ -108,6 +108,12 @@
 
 	const meetings = $derived(chartData.map((d) => d.Fecha));
 
+	// Avoid overlapping x-axis labels: assume ~60px per label and only show
+	// every Nth date when there are more meetings than the chart can fit comfortably.
+	const labelStep = $derived(
+		Math.max(1, Math.ceil(meetings.length / Math.max(1, Math.floor(divWidth / 60))))
+	);
+
 	const getDataAtPosition = (position) => {
 		if (!position || !chartData.length) return null;
 
@@ -142,13 +148,62 @@
 		return xScale(fecha) > 100 ? 'calc(-100% - 10px)' : '10px';
 	};
 
+	// Tooltip layout. The .tooltip-container now spans `inset: 0 0 50px 0`
+	// inside a 350px tall .chart → 300px tall, ending right above the date
+	// label strip and exactly matching the SVG coordinate system used by yScale.
+	const tooltip_height = 28;
+	const tooltip_gap = 4;
+	const tooltip_area_height = 300;
+
+	// Compute the `top` of both tooltips together so we can:
+	//   1. anchor each one to its data point (yScale(value) ± 5)
+	//   2. enforce a minimum vertical gap so they never overlap on small values
+	//   3. clamp the bottom one so it can't slip into the date labels below
+	const tooltipTops = $derived.by(() => {
+		if (!hoveredData) return { mujerTop: 0, hombreTop: 0 };
+		const mujerVal = hoveredData[stackValue].Mujer;
+		const hombreVal = hoveredData[stackValue].Hombre;
+
+		// Ideal anchors. mujerTop = top edge of the bottom tooltip (no transform).
+		// hombreTop = bottom edge of the top tooltip (translateY(-100%)).
+		let mujerTop = yScale(mujerVal) + 5;
+		let hombreTop = yScale(mujerVal + hombreVal) - 5;
+
+		// Push them apart if the gap between the two tooltips is too small.
+		const minGap = tooltip_height + tooltip_gap;
+		if (mujerTop - hombreTop < minGap) {
+			const mid = (mujerTop + hombreTop) / 2;
+			mujerTop = mid + minGap / 2;
+			hombreTop = mid - minGap / 2;
+		}
+
+		// Clamp the bottom tooltip to keep it out of the date label area, then
+		// shift the top tooltip by the same amount so the gap is preserved.
+		const maxMujerTop = tooltip_area_height - tooltip_height - tooltip_gap;
+		if (mujerTop > maxMujerTop) {
+			const shift = mujerTop - maxMujerTop;
+			mujerTop -= shift;
+			hombreTop -= shift;
+		}
+
+		// Make sure the top tooltip never floats above the top of the chart.
+		const minHombreTop = tooltip_height + tooltip_gap;
+		if (hombreTop < minHombreTop) {
+			const shift = minHombreTop - hombreTop;
+			hombreTop += shift;
+			mujerTop += shift;
+		}
+
+		return { mujerTop, hombreTop };
+	});
+
 	const getTooltipStyle = (top, left, isTop = false) => {
 		const transform = getTooltipTransform(hoveredData.Fecha);
 		return `position: absolute; top: ${top}px; left: ${left}px; transform: translateX(${transform})${isTop ? ' translateY(-100%)' : ''}`;
 	};
 </script>
 
-<div>
+<div class="chart-wrapper">
 	<div class="controls">
 		<button class:active={!porcentaje} onclick={() => togglePorcentaje(false)}> Cantidad </button>
 		<button class:active={porcentaje} onclick={() => togglePorcentaje(true)}> Porcentaje </button>
@@ -171,46 +226,61 @@
 						style="fill: var(--{colorDict[layer.key] ?? layer.key})"
 					/>
 				{/each}
+				{#each stackedData as layer (layer.key)}
+					<path class="area-hover" d={areaGenerator(layer)} />
+				{/each}
 			</g>
 
 			<g class="annotations">
 				{#if porcentaje && chartValue === 'Sexo'}
-					<text y={yScale(50)} x="5" alignment-baseline="middle" class="ref-label">50%</text>
-					<line
-						x1="40"
-						x2={divWidth}
-						y1={yScale(50)}
-						y2={yScale(50)}
-						stroke="#9b9db5"
-						stroke-width="1.5"
-						stroke-dasharray="4 3"
-					/>
+					{#each [30, 50, 70] as n}
+						<text y={yScale(n)} x="5" alignment-baseline="middle" class="axis ref-label">{n}%</text>
+						<line
+							x1="40"
+							x2={divWidth}
+							y1={yScale(n)}
+							y2={yScale(n)}
+							stroke="black"
+							stroke-width={n === 50 ? 1.5 : 1}
+							stroke-dasharray={n === 50 ? '' : '4 3'}
+						/>
+					{/each}
 				{/if}
 
-				{#each meetings as meeting (meeting.getTime())}
+				{#each meetings as meeting, i (meeting.getTime())}
 					<line
 						x1={xScale(meeting)}
 						x2={xScale(meeting)}
 						y1={0}
 						y2={300}
-						stroke="white"
-						stroke-width="2.5"
+						stroke="var(--white)"
+						stroke-width="1"
 					/>
-					<text
-						x={xScale(meeting)}
-						y={320}
-						alignment-baseline="baseline"
-						text-anchor={xScale(meeting) < 20
-							? 'start'
-							: xScale(meeting) > divWidth - 20
-								? 'end'
-								: 'middle'}
-						class="meeting-label"
-						class:highlighted={hoveredData?.Fecha === meeting}
-						class:dimmed={hoveredData !== null && hoveredData?.Fecha !== meeting}
-					>
-						{formatDate(meeting)}
-					</text>
+					<circle
+						cx={xScale(meeting)}
+						cy={300}
+						r="4"
+						stroke="var(--white)"
+						fill="var(--black)"
+						stroke-width="2px"
+					/>
+					{#if i % labelStep === 0 || i === meetings.length - 1 || hoveredData?.Fecha === meeting}
+						<text
+							x={xScale(meeting)}
+							y={320}
+							alignment-baseline="baseline"
+							text-anchor={xScale(meeting) < 20
+								? 'start'
+								: xScale(meeting) > divWidth - 20
+									? 'end'
+									: 'middle'}
+							class="meeting-label"
+							class:highlighted={hoveredData?.Fecha === meeting}
+							class:dimmed={hoveredData !== null && hoveredData?.Fecha !== meeting}
+						>
+							{formatDate(meeting)}
+						</text>
+					{/if}
 				{/each}
 			</g>
 
@@ -221,15 +291,15 @@
 						x2="0"
 						y2="300"
 						y1={yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}
-						stroke="#1a1c2e"
-						stroke-width="2"
+						stroke="var(--black)"
+						stroke-width="1.2"
 					/>
-					<circle cx="0" cy={yScale(hoveredData[stackValue].Mujer)} r="4" fill="#1a1c2e" />
+					<circle cx="0" cy={yScale(hoveredData[stackValue].Mujer)} r="3" fill="var(--black)" />
 					<circle
 						cx="0"
 						cy={yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre)}
-						r="4"
-						fill="#1a1c2e"
+						r="3"
+						fill="var(--black)"
 					/>
 				</g>
 			{/if}
@@ -239,21 +309,14 @@
 			<div class="tooltip-container">
 				<div
 					class="tooltip-text"
-					style={getTooltipStyle(
-						yScale(hoveredData[stackValue].Mujer) + 5,
-						xScale(hoveredData.Fecha)
-					)}
+					style={getTooltipStyle(tooltipTops.mujerTop, xScale(hoveredData.Fecha))}
 				>
 					{Math.round(hoveredData[stackValue].Mujer)}{porcentaje ? '%' : ''}
 				</div>
 
 				<div
 					class="tooltip-text"
-					style={getTooltipStyle(
-						yScale(hoveredData[stackValue].Mujer + hoveredData[stackValue].Hombre) - 5,
-						xScale(hoveredData.Fecha),
-						true
-					)}
+					style={getTooltipStyle(tooltipTops.hombreTop, xScale(hoveredData.Fecha), true)}
 				>
 					{Math.round(hoveredData[stackValue].Hombre)}{porcentaje ? '%' : ''}
 				</div>
@@ -263,48 +326,80 @@
 </div>
 
 <style>
-	.controls {
+	.chart-wrapper {
 		display: flex;
-		gap: 0.4rem;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+		align-self: stretch;
+	}
+
+	.controls {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
 	}
 
 	.chart {
 		width: 100%;
 		height: 350px;
 		position: relative;
-		padding-top: 2rem;
 	}
 
 	.layer {
 		transition: d 0.5s ease;
-		opacity: 0.85;
+		opacity: 1;
+		stroke: black;
+		stroke-width: 0.5px;
 	}
 
-	.layer:hover {
+	.layers .area-hover {
+		opacity: 0;
+		fill: rgba(0, 0, 0, 0);
+		stroke: black;
+		stroke-width: 2px;
+	}
+
+	.layers .area-hover,
+	.gender-section .layers .area-hover:hover {
+		opacity: 0 !important;
+		stroke-width: 0 !important;
+		stroke: rgba(0, 0, 0, 0);
+	}
+
+	.layers .area-hover:hover {
 		opacity: 1;
 	}
 
 	text {
 		font-size: 11px;
-		font-family: 'Inter', system-ui, sans-serif;
+		font-family: 'Poppins', system-ui, sans-serif;
 	}
 
 	.ref-label {
-		fill: #9b9db5;
+		fill: var(--grey);
 		font-weight: 500;
 	}
 
 	.meeting-label {
 		transition: all 0.25s ease;
-		font-weight: normal;
-		opacity: 1;
-		fill: #9b9db5;
+		color: var(--grey);
+		font-weight: 400;
+		line-height: 20px;
+		font-size: 0.625rem;
+		opacity: 0.6;
 	}
 
 	.meeting-label.highlighted {
 		font-weight: 800;
 		opacity: 1;
-		fill: #1a1c2e;
+		fill: var(--black);
+		font-size: 1rem;
+		stroke: var(--white);
+		paint-order: stroke fill !important;
+		stroke-width: 5px;
 	}
 
 	.meeting-label.dimmed {
@@ -317,14 +412,12 @@
 
 	.tooltip-container {
 		position: absolute;
-		height: calc(100% - 2rem - 50px);
-		width: 100%;
-		bottom: 50px;
+		inset: 0 0 50px 0;
 		pointer-events: none;
 	}
 
 	.tooltip-text {
-		color: #1a1c2e;
+		color: var(--black);
 		background-color: rgba(255, 255, 255, 0.92);
 		padding: 4px 10px;
 		border-radius: 6px;

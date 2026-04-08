@@ -42,7 +42,6 @@
 							</svg>
 						</a>
 					{/if}
-
 					{#if persona.web}
 						<a href={persona.web} target="_blank" aria-label="Web de {persona.nombre}">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
@@ -79,8 +78,8 @@
 	.personas-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-		column-gap: 16px;
-		row-gap: 12px;
+		column-gap: 1rem;
+		row-gap: 0;
 	}
 
 	.persona {
@@ -91,8 +90,8 @@
 	}
 
 	.persona-name {
-		font-weight: 500;
-		font-size: 0.9rem;
+		font-weight: 400;
+		font-size: 1.125rem;
 	}
 
 	.persona-links {
@@ -104,16 +103,21 @@
 	.persona-links a {
 		display: flex;
 		align-items: center;
-		opacity: 0.4;
 		transition: opacity 0.2s;
 	}
 
 	.persona-links a:hover {
-		opacity: 0.8;
+		opacity: 1;
 		text-decoration: none;
 	}
 
 	svg {
 		height: 0.9rem;
+		fill: var(--dvs-purple);
 	}
+
+	.persona-links a:hover svg {
+		fill: var(--dvs-dark-purple)
+	}
+
 </style>

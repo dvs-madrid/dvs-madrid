@@ -65,36 +65,42 @@
 
 <div class="gender-section">
 	{#if ready}
-		<div class="container">
-			<div class="year-filters">
-				{#each years as year (year)}
-					<button class={[selectedYear === year && 'active']} onclick={() => (selectedYear = year)}
-						>{year}</button
-					>
-				{/each}
-			</div>
-			<p class="summary">
-				{text} hemos realizado <strong>{yearRecount.charlas} charlas</strong> y han presentado
-				<strong>{yearRecount.ponentes} personas diferentes</strong>. El porcentaje de ponentes se
-				queda así:
-			</p>
-			<div class="bar-chart">
-				{#each genderDistribution as sex (sex.genero)}
-					<div class="column">
-						<div class="bar" style="height: {sex.percent}%; background-color: var(--{sex.genero})">
-							<p class="percent">{Math.round(sex.percent)}%</p>
+		<div class="row">
+			<div class="container">
+				<p class="summary">
+					{text} hemos realizado <strong>{yearRecount.charlas} charlas</strong> y han presentado
+					<strong>{yearRecount.ponentes} personas diferentes</strong>. El porcentaje de ponentes se
+					queda así:
+				</p>
+				<div class="year-filters">
+					{#each years as year (year)}
+						<button
+							class={[selectedYear === year && 'active']}
+							onclick={() => (selectedYear = year)}>{year}</button
+						>
+					{/each}
+				</div>
+				<div class="bar-chart">
+					{#each genderDistribution as sex (sex.genero)}
+						<div class="column">
+							<div
+								class="bar"
+								style="height: {sex.percent}%; background-color: var(--{sex.genero})"
+							>
+								<p class="percent">{Math.round(sex.percent)}%</p>
+							</div>
+							<p class="bar-label">{sex.genero}</p>
 						</div>
-						<p class="bar-label">{sex.genero}</p>
-					</div>
-				{/each}
+					{/each}
+				</div>
 			</div>
-		</div>
 
-		<div class="container">
-			<p class="summary">
-				Pero la proporción no ha sido siempre igual, sino que ha ido evolucionando en cada meetup:
-			</p>
-			<AreaChart {data} chartValue="Sexo" />
+			<div class="container">
+				<p class="summary">
+					Pero la proporción no ha sido siempre igual, sino que ha ido evolucionando en cada meetup:
+				</p>
+				<AreaChart {data} chartValue="Sexo" />
+			</div>
 		</div>
 	{/if}
 </div>
@@ -103,27 +109,32 @@
 	.gender-section {
 		display: flex;
 		flex-wrap: wrap;
+		gap: 1rem;
 	}
 
 	.year-filters {
+		width: 100%;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		gap: 0.4rem;
-		margin-top: 1rem;
+		gap: 0.5rem;
 		flex-wrap: wrap;
+		padding: 0 0 2rem 0;
 	}
 
 	.summary {
-		font-size: 0.9rem;
+		margin-bottom: 1rem;
 	}
 
+
+
 	.bar-chart {
-		height: 280px;
+		height: 200px;
+		width: 100%;
 		display: flex;
+		justify-content: center;
 		align-items: flex-end;
-		justify-content: space-evenly;
-		padding: 0 1rem;
+		gap: 24px;
+		align-self: stretch;
 	}
 
 	.column {
@@ -153,14 +164,14 @@
 		left: 0;
 		right: 0;
 		font-weight: 700;
-		font-size: 1.1rem;
-		color: #1a1c2e;
+		color: var(--black);
 	}
 
 	.bar-label {
 		margin-top: 0.75rem !important;
-		font-size: 0.85rem;
-		font-weight: 500;
-		color: #9b9db5;
+		color: var(--grey);
+		font-weight: 400;
+		line-height: 20px;
+		font-size: 1rem;
 	}
 </style>

@@ -39,10 +39,21 @@
 		</div>
 	{:else}
 		<div class="tbd">
-			<p>Aún estamos decidiendo la fecha.</p>
 			<p>
-				Entérate en <a href="https://www.datavisualizationsociety.org/slack-community">Slack</a>
-				<span class="channel">(#location-madrid)</span>
+				El siguiente evento será el 23 de abril. Consigue tus entradas en
+				<a
+					href="https://www.eventbrite.com/e/entradas-dvs-madrid-abr-2026-memoria-diseno-y-accesibilidad-1986891817913"
+				>
+					Eventbrite
+				</a>
+				.
+			</p>
+			<p>
+				Entérate de más en
+				<a href="https://www.datavisualizationsociety.org/slack-community">
+					Slack
+					<span class="channel">(#location-madrid)</span>
+				</a>
 			</p>
 		</div>
 	{/if}
@@ -51,24 +62,25 @@
 <style>
 	.event-card {
 		background: linear-gradient(135deg, #1a1c2e 0%, #2d2f55 100%);
-		border-radius: 16px;
+		border-radius: var(--radius-nonui);
 		padding: 2.5rem;
 		margin-top: 1rem;
-		color: white;
+		margin-bottom: 3rem;
+		color: var(--white);
 	}
 
 	.event-label {
-		font-size: 0.75rem;
+		font-size: 0.875rem;
 		font-weight: 600;
-		text-transform: uppercase;
+		line-height: 16px;
 		letter-spacing: 0.1em;
-		color: rgba(255, 255, 255, 0.5);
+		text-transform: uppercase;
+		color: var(--white);
 		margin-bottom: 1.5rem;
 	}
 
 	.event-content {
-		text-align: center;
-		padding: 1rem 0;
+		margin-top: 1rem;
 	}
 
 	.date {
@@ -79,7 +91,6 @@
 	}
 
 	.countdown {
-		font-size: 1.8rem;
 		font-weight: 700;
 		color: white;
 		margin-bottom: 2rem;
@@ -109,31 +120,31 @@
 	}
 
 	.tbd {
-		text-align: center;
-		padding: 1.5rem 0;
+		margin-top: 1rem;
 	}
 
 	.tbd p {
-		color: rgba(255, 255, 255, 0.85);
-		font-size: 1.1rem;
-		margin: 0.5rem 0;
+		color: var(--white);
+		margin: 0.5rem 0 0;
 	}
 
 	.tbd a {
-		color: #c4a8ff;
+		color: var(--dvs-light-purple);
 		text-decoration: underline;
-		font-weight: 600;
+		font-weight: 700;
+	}
+
+	.tbd a:hover {
+		color: #ceaecc;
 	}
 
 	.channel {
-		display: inline-block;
-		color: rgba(255, 255, 255, 0.5);
-		font-size: 0.9rem;
+		font-weight: 400;
 	}
 
 	@media (width > 550px) {
 		.event-card {
-			padding: 3rem;
+			padding: 2.5rem;
 		}
 
 		.date {

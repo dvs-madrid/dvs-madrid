@@ -10,7 +10,7 @@
 	<div class="recursos-grid">
 		{#each Object.entries(recursos) as [key, recurso]}
 			<div class="recurso-group">
-				<h4>{key}</h4>
+				<h3>{key}</h3>
 				<ul>
 					{#each recurso.toSorted((a, b) => ascending(a.nombre, b.nombre)) as info}
 						{#if info.link}
@@ -31,26 +31,37 @@
 		flex-direction: column;
 		gap: 1rem;
 		margin-bottom: 2rem;
+		font-size: 1.125rem;
 	}
 
 	.recursos-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-		column-gap: 24px;
-		row-gap: 16px;
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+		column-gap: 1.5rem;
+		row-gap: 1rem;
+	}
+
+	@media (width < 600px) {
+		.recursos-grid {
+			grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+		}
 	}
 
 	.recurso-group {
 		padding: 1rem 0;
+		ul li {
+			margin-bottom: 0.5rem;
+		}
 	}
 
 	a {
-		color: #5258b5;
+		color: var(--dvs-purple);
 		text-decoration: none;
+		font-weight: 400;
 	}
 
 	a:hover {
 		text-decoration: underline;
-		color: #7b46d9;
+		color: var(--dvs-dark-purple);
 	}
 </style>

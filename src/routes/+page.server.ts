@@ -2,15 +2,21 @@ import { csv, descending, groups } from 'd3';
 import archieml from 'archieml';
 import archieRaw from '../../static/data.txt?raw';
 
-function charlasDataset(rawData) {
+function charlasDataset(rawData, descripcionesMap) {
 	const charlasClean = groups(rawData, (d) => d.Titulo)
-		.map((d) => ({
-			titulo: d[0],
-			ponentes: new Intl.ListFormat('es').format(d[1].map((n) => n.Nombre)),
-			curso: d[1][0].Curso,
-			tema: d[1][0].Tema,
-			fecha: new Date(d[1][0].Fecha)
-		}))
+		.map(([titulo, ponentesRaw]) => {
+			const extra = descripcionesMap.get(titulo) ?? {};
+			return {
+				id: titulo,
+				titulo,
+				ponentes: new Intl.ListFormat('es').format(ponentesRaw.map((n) => n.Nombre)),
+				curso: ponentesRaw[0].Curso,
+				tema: ponentesRaw[0].Tema,
+				fecha: new Date(ponentesRaw[0].Fecha),
+				descripcion: extra.descripcion ?? '',
+				link: extra.link ?? ''
+			};
+		})
 		.sort((a, b) => descending(a.fecha, b.fecha));
 
 	return charlasClean;
@@ -25,16 +31,27 @@ export async function load() {
 		return `https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=${gid}`;
 	};
 
-	const google_spreadsheet =
+	const mainSpreadsheet =
 		'https://docs.google.com/spreadsheets/d/1hPkvrszhubYai9_wbDN-MWowaqom54KLw7p8_GhwJ4s/edit?gid=993396898#gid=993396898';
+	const descripcionesSpreadsheet =
+		'https://docs.google.com/spreadsheets/d/1hPkvrszhubYai9_wbDN-MWowaqom54KLw7p8_GhwJ4s/edit?gid=1791175569#gid=1791175569';
 
-	const csvUrl = getCsvUrl(google_spreadsheet);
-	const data = await csv(csvUrl);
+	const [data, descripciones] = await Promise.all([
+		csv(getCsvUrl(mainSpreadsheet)),
+		csv(getCsvUrl(descripcionesSpreadsheet))
+	]);
+
+	const descripcionesMap = new Map(
+		descripciones.map((d) => [
+			d.Titulo,
+			{ descripcion: d['Descripción'] ?? '', link: d.Youtube ?? '' }
+		])
+	);
 
 	const text = archieml.load(archieRaw);
 
 	return {
-		charlas: charlasDataset(data),
+		charlas: charlasDataset(data, descripcionesMap),
 		graficos: data,
 		prox: text.prox,
 		personas: text.personas,
