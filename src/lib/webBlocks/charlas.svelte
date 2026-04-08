@@ -20,7 +20,13 @@
 			</p>
 		</div>
 		{#if charla.link}
-			<a href={charla.link} target="_blank" rel="noopener" class="charla-text">
+			<a
+				alt="Ver charla en Youtube"
+				href={charla.link}
+				target="_blank"
+				rel="noopener"
+				class="charla-text"
+			>
 				<span class="charla-titulo">{charla.titulo}</span>
 				<span class="charla-ponentes">{charla.ponentes}</span>
 				<svg
@@ -62,6 +68,11 @@
 			</li>
 		{/each}
 	</ul>
+	<p class="youtube-info">
+		Algunas de las charlas han sido grabadas y están disponibles en
+		<a href="https://www.youtube.com/@DVS-Madrid">nuestro canal de Youtube</a>
+		.
+	</p>
 </section>
 
 <style>
@@ -120,20 +131,20 @@
 
 	a.charla-text:hover {
 		text-decoration: underline;
-		text-decoration-color: #e44;
+		text-decoration-color: var(--black);
 	}
 
 	.yt-icon {
-		height: 0.9em;
+		height: 1.2em;
 		width: auto;
 		margin-left: 4px;
-		vertical-align: -0.05em;
-		opacity: 0.7;
+		vertical-align: -0.2em;
+		opacity: 1;
 		transition: opacity 0.2s;
 	}
 
 	a.charla-text:hover .yt-icon {
-		opacity: 1;
+		fill: rgb(188, 53, 53);
 	}
 
 	.wrapper-tema {
@@ -161,6 +172,11 @@
 
 	button {
 		margin: 0;
+	}
+
+	.youtube-info {
+		font-size: 0.875rem;
+		color: var(--grey);
 	}
 
 	@media (width < 600px) {
